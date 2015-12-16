@@ -33,3 +33,6 @@ puts hash.map { |k, v| v[:director] }.to_a.sort.uniq
 
 puts "\nCount not USA films"
 puts hash.reject { |k, v| v[:country] == "USA" }.count
+
+puts "\nCount films grouped by director"
+puts hash.group_by { |x, y| y[:director] }.map { |k, v| [k, v.count] }.sort
