@@ -40,6 +40,7 @@ puts hash.group_by { |x, y| y[:director] }.map { |k, v| [k, v.count] }.sort
 
 puts "\nDisplay count of films for every actor"
 h = Hash.new(0)
-puts hash.map { |x, y| y[:actors] }
+puts hash.map { |x, y| y[:actors] }.flatten.inject(h) { |acc, n| acc[n] += 1; acc } 
+
 
 
