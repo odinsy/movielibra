@@ -30,7 +30,7 @@ puts "\nComedy sorted by release date"
 puts hash.select { |k, v| v[:genre].include? "Comedy" }.sort_by {|k, v| v[:date] }
 
 puts "\nDirector list: "
-puts hash.map { |k, v| v[:director] }.to_a.sort.uniq
+puts hash.map { |k, v| v[:director] }.sort.uniq
 
 puts "\nDisplay count of not USA films"
 puts hash.reject { |k, v| v[:country] == "USA" }.count
