@@ -19,6 +19,7 @@ hash = Hash.new {|key, value| key[value]={}}
 movies.readlines.each do |movie|
   movie.chomp!
   link, name, year, country, date, genre, duration, rating, director, actors = movie.split("|")
+  actors = actors.split(",")
   hash[name] = { link: link, year: year, country: country, date: date, genre: genre, duration: duration, rating: rating, director: director, actors: actors }
 end   
 
@@ -31,8 +32,14 @@ puts hash.select { |k, v| v[:genre].include? "Comedy" }.sort_by {|k, v| v[:date]
 puts "\nDirector list: "
 puts hash.map { |k, v| v[:director] }.to_a.sort.uniq
 
-puts "\nCount not USA films"
+puts "\nDisplay count of not USA films"
 puts hash.reject { |k, v| v[:country] == "USA" }.count
 
-puts "\nCount films grouped by director"
+puts "\nDisplay count of films grouped by director"
 puts hash.group_by { |x, y| y[:director] }.map { |k, v| [k, v.count] }.sort
+
+puts "\nDisplay count of films for every actor"
+h = Hash.new(0)
+puts hash.map { |x, y| y[:actors] }
+
+
