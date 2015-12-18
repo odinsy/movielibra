@@ -24,23 +24,23 @@ movies.map.each do |movie|
 end   
 
 puts "5 longest movies"
-puts arr.sort_by { |v| v[:duration].gsub!(/ min/, '').to_i }.last(5)
+puts arr.sort_by { |k| k[:duration].gsub!(/ min/, '').to_i }.last(5)
 
 puts "\nComedy sorted by release date"
-puts arr.select { |v| v[:genre].include? "Comedy" }.sort_by {|v| v[:date] }
+puts arr.select { |k| k[:genre].include? "Comedy" }.sort_by { |k| k[:date] }
 
 puts "\nDirector list: "
-puts arr.map { |v| v[:director] }.sort.uniq
+puts arr.map { |k| k[:director] }.sort.uniq
 
 puts "\nDisplay count of not USA films"
-puts arr.reject { |v| v[:country] == "USA" }.count
+puts arr.reject { |k| k[:country] == "USA" }.count
 
 puts "\nDisplay count of films grouped by director"
-puts arr.group_by { |y| y[:director] }.map { |k, v| [k, v.count] }.sort
+puts arr.group_by { |k| k[:director] }.map { |k, v| [k, v.count] }.sort
 
 puts "\nDisplay count of films for every actor"
 h = Hash.new(0)
-puts arr.map { |y| y[:actors] }.flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by {|k,v| v}.reverse
+puts arr.map { |k| k[:actors] }.flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
 
 
 
