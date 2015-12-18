@@ -30,7 +30,7 @@ puts "\nComedy sorted by release date"
 puts arr.select { |k| k[:genre].include? "Comedy" }.sort_by { |k| k[:date] }
 
 puts "\nDirector list: "
-puts arr.map { |k| k[:director] }.sort.uniq
+puts arr.map { |k| k[:director] }.sort_by { |words| words.split(" ").last }.uniq
 
 puts "\nDisplay count of not USA films"
 puts arr.reject { |k| k[:country] == "USA" }.count
