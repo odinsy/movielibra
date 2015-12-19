@@ -42,5 +42,3 @@ puts "\nDisplay count of films for every actor"
 h = Hash.new(0)
 puts arr.map { |k| k[:actors] }.flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
 
-
-
