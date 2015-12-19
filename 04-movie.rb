@@ -41,17 +41,20 @@ puts "\nComedy sorted by release date"
 puts movies.select { |k| k.genre.include? "Comedy" }.sort_by { |k| k.date }
 
 puts "\nDirector list: "
-puts movies.map { |k| k.director }.sort_by { |words| words.split(" ").last }.uniq
+#puts movies.map { |k| k.director }.sort_by { |words| words.split(" ").last }.uniq
+puts movies.map(&:director).sort_by { |words| words.split(" ").last }.uniq
 
 puts "\nDisplay count of not USA films"
 puts movies.reject { |k| k.country == "USA" }.count
 
 puts "\nDisplay count of films grouped by director"
-puts movies.group_by { |k| k.director }.map { |k, v| [k, v.count] }.sort
+#puts movies.group_by { |k| k.director }.map { |k, v| [k, v.count] }.sort
+puts movies.group_by(&:director).map { |k, v| [k, v.count] }.sort
 
 puts "\nDisplay count of films for every actor"
 h = Hash.new(0)
-puts movies.map { |k| k.actors }.flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
+#puts movies.map { |k| k.actors }.flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
+puts movies.map(&:actors).flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
 
 puts "\nDisplay statistics for month"
 f = Hash.new(0)
