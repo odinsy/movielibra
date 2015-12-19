@@ -38,7 +38,7 @@ puts "5 longest movies"
 puts movies.sort_by { |k| k.duration.gsub!(/ min/, '').to_i }.last(5)
 
 puts "\nComedy sorted by release date"
-puts movies.select { |k| k.genre.include? "Comedy" }.sort_by { |k| k.date }
+puts movies.select { |k| k.genre.include? "Comedy" }.sort_by(&:date)
 
 puts "\nDirector list: "
 #puts movies.map { |k| k.director }.sort_by { |words| words.split(" ").last }.uniq
