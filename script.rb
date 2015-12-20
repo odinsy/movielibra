@@ -17,9 +17,9 @@ end
 movies = MovieList.new(path)
 
 p movies.longest(10)
-p movies.sort_by_genre("Comedy")
+p movies.select_by_genre("Comedy")
 p movies.directors
-p movies.count_by_country("USA")
+p movies.skip_country("USA")
 p movies.count_by_director
 p movies.count_by_actor
 p movies.month_stats
