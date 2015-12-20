@@ -1,45 +1,44 @@
 #!/usr/bin/env ruby
 
+require 'csv'
+require './lib/movie.rb'
+
 class MovieList
 
   attr_accessor :movies
 
-  def initialize
-    @movies = []
+  def initialize(path)
+    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(movie) }
   end
 
-  def add_movie(movie)
-    @movies.push(movie)
+  def longest(num)
+    @movies.sort_by(&:duration).last(num)
   end
 
-  def longest(movies)
-    self.sort_by { |k| k.duration.gsub!(/ min/, '').to_i }.last(5)
+  def sort_by_genre(genre)
+    @movies.select { |k| k.genre.include? genre }.sort_by(&:date)
   end
 
-  def comedy(movies)
-    self.select { |k| k.genre.include? "Comedy" }.sort_by(&:date)
+  def directors
+    @movies.map(&:director).sort_by { |words| words.split(" ").last }.uniq
   end
 
-  def directors(movies)
-    self.map(&:director).sort_by { |words| words.split(" ").last }.uniq
+  def count_by_country(country)
+    @movies.reject { |k| k.country == country }.count
   end
 
-  def count_not_usa(movies)
-    self.reject { |k| k.country == "USA" }.count
+  def count_by_director
+    @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse
   end
 
-  def count_by_director(movies)
-    self.group_by(&:director).map { |k, v| [k, v.count] }.sort
-  end
-
-  def count_by_actor(movies)
+  def count_by_actor
     h = Hash.new(0)
-    self.map(&:actors).flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
+    @movies.map(&:actors).flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
   end
 
-  def month_stats(movies)
+  def month_stats
     f = Hash.new(0)
-    self.select { |k| k.date.length > 4 }.map { |k| Date.strptime(k.date, '%Y-%m').mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
+    @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
   end
 
 end

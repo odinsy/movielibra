@@ -2,7 +2,24 @@
 
 Dir["./lib/*.rb"].each {|file| require file }
 
-movies = MovieList.new
-movie = Movie.new()
-movies.add_movie(movie)
-p movies
+if ARGV.empty?
+  puts "There are no arguments!"
+  exit
+end
+
+path = ARGV.shift
+
+unless File.exist?(path)
+  puts "File not found: #{path}"
+  exit
+end
+
+movies = MovieList.new(path)
+
+p movies.longest(10)
+p movies.sort_by_genre("Comedy")
+p movies.directors
+p movies.count_by_country("USA")
+p movies.count_by_director
+p movies.count_by_actor
+p movies.month_stats
