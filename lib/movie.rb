@@ -15,14 +15,17 @@ class Movie
     @actors =   @actors.split(",")
   end
 
+  # Parse the date
   def parse_date(date)
-    if date.length < 5
-      Date.strptime(date, '%Y')
-    elsif date.length < 8
-      Date.strptime(date, '%Y-%m')
+    fmt = case date.length
+    when 0..4
+      '%Y'
+    when 5..7
+      '%Y-%m'
     else
-      Date.strptime(date, '%Y-%m-%d')
+      '%Y-%m-%d'
     end
+    Date.strptime(date, fmt)
   end
 
 end
