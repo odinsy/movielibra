@@ -4,15 +4,17 @@ require 'date'
 
 class Movie
 
-  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors
+  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :viewed
 
   def initialize(movie)
     @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = movie
-    @year =     @year.to_i
-    @date =     parse_date(@date)
-    @genre =    @genre.split(",")
-    @duration = @duration.gsub!(/ min/, '').to_i
-    @actors =   @actors.split(",")
+    @year       = @year.to_i
+    @date       = parse_date(@date)
+    @genre      = @genre.split(",")
+    @duration   = @duration.gsub!(/ min/, '').to_i
+    @actors     = @actors.split(",")
+    @my_rating  = 0
+    @viewed     = false
   end
 
   # Parse the date
