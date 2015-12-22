@@ -48,4 +48,8 @@ class MovieList
     @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
   end
 
+  def beautify
+    @movies.each { |m| puts m.humanize }
+  end
+
 end

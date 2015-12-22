@@ -16,6 +16,10 @@ class MyMovieList < MovieList
     movie.my_rating = num
   end
 
+  def next
+    @movies.select { |movie| movie.viewed == false }.sort_by{ |m| m.rating * rand }.reverse.first(5)
+  end
+
   def find_movie(name)
     @movies.detect { |movie| movie.name.downcase == name.downcase }
   end

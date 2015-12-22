@@ -12,6 +12,7 @@ class Movie
     @date       = parse_date(@date)
     @genre      = @genre.split(",")
     @duration   = @duration.gsub!(/ min/, '').to_i
+    @rating     = @rating.to_f.round(1)
     @actors     = @actors.split(",")
     @my_rating  = 0
     @viewed     = false
@@ -28,6 +29,10 @@ class Movie
       '%Y-%m-%d'
     end
     Date.strptime(date, fmt)
+  end
+
+  def humanize
+    "Movie: #{@name}, #{@year}, #{@country}, #{@date}, #{@genre}, #{@duration}, #{@rating}, #{@director}, #{@actors}"
   end
 
 end

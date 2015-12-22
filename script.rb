@@ -17,7 +17,7 @@ end
 movies = MyMovieList.new(path)
 
 =begin
-p movies.longest(10)
+movies.longest(10)
 p movies.select_by_genre("Comedy")
 p movies.directors
 p movies.skip_country("USA")
@@ -26,8 +26,10 @@ p movies.count_by_actor
 p movies.month_stats
 =end
 
-movie = movies.find_movie("12 Angry Men")
-p movie
-p movies.rate("12 Angry Men", 5)
-p movies.set_viewed("12 Angry Men")
-p movie
+#movie = movies.find_movie("12 Angry Men")
+#p movie
+#p movies.rate("12 Angry Men", 5)
+#p movies.set_viewed("12 Angry Men")
+#p movie
+#movies.beautify
+movies.next.each { |m| p m.rating }
