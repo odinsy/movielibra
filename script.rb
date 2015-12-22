@@ -32,4 +32,4 @@ p movies.month_stats
 #p movies.set_viewed("12 Angry Men")
 #p movie
 #movies.beautify
-movies.next.each { |m| p m.rating }
+p movies.next

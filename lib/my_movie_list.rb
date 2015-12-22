@@ -17,7 +17,7 @@ class MyMovieList < MovieList
   end
 
   def next
-    @movies.select { |movie| movie.viewed == false }.sort_by{ |m| m.rating * rand }.reverse.first(5)
+    @movies.select { |movie| movie.viewed == false }.sort_by{ |m| -m.rating * rand }.first(5)
   end
 
   def find_movie(name)
