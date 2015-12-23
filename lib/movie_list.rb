@@ -49,7 +49,7 @@ class MovieList
   end
 
   def beautify
-    @movies.each { |m| puts m.humanize }
+    @movies.map { |m| m.humanize }
   end
 
 end

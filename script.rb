@@ -14,22 +14,25 @@ unless File.exist?(path)
   exit
 end
 
-movies = MyMovieList.new(path)
+@movies = MyMovieList.new(path)
 
 =begin
-movies.longest(10)
-p movies.select_by_genre("Comedy")
-p movies.directors
-p movies.skip_country("USA")
-p movies.count_by_director
-p movies.count_by_actor
-p movies.month_stats
+@movies.longest(10)
+p @movies.select_by_genre("Comedy")
+p @movies.directors
+p @movies.skip_country("USA")
+p @movies.count_by_director
+p @movies.count_by_actor
+p @movies.month_stats
 =end
 
-#movie = movies.find_movie("12 Angry Men")
-#p movie
-#p movies.rate("12 Angry Men", 5)
-#p movies.set_viewed("12 Angry Men")
-#p movie
-#movies.beautify
-p movies.next
+p @movie = @movies.find_movie("12 Angry Men")
+p @movies.watch(@movie.name, rand(10))
+#p @movie
+#p @movies.beautify
+p @movies.each { |m| m.watch(rand(10)) }
+#@movies.map { |m| set_viewed(m.name) }
+#p @movie
+#@movies.beautify
+#p @movies.next
+#@movies.liked
