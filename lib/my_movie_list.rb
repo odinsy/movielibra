@@ -2,10 +2,25 @@
 
 class MyMovieList < MovieList
 
+  def sorting(movie)
+    case movie.date.to_s.to_i
+    when 1900..1944
+      AncientMovie.new(movie)
+    when 1945..1967
+      ClassicMovie.new(movie)
+    when 1968..1999
+      ModernMovie.new(movie)
+    when 2000..Date.today.year
+      NewMovie.new(movie)
+    else
+      raise "error"
+    end
+  end
+
   def watch(name, num)
     movie             = find_movie(name)
     movie.viewed      = true
-    movie.date_movie  = Date.today.strftime("%Y-%m-%d")
+    movie.date_movie  = Date.today
     movie.my_rating   = num
   end
 

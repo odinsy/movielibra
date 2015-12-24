@@ -36,6 +36,11 @@ class MovieList
     @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse
   end
 
+  # Display the movies by director
+  def by_director(director)
+    @movies.select { |m| m.director == director }
+  end
+
   # Display the count of movies by each actor
   def count_by_actor
     h = Hash.new(0)
@@ -48,8 +53,9 @@ class MovieList
     @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
   end
 
-  def beautify
-    @movies.map { |m| m.humanize }
+  # Beauty output
+  def beauty
+    @movies.map { |m| m.humane }
   end
 
 end

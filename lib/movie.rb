@@ -19,6 +19,36 @@ class Movie
     @date_movie = nil
   end
 
+  class AncientMovie < Movie
+    weight = 2
+
+    def description
+      "#@name — so old movie (#@date year)"
+    end
+  end
+
+  class ClassicMovie < Movie
+    weight = 4
+
+    def description
+      "#@name — the classic movie. The director is #@director. Maybe you wanna to see his other movies? "
+    end
+  end
+
+  class ModernMovie < Movie
+    weight = 7
+
+    def description
+    end
+  end
+
+  class NewMovie < Movie
+    weight = 10
+
+    def description
+    end
+  end
+
   # Parse the date
   def parse_date(date)
     fmt = case date.length
@@ -29,21 +59,21 @@ class Movie
     else
       '%Y-%m-%d'
     end
-    Date.strptime(date, fmt).strftime("%Y-%m-%d")
+    Date.strptime(date, fmt)
   end
 
+  # Make and rate viewed movie
   def watch(num)
-    if num > 10 || num < 0
-      puts "You can rate film only from 0 to 10!"
-      exit
+    unless (0..10).include?(num)
+      raise ArgumentError, "You can rate film only from 0 to 10!"
     end
     @viewed = true
-    @date_movie = Date.today.strftime("%Y-%m-%d")
+    @date_movie = Date.today
     @my_rating = num.to_i
   end
 
-  def humanize
-    "Movie: #{@name}, #{@year}, #{@rating}, #{@my_rating}, #{@country}, #{@date}, #{@genre}, #{@duration}, #{@director}, #{@actors}, #{@date_movie}, #{@viewed}"
+  def inspect
+    "Movie: #@name, #@year, #@rating, #@my_rating, #@country, #@date, #@genre, #@duration, #@director, #@actors, #@date_movie, #@viewed"
   end
 
 end

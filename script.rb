@@ -26,13 +26,12 @@ p @movies.count_by_actor
 p @movies.month_stats
 =end
 
-p @movie = @movies.find_movie("12 Angry Men")
-p @movies.watch(@movie.name, rand(10))
-#p @movie
-#p @movies.beautify
-p @movies.each { |m| m.watch(rand(10)) }
-#@movies.map { |m| set_viewed(m.name) }
-#p @movie
+@movie = @movies.find_movie("12 Angry Men")
+puts @movies.watch(@movie.name, rand(10))
+puts @movie.watch(10)
+@movies.each { |m| puts m.watch(rand(10)) }
+
 #@movies.beautify
-#p @movies.next
-#@movies.liked
+p @movies.next
+p @movies.liked
+@movies.sorting(@movie)
