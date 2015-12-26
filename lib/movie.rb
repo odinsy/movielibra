@@ -8,9 +8,9 @@ class Movie
   include Rate
   attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
 
-  def initialize(parent, attributes)
+  def initialize(list, attributes)
     @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = attributes
-    @parent     = parent
+    @list       = list
     @year       = @year.to_i
     @date       = parse_date(@date)
     @genre      = @genre.split(",")
@@ -33,7 +33,7 @@ class Movie
     WEIGHT = 50
 
     def description
-      "#{@name} — the classic movie. The director is #{@director}. Maybe you wanna see his other movies? \n#{@parent.by_director(@director)}"
+      "#{@name} — the classic movie. The director is #{@director}. Maybe you wanna see his other movies? \n#{@list.by_director(@director)}"
     end
   end
 
@@ -66,6 +66,7 @@ class Movie
     Date.strptime(date, fmt)
   end
 
+  # Check the film for viewing
   def viewed?
     @view_date ? true : false
   end
