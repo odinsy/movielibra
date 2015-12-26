@@ -2,18 +2,20 @@
 
 class MyMovieList < MovieList
 
-  def classify(movie)
-    case movie.date.to_s.to_i
-    when 1900..1944
-      Movie::AncientMovie.new(movie)
-    when 1945..1967
-      Movie::ClassicMovie.new(movie)
-    when 1968..1999
-      Movie::ModernMovie.new(movie)
-    when 2000..Date.today.year
-      Movie::NewMovie.new(movie)
-    else
-      raise "error"
+  def initialize(path)
+    @movies = CSV.foreach(path, col_sep: "|").map do |movie|
+      case movie[4].to_s.to_i
+      when 1900..1944
+        Movie::AncientMovie.new(self, movie)
+      when 1945..1967
+        Movie::ClassicMovie.new(self, movie)
+      when 1968..1999
+        Movie::ModernMovie.new(self, movie)
+      when 2000..Date.today.year
+        Movie::NewMovie.new(self, movie)
+      else
+        raise "error"
+      end
     end
   end
 
@@ -25,11 +27,13 @@ class MyMovieList < MovieList
   end
 
   def next
-    @movies.select { |movie| movie.viewed == false }.sort_by{ |m| -m.rating * rand }.first(5)
+    @movies = @movies.select { |movie| movie.viewed == false }.sort_by{ |m| [-m.rating * rand, m.class::WEIGHT] }.first(5)
+    @movies.each { |m| puts m.description }
   end
 
-  def liked
-    @movies.select { |movie| movie.viewed == true }.sort_by{ |m| [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5)
+  def watched
+    @movies = @movies.select { |movie| movie.viewed == true }.sort_by{ |m| [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5)
+    @movies.each { |m| puts m.description }
   end
 
   def find_movie(name)

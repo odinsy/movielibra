@@ -8,7 +8,7 @@ class MovieList
   attr_accessor :movies
 
   def initialize(path)
-    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(movie) }
+    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
   end
 
   # Display the longest movies
@@ -38,7 +38,7 @@ class MovieList
 
   # Display the movies by director
   def by_director(director)
-    @movies.select { |m| m.director == director }
+    @movies.select { |m| m.director == director }.map(&:name)
   end
 
   # Display the count of movies by each actor

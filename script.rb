@@ -15,6 +15,7 @@ unless File.exist?(path)
 end
 
 @movies = MyMovieList.new(path)
+@movie = @movies.find_movie("12 Angry Men")
 
 =begin
 @movies.longest(10)
@@ -25,12 +26,12 @@ p @movies.count_by_director
 p @movies.count_by_actor
 p @movies.month_stats
 =end
+puts @movie.methods
 
-@movie = @movies.find_movie("12 Angry Men")
-puts @movies.watch(@movie.name, rand(10))
-puts @movie.watch(10)
-@movies.each { |m| puts m.watch(rand(10)) }
-
-p @movies.next
-p @movies.liked
-p @movies.classify(@movie)
+@movie.watch(10)
+p @movie.viewed
+puts "\nNot seen movies:"
+@movies.next
+puts "\nWatched movies:"
+p @movie
+p @movies.watched
