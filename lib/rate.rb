@@ -7,8 +7,7 @@ module Rate
     unless (0..10).include?(num)
       raise ArgumentError, "You can rate film only from 0 to 10!"
     end
-    @viewed     = true
-    @date_movie = Date.today
+    @view_date  = Date.today
     @my_rating  = num.to_i
   end
 

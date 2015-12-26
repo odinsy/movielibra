@@ -6,7 +6,7 @@ require './lib/rate.rb'
 class Movie
 
   include Rate
-  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :viewed, :date_movie
+  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
 
   def initialize(parent, attributes)
     @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = attributes
@@ -18,15 +18,14 @@ class Movie
     @rating     = @rating.to_f.round(1)
     @actors     = @actors.split(",")
     @my_rating  = 0
-    @viewed   = false
-    @date_movie = nil
+    @view_date  = nil
   end
 
   class AncientMovie < Movie
     WEIGHT = 30
 
     def description
-      "#@name — so old movie (#@year year)"
+      "#{@name} — so old movie (#{@year} year)"
     end
   end
 
@@ -34,7 +33,7 @@ class Movie
     WEIGHT = 50
 
     def description
-      "#@name — the classic movie. The director is #@director. Maybe you wanna to see his other movies? \n#{@parent.by_director(@director)}"
+      "#{@name} — the classic movie. The director is #{@director}. Maybe you wanna see his other movies? \n#{@parent.by_director(@director)}"
     end
   end
 
@@ -42,7 +41,7 @@ class Movie
     WEIGHT = 70
 
     def description
-      "#@name — modern movie. Starring: #@actors"
+      "#{@name} — modern movie. Starring: #{@actors}"
     end
   end
 
@@ -50,7 +49,7 @@ class Movie
     WEIGHT = 100
 
     def description
-      "#@name — novelty!"
+      "#{@name} — novelty!"
     end
   end
 
@@ -67,9 +66,13 @@ class Movie
     Date.strptime(date, fmt)
   end
 
+  def viewed?
+    @view_date ? true : false
+  end
+
   # Human readable output
   def humane
-    puts "\nName: #@name, year: #@year, rating: #@rating, my_rating: #@my_rating, country: #@country, date: #@date, genre: #@genre, duration: #@duration, director: #@director, actors: #@actors, date_movie: #@date_movie, viewed: #@viewed"
+    puts "\nName: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, date_movie: #{@date_movie}, viewed: #{@viewed}"
   end
 
 end
