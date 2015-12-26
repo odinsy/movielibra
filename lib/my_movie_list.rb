@@ -2,16 +2,16 @@
 
 class MyMovieList < MovieList
 
-  def sorting(movie)
+  def classify(movie)
     case movie.date.to_s.to_i
     when 1900..1944
-      AncientMovie.new(movie)
+      Movie::AncientMovie.new(movie)
     when 1945..1967
-      ClassicMovie.new(movie)
+      Movie::ClassicMovie.new(movie)
     when 1968..1999
-      ModernMovie.new(movie)
+      Movie::ModernMovie.new(movie)
     when 2000..Date.today.year
-      NewMovie.new(movie)
+      Movie::NewMovie.new(movie)
     else
       raise "error"
     end
@@ -20,8 +20,8 @@ class MyMovieList < MovieList
   def watch(name, num)
     movie             = find_movie(name)
     movie.viewed      = true
-    movie.date_movie  = Date.today
     movie.my_rating   = num
+    movie.date_movie  = Date.today
   end
 
   def next
@@ -29,7 +29,7 @@ class MyMovieList < MovieList
   end
 
   def liked
-    @movies.select { |movie| movie.viewed == true }.sort_by{ |m| p [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5)
+    @movies.select { |movie| movie.viewed == true }.sort_by{ |m| [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5)
   end
 
   def find_movie(name)

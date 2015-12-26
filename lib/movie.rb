@@ -20,7 +20,7 @@ class Movie
   end
 
   class AncientMovie < Movie
-    weight = 2
+    weight = 30
 
     def description
       "#@name — so old movie (#@date year)"
@@ -28,7 +28,7 @@ class Movie
   end
 
   class ClassicMovie < Movie
-    weight = 4
+    weight = 50
 
     def description
       "#@name — the classic movie. The director is #@director. Maybe you wanna to see his other movies? "
@@ -36,16 +36,18 @@ class Movie
   end
 
   class ModernMovie < Movie
-    weight = 7
+    weight = 70
 
     def description
+      "#@name — modern movie. Starring #@actors"
     end
   end
 
   class NewMovie < Movie
-    weight = 10
+    weight = 100
 
     def description
+      "#@name — novelty!"
     end
   end
 
@@ -62,17 +64,17 @@ class Movie
     Date.strptime(date, fmt)
   end
 
-  # Make and rate viewed movie
+  # Make viewed and rate movie
   def watch(num)
     unless (0..10).include?(num)
       raise ArgumentError, "You can rate film only from 0 to 10!"
     end
-    @viewed = true
+    @viewed     = true
     @date_movie = Date.today
-    @my_rating = num.to_i
+    @my_rating  = num.to_i
   end
 
-  def inspect
+  def humane
     "Movie: #@name, #@year, #@rating, #@my_rating, #@country, #@date, #@genre, #@duration, #@director, #@actors, #@date_movie, #@viewed"
   end
 

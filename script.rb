@@ -31,7 +31,6 @@ puts @movies.watch(@movie.name, rand(10))
 puts @movie.watch(10)
 @movies.each { |m| puts m.watch(rand(10)) }
 
-#@movies.beautify
 p @movies.next
 p @movies.liked
-@movies.sorting(@movie)
+p @movies.classify(@movie)
