@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'date'
+require './lib/rate.rb'
 
 class Movie
 
+  include Rate
   attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :viewed, :date_movie
 
   def initialize(parent, attributes)
@@ -65,16 +67,7 @@ class Movie
     Date.strptime(date, fmt)
   end
 
-  # Make viewed and rate movie
-  def watch(num)
-    unless (0..10).include?(num)
-      raise ArgumentError, "You can rate film only from 0 to 10!"
-    end
-    @viewed     = true
-    @date_movie = Date.today
-    @my_rating  = num.to_i
-  end
-
+  # Human readable output
   def humane
     puts "\nName: #@name, year: #@year, rating: #@rating, my_rating: #@my_rating, country: #@country, date: #@date, genre: #@genre, duration: #@duration, director: #@director, actors: #@actors, date_movie: #@date_movie, viewed: #@viewed"
   end

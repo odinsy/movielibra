@@ -26,12 +26,9 @@ p @movies.count_by_director
 p @movies.count_by_actor
 p @movies.month_stats
 =end
-puts @movie.methods
 
-@movie.watch(10)
-p @movie.viewed
+@movie.rate(10)
 puts "\nNot seen movies:"
 @movies.next
 puts "\nWatched movies:"
-p @movie
-p @movies.watched
+@movies.watched

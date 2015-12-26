@@ -19,7 +19,7 @@ class MyMovieList < MovieList
     end
   end
 
-  def watch(name, num)
+  def rate(name, num)
     movie             = find_movie(name)
     movie.viewed      = true
     movie.my_rating   = num
@@ -27,13 +27,11 @@ class MyMovieList < MovieList
   end
 
   def next
-    @movies = @movies.select { |movie| movie.viewed == false }.sort_by{ |m| [-m.rating * rand, m.class::WEIGHT] }.first(5)
-    @movies.each { |m| puts m.description }
+    @movies.select { |movie| movie.viewed == false }.sort_by{ |m| [-m.rating * rand, m.class::WEIGHT * rand] }.first(5).each { |m| puts m.description }
   end
 
   def watched
-    @movies = @movies.select { |movie| movie.viewed == true }.sort_by{ |m| [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5)
-    @movies.each { |m| puts m.description }
+    @movies.select { |movie| movie.viewed == true }.sort_by{ |m| [-m.my_rating * rand, (Date.today - m.date_movie).to_i * rand] }.first(5).each { |m| puts m.description }
   end
 
   def find_movie(name)
