@@ -27,7 +27,7 @@ p @movies.count_by_actor
 p @movies.month_stats
 =end
 
-@movie.rate(10)
+@movie.rate(Date.today, 10)
 puts "\nNot seen movies:"
 @movies.next
 puts "\nWatched movies:"
