@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require './lib/rate.rb'
+require './lib/rate_list.rb'
 
 class MyMovieList < MovieList
 
-  include Rate
+  include RateList
 
   def initialize(path)
     @movies = CSV.foreach(path, col_sep: "|").map do |movie|
@@ -21,13 +21,6 @@ class MyMovieList < MovieList
         raise ArgumentError, "Unexpected movie year: #{movie[4]}"
       end
     end
-  end
-
-  def rate(name, num)
-    movie             = find_movie(name)
-    movie.viewed      = true
-    movie.my_rating   = num
-    movie.date_movie  = Date.today
   end
 
   def find_movie(name)

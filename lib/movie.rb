@@ -68,7 +68,7 @@ class Movie
 
   # Check the film for viewing
   def viewed?
-    @view_date ? true : false
+    !@view_date.nil?
   end
 
   # Human readable output
