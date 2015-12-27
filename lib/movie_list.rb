@@ -8,7 +8,7 @@ class MovieList
   attr_accessor :movies
 
   def initialize(path)
-    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(movie) }
+    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
   end
 
   # Display the longest movies
@@ -36,6 +36,11 @@ class MovieList
     @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse
   end
 
+  # Display the movies by director
+  def by_director(director)
+    @movies.select { |m| m.director == director }.map(&:name)
+  end
+
   # Display the count of movies by each actor
   def count_by_actor
     h = Hash.new(0)
@@ -46,6 +51,11 @@ class MovieList
   def month_stats
     f = Hash.new(0)
     @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
+  end
+
+  # Beauty output
+  def beauty
+    @movies.map { |m| m.humane }
   end
 
 end
