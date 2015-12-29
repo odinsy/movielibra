@@ -11,6 +11,14 @@ class MovieList
     @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
   end
 
+  def print
+    @movies.map { |i| puts yield(i) } if block_given?
+  end
+
+  def sorted_by(&block)
+    puts @movies.sort_by { block } if block
+  end
+
   # Display the longest movies
   def longest(num)
     @movies.sort_by(&:duration).last(num)

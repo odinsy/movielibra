@@ -25,10 +25,13 @@ p @movies.skip_country("USA")
 p @movies.count_by_director
 p @movies.count_by_actor
 p @movies.month_stats
-=end
 
 @movie.rate(Date.today, 10)
 puts "\nNot seen movies:"
 @movies.next
 puts "\nWatched movies:"
 @movies.watched
+=end
+
+#@movies.print { |movie| "#{movie.year}: #{movie.name}" }
+@movies.sorted_by { |movie| [movie.genre, movie.year] }
