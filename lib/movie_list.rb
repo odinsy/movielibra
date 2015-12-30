@@ -16,7 +16,7 @@ class MovieList
   end
 
   def sorted_by(&block)
-    puts @movies.sort_by { block } if block
+    p @movies.sort_by(&block) if block
   end
 
   # Display the longest movies
