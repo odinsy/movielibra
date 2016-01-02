@@ -37,6 +37,14 @@ puts "\nWatched movies:"
 #@movies.print { |movie| "#{movie.year}: #{movie.name}" }
 #@movies.sorted_by { |movie| [movie.genre, movie.year] }
 @movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
-puts @movies.algos
-#@movies.sorted_by { |movie| [movie.genre, movie.year] }
-@movies.sorted_by(:genres_years)
+#puts @movies.algos
+#@movies.sorted_by(:genres_years)
+@movies.add_filter(:rating_greater) { |movie, rating| movie.rating > rating }
+@movies.add_filter(:genres) { |movie, *genres| genres.include?(movie.genre) }
+@movies.add_filter(:years) { |movie, from, to| (from..to).include?(movie.year) }
+#puts @movies.filters
+@movies.filter(
+    genres: ['Comedy', 'Horror'],
+    years: [2005, 2010],
+    rating_greater: 8
+  )
