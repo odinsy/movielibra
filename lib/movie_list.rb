@@ -36,10 +36,9 @@ class MovieList
 
   def filter(attrs)
     attrs.inject(@movies) do |result, (title, value)|
-      if @filters.include?(title)
-        filter = @filters[title]
-        puts result.select { |movie| filter.call(movie, *value) }
-      end
+      filter = @filters[title]
+      raise ArgumentError, "Unknown filter #{title}"
+      puts result.select { |movie| filter.call(movie, *value) }
     end
   end
 
