@@ -24,9 +24,9 @@ class MovieList
   def sorted_by(algo=nil, &block)
     if @algos.include?(algo)
       algo = @algos[algo]
-      p @movies.sort_by(&algo)
+      @movies.sort_by(&algo)
     else
-      p @movies.sort_by(&block)
+      @movies.sort_by(&block)
     end
   end
 
@@ -37,8 +37,8 @@ class MovieList
   def filter(attrs)
     attrs.inject(@movies) do |result, (title, value)|
       filter = @filters[title]
-      raise ArgumentError, "Unknown filter #{title}"
-      puts result.select { |movie| filter.call(movie, *value) }
+      raise ArgumentError, "Unknown filter #{title}" unless filter
+      result.select { |movie| filter.call(movie, *value) }
     end
   end
 
