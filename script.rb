@@ -14,8 +14,9 @@ unless File.exist?(path)
   exit
 end
 
-@movies = MyMovieList.new(path)
-@movie = @movies.find_movie("12 Angry Men")
+@movies = MovieList.new(path)
+#@movies = MyMovieList.new(path)
+#@movie = @movies.find_movie("12 Angry Men")
 
 =begin
 @movies.longest(10)
@@ -34,4 +35,8 @@ puts "\nWatched movies:"
 =end
 
 #@movies.print { |movie| "#{movie.year}: #{movie.name}" }
-@movies.sorted_by { |movie| [movie.genre, movie.year] }
+#@movies.sorted_by { |movie| [movie.genre, movie.year] }
+@movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
+puts @movies.algos
+#@movies.sorted_by { |movie| [movie.genre, movie.year] }
+@movies.sorted_by(:genres_years)

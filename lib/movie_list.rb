@@ -5,18 +5,29 @@ require './lib/movie.rb'
 
 class MovieList
 
-  attr_accessor :movies
+  attr_accessor :movies, :algos
 
   def initialize(path)
     @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+    @algos  = Hash.new
   end
 
   def print
     @movies.map { |i| puts yield(i) } if block_given?
   end
 
-  def sorted_by(&block)
-    p @movies.sort_by(&block) if block
+  def sorted_by(algo=nil, &block)
+    if @algos.include? algo
+      algo = @algos[algo]
+      p @movies.sort_by(&algo)
+    else
+      puts "block"
+      p @movies.sort_by(&block)
+    end
+  end
+
+  def add_sort_algo(algo, &block)
+    @algos.store(algo, block)
   end
 
   # Display the longest movies
