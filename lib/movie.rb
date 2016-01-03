@@ -66,14 +66,20 @@ class Movie
     Date.strptime(date, fmt)
   end
 
-  # Check the film for viewing
+  # Check the movie for viewing
   def viewed?
     !@view_date.nil?
   end
 
+  # Check that movies has genre
+  def has_genre?(*genres)
+    #@genre.any? { |genre| genres.include?(genre) }
+    (@genre - genres).empty?
+  end
+
   # Human readable output
-  def humane
-    puts "\nName: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, date_movie: #{@date_movie}, viewed: #{@viewed}"
+  def inspect
+    "\nName: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, view_date: #{@view_date}"
   end
 
 end

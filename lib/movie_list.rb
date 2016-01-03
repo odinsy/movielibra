@@ -5,10 +5,43 @@ require './lib/movie.rb'
 
 class MovieList
 
-  attr_accessor :movies
+  attr_accessor :movies, :algos, :filters
 
   def initialize(path)
-    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+    @algos    = {}
+    @filters  = {}
+  end
+
+  def print
+    @movies.map { |i| puts yield(i) } if block_given?
+  end
+
+  def add_sort_algo(algo, &block)
+    @algos.store(algo, block)
+  end
+
+  def sorted_by(algo=nil, &block)
+    if @algos.include?(algo)
+      algo = @algos[algo]
+      @movies.sort_by(&algo)
+    elsif block
+      @movies.sort_by(&block)
+    else
+      raise ArgumentError, "Unknown algorithm #{algo}"      
+    end
+  end
+
+  def add_filter(filter, &block)
+    @filters.store(filter, block)
+  end
+
+  def filter(attrs)
+    attrs.inject(@movies) do |result, (title, value)|
+      filter = @filters[title]
+      raise ArgumentError, "Unknown filter #{title}" unless filter
+      result.select { |movie| filter.call(movie, *value) }
+    end
   end
 
   # Display the longest movies

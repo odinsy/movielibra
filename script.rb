@@ -14,8 +14,9 @@ unless File.exist?(path)
   exit
 end
 
-@movies = MyMovieList.new(path)
-@movie = @movies.find_movie("12 Angry Men")
+@movies = MovieList.new(path)
+#@movies = MyMovieList.new(path)
+#@movie = @movies.find_movie("12 Angry Men")
 
 =begin
 @movies.longest(10)
@@ -25,10 +26,31 @@ p @movies.skip_country("USA")
 p @movies.count_by_director
 p @movies.count_by_actor
 p @movies.month_stats
-=end
 
 @movie.rate(Date.today, 10)
 puts "\nNot seen movies:"
 @movies.next
 puts "\nWatched movies:"
 @movies.watched
+=end
+
+# Check that movies has genre
+#p @movie.has_genre?("Crime", "Drama")
+
+# Print and algorithms
+#@movies.print { |movie| "#{movie.year}: #{movie.name}" }
+@movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
+puts @movies.algos
+p @movies.sorted_by { |movie| [movie.genre, movie.year] }.first(5)
+p @movies.sorted_by(:genres_years).first(5)
+
+# Filters
+@movies.add_filter(:genres) { |movie, *genres| movie.has_genre?(*genres) }
+@movies.add_filter(:rating_greater) { |movie, rating| movie.rating > rating }
+@movies.add_filter(:years) { |movie, from, to| (from..to).include?(movie.year) }
+p @movies.filters
+p @movies.filter(
+    genres: ['Comedy', 'Drama'],
+    years: [2005, 2010],
+    rating_greater: 8
+)
