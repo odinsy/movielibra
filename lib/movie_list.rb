@@ -25,8 +25,10 @@ class MovieList
     if @algos.include?(algo)
       algo = @algos[algo]
       @movies.sort_by(&algo)
-    else
+    elsif block
       @movies.sort_by(&block)
+    else
+      raise ArgumentError, "Unknown algorithm #{algo}"      
     end
   end
 

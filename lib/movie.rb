@@ -66,9 +66,15 @@ class Movie
     Date.strptime(date, fmt)
   end
 
-  # Check the film for viewing
+  # Check the movie for viewing
   def viewed?
     !@view_date.nil?
+  end
+
+  # Check that movies has genre
+  def has_genre?(*genres)
+    #@genre.any? { |genre| genres.include?(genre) }
+    (@genre - genres).empty?
   end
 
   # Human readable output
