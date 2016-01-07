@@ -32,7 +32,6 @@ puts "\nNot seen movies:"
 @movies.next
 puts "\nWatched movies:"
 @movies.watched
-=end
 
 # Check that movies has genre
 #p @movie.has_genre?("Crime", "Drama")
@@ -54,3 +53,4 @@ p @movies.filter(
     years: [2005, 2010],
     rating_greater: 8
 )
+=end

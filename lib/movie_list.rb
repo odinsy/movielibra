@@ -8,7 +8,7 @@ class MovieList
   attr_accessor :movies, :algos, :filters
 
   def initialize(path)
-    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.create(self, movie) }
     @algos    = {}
     @filters  = {}
   end
@@ -28,7 +28,7 @@ class MovieList
     elsif block
       @movies.sort_by(&block)
     else
-      raise ArgumentError, "Unknown algorithm #{algo}"      
+      raise ArgumentError, "Unknown algorithm #{algo}"
     end
   end
 
