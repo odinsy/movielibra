@@ -9,7 +9,7 @@ class Movie
   WEIGHT = 0
 
   include Rate
-  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
+  attr_accessor :list, :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
 
   @@filters = {}
 
@@ -41,7 +41,9 @@ class Movie
   end
 
   def self.print_format(format_str)
-    define_method(:description) { format_str }
+    define_method(:description) do
+      format_str % self.to_h
+    end
   end
 
   def self.weight(atr)
@@ -50,25 +52,25 @@ class Movie
 
   class AncientMovie < Movie
     filter { (1900..1944).cover?(year) }
-    print_format "%{@name} — so old movie (%{@year} year)"
+    print_format "%{name} — so old movie (%{year} year)"
     weight 0.3
   end
 
   class ClassicMovie < Movie
     filter { (1945..1967).cover?(year) }
-    print_format "%{@name} — the classic movie. The director is %{@director}. Maybe you wanna see his other movies? \n%{@list.by_director(@director)}"
+    print_format "%{name} — the classic movie. The director is %{director}. Maybe you wanna see his other movies? \n%{dir_movie})"
     weight 0.5
   end
 
   class ModernMovie < Movie
     filter { (1968..1999).cover?(year) }
-    print_format "%{@name} — modern movie. Starring: %{@actors}"
+    print_format "%{name} — modern movie. Starring: %{actors}"
     weight 0.7
   end
 
   class NewMovie < Movie
     filter { (2000..Date.today.year).cover?(year) }
-    print_format "%{@name} — novelty!"
+    print_format "%{name} — novelty!"
     weight 1.0
   end
 
@@ -99,6 +101,24 @@ class Movie
   # Human readable output
   def inspect
     "\n#{self.class}, name: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, view_date: #{@view_date}"
+  end
+
+  def to_h
+    {
+      dir_movie:  @list.by_director(@director),
+      list:       @list,
+      name:       @name,
+      year:       @year,
+      rating:     @rating,
+      my_rating:  @my_rating,
+      country:    @country,
+      date:       @date,
+      genre:      @genre,
+      duration:   @duration,
+      director:   @director,
+      actors:     @actors,
+      view_date:  @view_date
+    }
   end
 
 end
