@@ -58,7 +58,7 @@ class Movie
 
   class ClassicMovie < Movie
     filter { (1945..1967).cover?(year) }
-    print_format "%{name} — the classic movie. The director is %{director}. Maybe you wanna see his other movies? \n%{dir_movie})"
+    print_format "%{name} — the classic movie. The director is %{director}. Maybe you wanna see his other movies? \n%{dir_movie}"
     weight 0.5
   end
 
@@ -105,7 +105,7 @@ class Movie
 
   def to_h
     {
-      dir_movie:  @list.by_director(@director),
+      dir_movie:  list.by_director(@director),
       list:       @list,
       name:       @name,
       year:       @year,
