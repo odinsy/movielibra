@@ -5,6 +5,7 @@ require './lib/movie.rb'
 
 class MovieList
 
+  include Enumerable
   attr_accessor :movies, :algos, :filters
 
   def initialize(path)

@@ -54,3 +54,8 @@ p @movies.filter(
     rating_greater: 8
 )
 =end
+
+# Metaprogramming
+p Object.const_get("Movie::AncientMovie::WEIGHT")
+@movies.print { |movie| "#{movie.year}: #{movie.name}" }
+p Movie::AncientMovie::description
