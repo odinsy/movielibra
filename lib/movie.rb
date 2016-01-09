@@ -12,7 +12,6 @@ class Movie
   attr_accessor :list, :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
 
   @@filters = {}
-  @@all_genres = []
 
   class << self
     attr_accessor :filters, :all_genres
@@ -29,16 +28,14 @@ class Movie
     @actors     = @actors.split(",")
     @my_rating  = 0
     @view_date  = nil
-    @@all_genres.push(self.genre).flatten!.uniq
   end
 
   def method_missing(method_sym, *arguments, &block)
-    method = method_sym.to_s
-    p method
-    if method.include?("?") and @@all_genres.include?(method.chomp("?").capitalize)
-      p true
+    method = method_sym.to_s.chomp("?").capitalize
+    if method_sym.to_s.include?("?")
+      @genre.include?(method)
     else
-      p false
+      super
     end
   end
 
