@@ -30,6 +30,18 @@ class Movie
     @view_date  = nil
   end
 
+  def method_missing(method_sym)
+    method = method_sym.to_s.chomp("?").capitalize
+    if @genre.include?(method)
+      self.class.send(:define_method, method) do
+        !method.nil?
+      end
+      self.send(method)
+    else
+      return
+    end
+  end
+
   def self.create(list, args)
     @movie  = OpenStruct.new(year: args[2].to_i)
     cls     = @@filters.detect { |cls, filter| @movie.instance_eval(&filter) }.first
@@ -94,7 +106,6 @@ class Movie
 
   # Check that movies has genre
   def has_genre?(*genres)
-    #@genre.any? { |genre| genres.include?(genre) }
     (@genre - genres).empty?
   end
 

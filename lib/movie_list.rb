@@ -17,9 +17,6 @@ class MovieList
     @filters  = {}
   end
 
-  def method_missing(method, *args)
-  end
-
   # Print movies
   def print
     @movies.map { |i| puts yield(i) } if block_given?

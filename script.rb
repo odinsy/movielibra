@@ -14,8 +14,8 @@ unless File.exist?(path)
   exit
 end
 
-#@movies = MovieList.new(path)
-@movies = MyMovieList.new(path)
+@movies = MovieList.new(path)
+#@movies = MyMovieList.new(path)
 #@movie = @movies.find_movie("12 Angry Men")
 
 =begin
@@ -56,7 +56,7 @@ p @movies.filter(
 =end
 
 # Metaprogramming
-p Object.const_get("Movie::AncientMovie::WEIGHT")
-@movies.recommend
+#p Object.const_get("Movie::AncientMovie::WEIGHT")
+p @movies.recommend.select(&:drama?)
 
-# @movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
+#@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
