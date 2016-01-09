@@ -56,8 +56,7 @@ p @movies.filter(
 =end
 
 # Metaprogramming
-#p Object.const_get("Movie::AncientMovie::WEIGHT")
+p Object.const_get("Movie::AncientMovie::WEIGHT")
+@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
 p @movies.recommend.reject(&:drama?)
 p @movies.recommend.reject(&:wtf)
-
-#@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
