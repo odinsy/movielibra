@@ -2,11 +2,20 @@
 
 require 'date'
 require './lib/rate.rb'
+require 'ostruct'
 
 class Movie
 
+  WEIGHT = 0
+
   include Rate
-  attr_accessor :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
+  attr_accessor :list, :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
+
+  @@filters = {}
+
+  class << self
+    attr_accessor :filters
+  end
 
   def initialize(list, attributes)
     @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = attributes
@@ -21,36 +30,57 @@ class Movie
     @view_date  = nil
   end
 
-  class AncientMovie < Movie
-    WEIGHT = 30
-
-    def description
-      "#{@name} — so old movie (#{@year} year)"
+  def method_missing(method_sym, *arguments, &block)
+    method = method_sym.to_s.chomp("?").capitalize
+    if method_sym.to_s.match(/\w+\?$/)
+      has_genre?(method)
+    else
+      super
     end
+  end
+
+  def self.create(list, args)
+    @movie  = OpenStruct.new(year: args[2].to_i)
+    cls     = @@filters.detect { |cls, filter| @movie.instance_eval(&filter) }.first
+    cls.new(list, args)
+  end
+
+  def self.filter(&block)
+    @@filters.store(self, block)
+  end
+
+  def self.print_format(format_str)
+    define_method(:description) do
+      format_str % self.to_h
+    end
+  end
+
+  def self.weight(arg)
+    const_set("WEIGHT", arg)
+  end
+
+  class AncientMovie < Movie
+    filter { (1900..1944).cover?(year) }
+    print_format "%{name} — so old movie (%{year} year)"
+    weight 0.3
   end
 
   class ClassicMovie < Movie
-    WEIGHT = 50
-
-    def description
-      "#{@name} — the classic movie. The director is #{@director}. Maybe you wanna see his other movies? \n#{@list.by_director(@director)}"
-    end
+    filter { (1945..1967).cover?(year) }
+    print_format "%{name} — the classic movie. The director is %{director}. Maybe you wanna see his other movies? \n%{dir_movie}"
+    weight 0.5
   end
 
   class ModernMovie < Movie
-    WEIGHT = 70
-
-    def description
-      "#{@name} — modern movie. Starring: #{@actors}"
-    end
+    filter { (1968..1999).cover?(year) }
+    print_format "%{name} — modern movie. Starring: %{actors}"
+    weight 0.7
   end
 
   class NewMovie < Movie
-    WEIGHT = 100
-
-    def description
-      "#{@name} — novelty!"
-    end
+    filter { (2000..Date.today.year).cover?(year) }
+    print_format "%{name} — novelty!"
+    weight 1.0
   end
 
   # Parse the date
@@ -71,15 +101,36 @@ class Movie
     !@view_date.nil?
   end
 
+  def has_genre?(genre)
+    @genre.include?(genre)
+  end
+
   # Check that movies has genre
-  def has_genre?(*genres)
-    #@genre.any? { |genre| genres.include?(genre) }
+  def has_genres?(*genres)
     (@genre - genres).empty?
   end
 
   # Human readable output
   def inspect
-    "\nName: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, view_date: #{@view_date}"
+    "\n#{self.class}, name: #{@name}, year: #{@year}, rating: #{@rating}, my_rating: #{@my_rating}, country: #{@country}, date: #{@date}, genre: #{@genre}, duration: #{@duration}, director: #{@director}, actors: #{@actors}, view_date: #{@view_date}"
+  end
+
+  def to_h
+    {
+      dir_movie:  @list.by_director(@director),
+      list:       @list,
+      name:       @name,
+      year:       @year,
+      rating:     @rating,
+      my_rating:  @my_rating,
+      country:    @country,
+      date:       @date,
+      genre:      @genre,
+      duration:   @duration,
+      director:   @director,
+      actors:     @actors,
+      view_date:  @view_date
+    }
   end
 
 end

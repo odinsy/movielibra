@@ -10,10 +10,12 @@ module RateList
     movie.date_movie  = Date.today
   end
 
-  def next
-    @movies.reject(&:viewed?).sort_by{ |m| [-m.rating * rand, m.class::WEIGHT * rand] }.first(5).each { |m| puts m.description }
+  # Get recommend movies with high rating for the review
+  def recommend
+    @movies.reject(&:viewed?).sort_by{ |m| [-m.rating * rand, m.class::WEIGHT * rand] }.first(5).each { |m| m.description }
   end
 
+  # Get watched movies with high rating
   def watched
     @movies.select(&:viewed?).sort_by{ |m| [-m.my_rating * rand, (Date.today - m.view_date).to_i * rand] }.first(5).each { |m| puts m.description }
   end

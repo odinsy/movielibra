@@ -2,25 +2,32 @@
 
 require 'csv'
 require './lib/movie.rb'
+require './lib/rate_list.rb'
 
 class MovieList
+
+  include Enumerable
+  include RateList
 
   attr_accessor :movies, :algos, :filters
 
   def initialize(path)
-    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.create(self, movie) }
     @algos    = {}
     @filters  = {}
   end
 
+  # Print movies
   def print
     @movies.map { |i| puts yield(i) } if block_given?
   end
 
+  # Add sorting algorithm
   def add_sort_algo(algo, &block)
     @algos.store(algo, block)
   end
 
+  # Sorting by algorithm or block
   def sorted_by(algo=nil, &block)
     if @algos.include?(algo)
       algo = @algos[algo]
@@ -28,14 +35,16 @@ class MovieList
     elsif block
       @movies.sort_by(&block)
     else
-      raise ArgumentError, "Unknown algorithm #{algo}"      
+      raise ArgumentError, "Unknown algorithm #{algo}"
     end
   end
 
+  # Add new filter for movie list
   def add_filter(filter, &block)
     @filters.store(filter, block)
   end
 
+  # Call filter on movie list
   def filter(attrs)
     attrs.inject(@movies) do |result, (title, value)|
       filter = @filters[title]
