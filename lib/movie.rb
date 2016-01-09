@@ -105,7 +105,7 @@ class Movie
 
   def to_h
     {
-      dir_movie:  list.by_director(@director),
+      dir_movie:  @list.by_director(@director),
       list:       @list,
       name:       @name,
       year:       @year,

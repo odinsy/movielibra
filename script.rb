@@ -14,8 +14,8 @@ unless File.exist?(path)
   exit
 end
 
-@movies = MovieList.new(path)
-#@movies = MyMovieList.new(path)
+#@movies = MovieList.new(path)
+@movies = MyMovieList.new(path)
 #@movie = @movies.find_movie("12 Angry Men")
 
 =begin
@@ -29,7 +29,7 @@ p @movies.month_stats
 
 @movie.rate(Date.today, 10)
 puts "\nNot seen movies:"
-@movies.next
+@movies.recommend
 puts "\nWatched movies:"
 @movies.watched
 
@@ -57,4 +57,6 @@ p @movies.filter(
 
 # Metaprogramming
 p Object.const_get("Movie::AncientMovie::WEIGHT")
-@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
+@movies.recommend
+
+# @movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }

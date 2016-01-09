@@ -10,7 +10,7 @@ module RateList
     movie.date_movie  = Date.today
   end
 
-  def next
+  def recommend
     @movies.reject(&:viewed?).sort_by{ |m| [-m.rating * rand, m.class::WEIGHT * rand] }.first(5).each { |m| puts m.description }
   end
 
