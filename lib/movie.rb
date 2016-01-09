@@ -30,10 +30,10 @@ class Movie
     @view_date  = nil
   end
 
-  def self.create(list, attrs)
-    @movie  = OpenStruct.new(year: attrs[2].to_i)
+  def self.create(list, args)
+    @movie  = OpenStruct.new(year: args[2].to_i)
     cls     = @@filters.detect { |cls, filter| @movie.instance_eval(&filter) }.first
-    cls.new(list, attrs)
+    cls.new(list, args)
   end
 
   def self.filter(&block)
@@ -46,8 +46,8 @@ class Movie
     end
   end
 
-  def self.weight(atr)
-    const_set("WEIGHT", atr)
+  def self.weight(arg)
+    const_set("WEIGHT", arg)
   end
 
   class AncientMovie < Movie
