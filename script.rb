@@ -59,4 +59,5 @@ p @movies.filter(
 p Object.const_get("Movie::AncientMovie::WEIGHT")
 @movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
 p @movies.recommend.reject(&:drama?)
+p @movies.recommend.select(&:comedy?)
 p @movies.recommend.reject(&:wtf)
