@@ -34,7 +34,7 @@ puts "\nWatched movies:"
 @movies.watched
 
 # Check that movies has genre
-#p @movie.has_genre?("Crime", "Drama")
+#p @movie.has_genres?("Crime", "Drama")
 
 # Print and algorithms
 #@movies.print { |movie| "#{movie.year}: #{movie.name}" }
@@ -44,7 +44,7 @@ p @movies.sorted_by { |movie| [movie.genre, movie.year] }.first(5)
 p @movies.sorted_by(:genres_years).first(5)
 
 # Filters
-@movies.add_filter(:genres) { |movie, *genres| movie.has_genre?(*genres) }
+@movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
 @movies.add_filter(:rating_greater) { |movie, rating| movie.rating > rating }
 @movies.add_filter(:years) { |movie, from, to| (from..to).include?(movie.year) }
 p @movies.filters
@@ -57,6 +57,7 @@ p @movies.filter(
 
 # Metaprogramming
 #p Object.const_get("Movie::AncientMovie::WEIGHT")
-p @movies.recommend.select(&:drama?)
+p @movies.recommend.reject(&:drama?)
+p @movies.recommend.reject(&:wtf)
 
 #@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }

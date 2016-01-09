@@ -12,9 +12,10 @@ class Movie
   attr_accessor :list, :link, :name, :year, :country, :date, :genre, :duration, :rating, :director, :actors, :my_rating, :view_date
 
   @@filters = {}
+  @@all_genres = []
 
   class << self
-    attr_accessor :filters
+    attr_accessor :filters, :all_genres
   end
 
   def initialize(list, attributes)
@@ -28,17 +29,16 @@ class Movie
     @actors     = @actors.split(",")
     @my_rating  = 0
     @view_date  = nil
+    @@all_genres.push(self.genre).flatten!.uniq
   end
 
-  def method_missing(method_sym)
-    method = method_sym.to_s.chomp("?").capitalize
-    if @genre.include?(method)
-      self.class.send(:define_method, method) do
-        !method.nil?
-      end
-      self.send(method)
+  def method_missing(method_sym, *arguments, &block)
+    method = method_sym.to_s
+    p method
+    if method.include?("?") and @@all_genres.include?(method.chomp("?").capitalize)
+      p true
     else
-      return
+      p false
     end
   end
 
@@ -104,8 +104,12 @@ class Movie
     !@view_date.nil?
   end
 
+  def has_genre?(genre)
+    @genre.include?(genre)
+  end
+
   # Check that movies has genre
-  def has_genre?(*genres)
+  def has_genres?(*genres)
     (@genre - genres).empty?
   end
 
