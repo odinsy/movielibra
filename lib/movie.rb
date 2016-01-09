@@ -32,7 +32,7 @@ class Movie
 
   def method_missing(method_sym, *arguments, &block)
     method = method_sym.to_s.chomp("?").capitalize
-    if method_sym.to_s.include?("?")
+    if method_sym.to_s.match(/\w+\?$/)
       @genre.include?(method)
     else
       super
