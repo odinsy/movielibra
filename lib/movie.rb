@@ -14,7 +14,7 @@ class Movie
   @@filters = {}
 
   class << self
-    attr_accessor :filters, :all_genres
+    attr_accessor :filters
   end
 
   def initialize(list, attributes)
@@ -33,7 +33,7 @@ class Movie
   def method_missing(method_sym, *arguments, &block)
     method = method_sym.to_s.chomp("?").capitalize
     if method_sym.to_s.match(/\w+\?$/)
-      self.has_genre?(method)
+      has_genre?(method)
     else
       super
     end
