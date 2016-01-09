@@ -2,10 +2,13 @@
 
 require 'csv'
 require './lib/movie.rb'
+require './lib/rate_list.rb'
 
 class MovieList
 
   include Enumerable
+  include RateList
+
   attr_accessor :movies, :algos, :filters
 
   def initialize(path)
@@ -14,14 +17,20 @@ class MovieList
     @filters  = {}
   end
 
+  def method_missing(method, *args)
+  end
+
+  # Print movies
   def print
     @movies.map { |i| puts yield(i) } if block_given?
   end
 
+  # Add sorting algorithm
   def add_sort_algo(algo, &block)
     @algos.store(algo, block)
   end
 
+  # Sorting by algorithm or block
   def sorted_by(algo=nil, &block)
     if @algos.include?(algo)
       algo = @algos[algo]
@@ -33,10 +42,12 @@ class MovieList
     end
   end
 
+  # Add new filter for movie list
   def add_filter(filter, &block)
     @filters.store(filter, block)
   end
 
+  # Call filter on movie list
   def filter(attrs)
     attrs.inject(@movies) do |result, (title, value)|
       filter = @filters[title]
