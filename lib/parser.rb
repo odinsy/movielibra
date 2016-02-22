@@ -14,18 +14,20 @@ class Parser
     page.links_with(css: "td.titleColumn a").map do |link|
       mov             = {}
       review          = link.click
-      mov[:link]      = review.canonical_uri
+      mov[:link]      = review.canonical_uri.to_s 
       mov[:name]      = review.search(".title_wrapper h1[itemprop='name']").text.gsub(/\(\d+\)/,"").strip
       mov[:year]      = review.search(".title_wrapper h1 span#titleYear a").text
-      mov[:country]   = review.links_with(href: %r{/country/})
-      mov[:date]      = review.search("//meta[@itemprop='datePublished']/@content").map(&:value)
+      mov[:country]   = review.links_with(href: %r{/country/}).map(&:text).first
+      mov[:date]      = review.search("//*[@class='titleBar']//meta[@itemprop='datePublished']/@content").map(&:value).first
       mov[:genre]     = review.search(".see-more.inline.canwrap[itemprop='genre'] a").text.split("\s").map(&:strip)
       mov[:duration]  = review.search("#titleDetails.article .txt-block time[itemprop='duration']").first.text
       mov[:rating]    = review.search(".imdbRating .ratingValue strong span").text
       mov[:director]  = review.search(".credit_summary_item span[itemprop='director'] a").text
       mov[:actors]    = review.search(".credit_summary_item span[itemprop='actors'] a").map { |actor| actor.text.strip }
-      mov
+      puts mov
     end
   end
 
 end
+
+Parser.parse
