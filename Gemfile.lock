@@ -3,6 +3,7 @@ GEM
   specs:
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
+    highline (1.7.8)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     json (1.8.3)
@@ -22,6 +23,10 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     ntlm-http (0.1.1)
+    options (2.3.2)
+    progress_bar (1.0.5)
+      highline (~> 1.6)
+      options (~> 2.3.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
@@ -33,3 +38,4 @@ PLATFORMS
 DEPENDENCIES
   json
   mechanize
+  progress_bar
