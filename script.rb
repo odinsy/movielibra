@@ -14,6 +14,9 @@ unless File.exist?(path)
   exit
 end
 
+#Parser.save_to_json("movies.json")
+#Parser.save_to_csv("movies.csv")
+
 @movies = MovieList.new(path)
 #@movies = MyMovieList.new(path)
 #@movie = @movies.find_movie("12 Angry Men")
@@ -56,8 +59,8 @@ p @movies.filter(
 =end
 
 # Metaprogramming
-p Object.const_get("Movie::AncientMovie::WEIGHT")
-@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
-p @movies.recommend.reject(&:drama?)
-p @movies.recommend.select(&:comedy?)
-p @movies.recommend.reject(&:wtf)
+#p Object.const_get("Movie::AncientMovie::WEIGHT")
+#@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
+#p @movies.recommend.reject(&:drama?)
+#p @movies.recommend.select(&:comedy?)
+#p @movies.recommend.reject(&:wtf)
