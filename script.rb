@@ -17,8 +17,13 @@ end
 #Parser.save_to_json("movies.json")
 #Parser.save_to_csv("movies.csv")
 
-@movies = MovieList.new(path)
-#@movies = MyMovieList.new(path)
+#@movies = MovieList.from_csv(path)
+#@movies = MovieList.from_json(path)
+
+@movies = MyMovieList.from_csv(path)
+#@movies = MyMovieList.from_json(path)
+p @movies
+
 #@movie = @movies.find_movie("12 Angry Men")
 
 =begin

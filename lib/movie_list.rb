@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'json'
 require 'csv'
 require './lib/movie.rb'
 require './lib/rate_list.rb'
@@ -11,10 +12,20 @@ class MovieList
 
   attr_accessor :movies, :algos, :filters
 
-  def initialize(path)
-    @movies   = CSV.foreach(path, col_sep: "|").map { |movie| Movie.create(self, movie) }
+  def initialize(array)
+    @movies   = array.map { |movie| Movie.create(self, movie) }
     @algos    = {}
     @filters  = {}
+  end
+
+  # Load from JSON
+  def self.from_json(path)
+    new(parse_json(path))
+  end
+
+  # Load from CSV
+  def self.from_csv(path)
+    new(parse_csv(path))
   end
 
   # Print movies
@@ -98,6 +109,18 @@ class MovieList
   # Beauty output
   def beauty
     @movies.map { |m| m.humane }
+  end
+
+  protected
+  # Parse from JSON to array
+  def self.parse_json(path)
+    JSON.parse(open(path).read).map do |mov|
+      mov.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
+    end
+  end
+  # Parse from CSV to array
+  def self.parse_csv(path)
+    CSV.foreach(path, col_sep: "|").map
   end
 
 end

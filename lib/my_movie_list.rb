@@ -6,8 +6,8 @@ class MyMovieList < MovieList
 
   include RateList
 
-  def initialize(path)
-    @movies = CSV.foreach(path, col_sep: "|").map { |movie| Movie.new(self, movie) }
+  def initialize(array)
+    @movies = array.map { |movie| Movie.new(self, movie) }
   end
 
   def find_movie(name)
