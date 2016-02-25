@@ -14,8 +14,13 @@ unless File.exist?(path)
   exit
 end
 
-@movies = MovieList.new(path)
-#@movies = MyMovieList.new(path)
+#@movies = MovieList.load_csv(path)
+#@movies = MovieList.load_json(path)
+
+#@movies = MyMovieList.load_csv(path)
+@movies = MyMovieList.load_json(path)
+p @movies
+
 #@movie = @movies.find_movie("12 Angry Men")
 
 =begin
@@ -56,8 +61,8 @@ p @movies.filter(
 =end
 
 # Metaprogramming
-p Object.const_get("Movie::AncientMovie::WEIGHT")
-@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
-p @movies.recommend.reject(&:drama?)
-p @movies.recommend.select(&:comedy?)
-p @movies.recommend.reject(&:wtf)
+#p Object.const_get("Movie::AncientMovie::WEIGHT")
+#@movies.print { |movie| "#{movie.year}: #{movie.name}, #{movie.description}" }
+#p @movies.recommend.reject(&:drama?)
+#p @movies.recommend.select(&:comedy?)
+#p @movies.recommend.reject(&:wtf)
