@@ -5,7 +5,6 @@ require 'json'
 require 'csv'
 require 'mechanize'
 require 'progress_bar'
-require 'pmap'
 
 class IMDBFetcher
 
@@ -34,7 +33,7 @@ class IMDBFetcher
     page  = agent.get(IMDB_URL)
     count = page.links_with(css: "td.titleColumn a").count
     bar   = ProgressBar.new(count)
-    page.links_with(css: "td.titleColumn a").peach(5) do |link|
+    page.links_with(css: "td.titleColumn a").each do |link|
       mov             = {}
       review          = link.click
       mov[:link]      = review.canonical_uri.to_s
