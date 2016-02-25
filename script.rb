@@ -14,14 +14,11 @@ unless File.exist?(path)
   exit
 end
 
-#Parser.save_to_json("movies.json")
-#Parser.save_to_csv("movies.csv")
+#@movies = MovieList.load_csv(path)
+#@movies = MovieList.load_json(path)
 
-#@movies = MovieList.from_csv(path)
-#@movies = MovieList.from_json(path)
-
-@movies = MyMovieList.from_csv(path)
-#@movies = MyMovieList.from_json(path)
+#@movies = MyMovieList.load_csv(path)
+@movies = MyMovieList.load_json(path)
 p @movies
 
 #@movie = @movies.find_movie("12 Angry Men")

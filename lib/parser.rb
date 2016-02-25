@@ -5,33 +5,36 @@ require 'json'
 require 'csv'
 require 'mechanize'
 require 'progress_bar'
+require 'pmap'
 
-class Parser
+class IMDBFetcher
 
   IMDB_URL = "http://www.imdb.com/chart/top"
 
-  def self.save_to_json(filename)
-    movies = parse
-    File.open(filename, "w+") { |f| f.puts movies.to_json }
+  attr_accessor :list
+
+  def initialize
+    @list = []
   end
 
-  def self.save_to_csv(filename)
-    movies = parse
+  def save_to_json(filename)
+    File.open(filename, "w+") { |f| f.puts @list.to_json }
+  end
+
+  def save_to_csv(filename)
     CSV.open(filename, "w+", col_sep: "|") do |file|
-      movies.each do |m|
+      @list.each do |m|
         file << m.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
       end
     end
   end
 
-  private
-
-  def self.parse
+  def run!
     agent = Mechanize.new
     page  = agent.get(IMDB_URL)
     count = page.links_with(css: "td.titleColumn a").count
     bar   = ProgressBar.new(count)
-    list  = page.links_with(css: "td.titleColumn a").map do |link|
+    page.links_with(css: "td.titleColumn a").peach(5) do |link|
       mov             = {}
       review          = link.click
       mov[:link]      = review.canonical_uri.to_s
@@ -45,8 +48,13 @@ class Parser
       mov[:director]  = review.search(".credit_summary_item span[itemprop='director'] a").text
       mov[:actors]    = review.search(".credit_summary_item span[itemprop='actors'] a").map { |actor| actor.text.strip }
       bar.increment!
-      mov
+      @list << mov
     end
   end
 
 end
+
+# fetcher = IMDBFetcher.new
+# fetcher.run!
+# fetcher.save_to_json("movies.json")
+# fetcher.save_to_csv("movies.csv")

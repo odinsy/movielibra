@@ -19,12 +19,12 @@ class MovieList
   end
 
   # Load from JSON
-  def self.from_json(path)
+  def self.load_json(path)
     new(parse_json(path))
   end
 
   # Load from CSV
-  def self.from_csv(path)
+  def self.load_csv(path)
     new(parse_csv(path))
   end
 
@@ -114,12 +114,14 @@ class MovieList
   protected
   # Parse from JSON to array
   def self.parse_json(path)
+    raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
     JSON.parse(open(path).read).map do |mov|
       mov.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
     end
   end
   # Parse from CSV to array
   def self.parse_csv(path)
+    raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
     CSV.foreach(path, col_sep: "|").map
   end
 
