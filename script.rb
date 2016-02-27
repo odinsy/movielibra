@@ -19,11 +19,12 @@ end
 
 #@movies = MyMovieList.load_csv(path)
 @movies = MyMovieList.load_json(path)
-p @movies
-
-#@movie = @movies.find_movie("12 Angry Men")
+# p @movies
 
 =begin
+@movie = @movies.find_movie("12 Angry Men")
+@movies.rate("12 Angry Men", 7)
+
 @movies.longest(10)
 p @movies.select_by_genre("Comedy")
 p @movies.directors
