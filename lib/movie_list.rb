@@ -8,8 +8,7 @@ require './lib/rate_list.rb'
 class MovieList
 
   include Enumerable
-  include RateList
-
+  
   attr_accessor :movies, :algos, :filters
 
   def initialize(array)
