@@ -3,7 +3,6 @@ require 'my_movie_list'
 
 describe "rate_list" do
   let!(:movies) { build(:my_movie_list) }
-  # let!(:movie) { build(:movie) }
   describe "#rate" do
     context "when num is correct" do
       before :each do
