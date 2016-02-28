@@ -3,11 +3,11 @@ require 'my_movie_list'
 
 describe "rate_list" do
   let!(:movies) { build(:my_movie_list) }
+  before :each do
+    movies.rate("The Godfather", 7)
+  end
   describe "#rate" do
     context "when num is correct" do
-      before :each do
-        movies.rate("The Godfather", 7)
-      end
       it "changes the rate" do
         expect(movies.find_movie("The Godfather").my_rating).to eq(7)
       end
@@ -22,9 +22,6 @@ describe "rate_list" do
     end
   end
   describe "#recommend" do
-    before :each do
-      movies.rate("The Godfather", 7)
-    end
     it "rejects watched movies" do
       expect(movies.recommend.map(&:name)).not_to include("The Godfather")
     end
@@ -33,10 +30,7 @@ describe "rate_list" do
     end
   end
   describe "#watched" do
-    before :each do
-      movies.rate("The Godfather", 7)
-    end
-    it "shows viewed movies" do
+    it "returns viewed movies" do
       expect(movies.watched.map(&:name)).to include("The Godfather")
     end
     it "rejects not watched movies" do
