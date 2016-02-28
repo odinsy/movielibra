@@ -8,11 +8,12 @@ require './lib/rate_list.rb'
 class MovieList
 
   include Enumerable
-  
+  extend Enumerable
+
   attr_accessor :movies, :algos, :filters
 
   def initialize(array)
-    @movies   = array.map { |movie| Movie.create(self, movie) }
+    @movies   = array.map { |movie| Movie.new(self, movie) }
     @algos    = {}
     @filters  = {}
   end
@@ -108,6 +109,10 @@ class MovieList
   # Beauty output
   def beauty
     @movies.map { |m| m.humane }
+  end
+
+  def each(&block)
+    @movies.each(&block)
   end
 
   protected

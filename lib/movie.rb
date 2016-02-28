@@ -23,7 +23,7 @@ class Movie
     @year       = @year.to_i
     @date       = parse_date(@date)
     @genre      = @genre.split(",")
-    @duration   = @duration.gsub!(/ min/, '').to_i
+    @duration   = @duration.to_i
     @rating     = @rating.to_f.round(1)
     @actors     = @actors.split(",")
     @my_rating  = 0
