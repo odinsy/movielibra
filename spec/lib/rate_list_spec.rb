@@ -1,7 +1,7 @@
 require 'movie_list'
 require 'my_movie_list'
 
-describe "rate_list" do
+describe "RateList" do
   let!(:movies) { build(:my_movie_list) }
   before :each do
     movies.rate("The Godfather", 7)
