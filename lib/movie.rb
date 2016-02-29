@@ -17,7 +17,7 @@ class Movie
     attr_accessor :filters
   end
 
-  def initialize(list, attributes)
+  def initialize(list=nil, attributes)
     @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = attributes
     @list       = list
     @year       = @year.to_i
