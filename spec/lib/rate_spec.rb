@@ -1,6 +1,6 @@
 require 'movie'
 
-describe "rate" do
+describe "Rate" do
   let!(:movie) { build(:movie) }
   context "when num is correct" do
     before :each do
