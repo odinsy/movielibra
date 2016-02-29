@@ -23,9 +23,7 @@ end
 @movies.rate("12 Angry Men", 7)
 @movie = @movies.find_movie("12 Angry Men")
 # p @movies.watched
-p @movies.select(&:viewed?)
-p @movies.watched.include?(@movie)
-p @movies.recommend.include?(@movie)
+
 =begin
 
 @movies.longest(10)
