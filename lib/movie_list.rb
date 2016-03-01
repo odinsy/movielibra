@@ -120,7 +120,7 @@ class MovieList
   def self.parse_json(path)
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
     JSON.parse(open(path).read).map do |mov|
-      mov.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
+      p mov
     end
   end
   # Parse from CSV to array

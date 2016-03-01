@@ -17,7 +17,7 @@ class IMDBFetcher
   end
 
   def save_to_json(filename)
-    File.open(filename, "w+") { |f| f.puts @list.to_json }
+    File.open(filename, "w+") { |f| f.puts JSON.parse(@list, symbolize_names: true) }
   end
 
   def save_to_csv(filename)
@@ -53,7 +53,7 @@ class IMDBFetcher
 
 end
 
-# fetcher = IMDBFetcher.new
-# fetcher.run!
-# fetcher.save_to_json("movies.json")
+fetcher = IMDBFetcher.new
+fetcher.run!
+fetcher.save_to_json("movies.json")
 # fetcher.save_to_csv("movies.csv")

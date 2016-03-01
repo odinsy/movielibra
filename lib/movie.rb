@@ -18,14 +18,17 @@ class Movie
   end
 
   def initialize(list=nil, attributes)
-    @link, @name, @year, @country, @date, @genre, @duration, @rating, @director, @actors = attributes
     @list       = list
-    @year       = @year.to_i
-    @date       = parse_date(@date)
-    @genre      = @genre.split(",")
-    @duration   = @duration.to_i
-    @rating     = @rating.to_f.round(1)
-    @actors     = @actors.split(",")
+    @link       = attributes[:link]
+    @name       = attributes[:name]
+    @year       = attributes[:year].to_i
+    @country    = attributes[:country]
+    @date       = parse_date(attributes[:date])
+    @genre      = attributes[:genre].split(",")
+    @duration   = attributes[:duration].to_i
+    @rating     = attributes[:rating].to_f.round(1)
+    @director   = attributes[:director]
+    @actors     = attributes[:actors].split(",")
     @my_rating  = 0
     @view_date  = nil
   end
@@ -40,7 +43,10 @@ class Movie
   end
 
   def self.create(list, args)
-    @movie  = OpenStruct.new(year: args[2].to_i)
+    p args
+    p args["year"]
+    p year    = args[:year].to_i
+    @movie  = OpenStruct.new(year: year)
     cls     = @@filters.detect { |cls, filter| @movie.instance_eval(&filter) }.first
     cls.new(list, args)
   end
