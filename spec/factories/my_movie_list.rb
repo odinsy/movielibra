@@ -1,10 +1,11 @@
 FactoryGirl.define do
   factory :my_movie_list, class: MovieList::MyMovieList do
     movies = [
-      ["http://www.imdb.com/title/tt0111161/", "The Shawshank Redemption", "1994", "USA", "1994-10-14", "Crime,Drama", "142", "9.3", "Frank Darabont", "Tim Robbins,Morgan Freeman,Bob Gunton"],
-      ["http://www.imdb.com/title/tt0068646/", "The Godfather", "1972", "USA", "1972-03-24", "Crime,Drama", "175", "9.2", "Francis Ford Coppola", "Marlon Brando,Al Pacino,James Caan"],
-      ["http://www.imdb.com/title/tt0071562/", "The Godfather: Part II", "1974", "USA", "1974-12-20", "Crime,Drama", "202", "9.0", "Francis Ford Coppola", "Al Pacino,Robert De Niro,Robert Duvall"],
-      ["http://www.imdb.com/title/tt0468569/", "The Dark Knight", "2008", "USA", "2008-07-18", "Action,Crime,Drama", "152", "9.0", "Christopher Nolan", "Christian Bale,Heath Ledger,Aaron Eckhart"]
+      {link: "http://www.imdb.com/title/tt0111161/", name: "The Shawshank Redemption", year: "1994", country: "USA", date: "1994-10-14", genre: ["Crime","Drama"], duration: "142", rating: "9.3", director: "Frank Darabont", actors: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"]},
+      {link: "http://www.imdb.com/title/tt0017925/", name: "The General", year: "1926", country: "USA", date: "1929", genre: ["Action","Adventure","Comedy","Drama","War"], duration: "67", rating: "8.3", director: "Clyde BruckmanBuster Keaton", actors: ["Buster Keaton", "Marion Mack", "Glen Cavender"]},
+      {link: "http://www.imdb.com/title/tt0052561/", name: "Anatomy of a Murder", year: "1959", country: "USA", date: "1959-09", genre: ["Crime","Drama","Mystery","Thriller"], duration: "160", rating: "8.1", director: "Otto Preminger", actors: ["James Stewart", "Lee Remick", "Ben Gazzara"]},
+      {link: "http://www.imdb.com/title/tt0094625/", name: "Акира", year: "1988", country: "Japan", date: "1988-07-16", genre: ["Animation","Action","Sci-Fi"], duration: "124", rating: "8.1", director: "Katsuhiro Ôtomo", actors: ["Nozomu Sasaki","Mami Koyama","Mitsuo Iwata"]},
+      {link: "http://www.imdb.com/title/tt0118694/", name: "In the Mood for Love", year: "2000", country: "Hong Kong", date: "2001-03-09", genre: ["Drama","Romance"], duration: "98", rating: "8.1", director: "Kar-wai Wong", actors: ["Tony Chiu Wai Leung","Maggie Cheung","Ping Lam Siu"]}
     ]
     initialize_with { new(movies) }
   end

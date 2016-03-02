@@ -22,9 +22,9 @@ end
 # p @movies
 @movies.rate("12 Angry Men", 7)
 @movie = @movies.find_movie("12 Angry Men")
-# p @movies.watched
-Movie::AncientMovie.filter { (1900..1944).cover?(year) }
-p Movie.filters
+p @movies.watched
+# Movie::AncientMovie.filter { (1900..1944).cover?(year) }
+# p Movie.filters
 =begin
 
 @movies.longest(10)
