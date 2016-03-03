@@ -13,10 +13,6 @@ class Movie
 
   @@filters = {}
 
-  class << self
-    attr_accessor :filters
-  end
-
   def initialize(list=nil, attributes)
     @list       = list
     @link       = attributes[:link]
@@ -60,6 +56,10 @@ class Movie
 
   def self.weight(arg)
     const_set("WEIGHT", arg)
+  end
+
+  def self.filters
+    @@filters
   end
 
   class AncientMovie < Movie
