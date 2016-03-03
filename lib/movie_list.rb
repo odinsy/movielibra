@@ -121,10 +121,10 @@ class MovieList
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
     JSON.parse(open(path).read, symbolize_names: true)
   end
-  # Parse from CSV to array
+  # Parse from CSV to array of hashes
   def self.parse_csv(path)
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
-    CSV.foreach(path, col_sep: "|").map
+    CSV.foreach(path, col_sep: "|", headers: true, header_converters: :symbol).map
   end
 
 end

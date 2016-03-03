@@ -5,6 +5,7 @@ require 'json'
 require 'csv'
 require 'mechanize'
 require 'progress_bar'
+require 'pmap'
 
 class IMDBFetcher
 
@@ -22,6 +23,7 @@ class IMDBFetcher
 
   def save_to_csv(filename)
     CSV.open(filename, "w+", col_sep: "|") do |file|
+      file << @list.first.keys
       @list.each do |m|
         file << m.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
       end
@@ -33,7 +35,7 @@ class IMDBFetcher
     page  = agent.get(IMDB_URL)
     count = page.links_with(css: "td.titleColumn a").count
     bar   = ProgressBar.new(count)
-    page.links_with(css: "td.titleColumn a").each do |link|
+    page.links_with(css: "td.titleColumn a").peach(4) do |link|
       mov             = {}
       review          = link.click
       mov[:link]      = review.canonical_uri.to_s
@@ -55,5 +57,5 @@ end
 
 # fetcher = IMDBFetcher.new
 # fetcher.run!
-# fetcher.save_to_json("movies.json")
+# # fetcher.save_to_json("movies.json")
 # fetcher.save_to_csv("movies.csv")
