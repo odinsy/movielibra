@@ -94,10 +94,10 @@ describe "MovieList" do
 
   describe ".parse_json" do
     it "returns an array" do
-      expect(MovieList.parse_json("spec/files/movies.json").class).to eq(Array)
+      expect(MovieList.parse_json("spec/factories/movies.json").class).to eq(Array)
     end
     it "parses JSON to array of hashes" do
-      expect(MovieList.parse_json("spec/files/movies.json").first).to eq({:link=>"http://www.imdb.com/title/tt0111161/", :name=>"The Shawshank Redemption", :year=>"1994", :country=>"USA", :date=>"1994-10-14", :genre=>["Crime", "Drama"], :duration=>"142", :rating=>"9.3", :director=>"Frank Darabont", :actors=>["Tim Robbins", "Morgan Freeman", "Bob Gunton"]})
+      expect(MovieList.parse_json("spec/factories/movies.json").first).to eq({:link=>"http://www.imdb.com/title/tt0111161/", :name=>"The Shawshank Redemption", :year=>"1994", :country=>"USA", :date=>"1994-10-14", :genre=>["Crime", "Drama"], :duration=>"142", :rating=>"9.3", :director=>"Frank Darabont", :actors=>["Tim Robbins", "Morgan Freeman", "Bob Gunton"]})
     end
     it "throw an exception when file does not exist" do
       expect { MovieList.parse_json("111.json") }.to raise_error("File not found: 111.json")
@@ -106,7 +106,7 @@ describe "MovieList" do
 
   describe ".parse_csv" do
     it "parses CSV" do
-      expect(MovieList.parse_csv("spec/files/movies.csv").first).to eq([[:link, "http://www.imdb.com/title/tt0468569/"], [:name, "The Dark Knight"], [:year, "2008"], [:country, "USA"], [:date, "2008-07-18"], [:genre, "Action,Crime,Drama"], [:duration, "152"], [:rating, "9.0"], [:director, "Christopher Nolan"], [:actors, "Christian Bale,Heath Ledger,Aaron Eckhart"]])
+      expect(MovieList.parse_csv("spec/factories/movies.csv").first).to eq([[:link, "http://www.imdb.com/title/tt0468569/"], [:name, "The Dark Knight"], [:year, "2008"], [:country, "USA"], [:date, "2008-07-18"], [:genre, "Action,Crime,Drama"], [:duration, "152"], [:rating, "9.0"], [:director, "Christopher Nolan"], [:actors, "Christian Bale,Heath Ledger,Aaron Eckhart"]])
     end
     it "throw an exception when file does not exist" do
       expect { MovieList.parse_csv("111.csv") }.to raise_error("File not found: 111.csv")
@@ -115,13 +115,13 @@ describe "MovieList" do
 
   describe ".load_json" do
     it "creates an object of class MovieList" do
-      expect(MovieList.load_json("spec/files/movies.json").class).to eq(MovieList)
+      expect(MovieList.load_json("spec/factories/movies.json").class).to eq(MovieList)
     end
   end
 
   describe ".load_csv" do
     it "creates an object of class MovieList" do
-      expect(MovieList.load_csv("spec/files/movies.csv").class).to eq(MovieList)
+      expect(MovieList.load_csv("spec/factories/movies.csv").class).to eq(MovieList)
     end
   end
 
