@@ -70,9 +70,9 @@ describe "Movie" do
   end
 
   describe ".filter" do
-    it "stores a filter" do
+    it "stores the filter" do
       Movie::ClassicMovie.filter { (1945..1967).cover?(year) }
-      expect(Movie.filters).to include("{ (1945..1967).cover?(year) }")
+      expect(Movie.filters ).to include { (1945..1967).cover?(year) }
     end
   end
 
