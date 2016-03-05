@@ -15,11 +15,11 @@ unless File.exist?(path)
 end
 
 #@movies = MovieList.load_csv(path)
-#@movies = MovieList.load_json(path)
+@movies = MovieList.load_json(path)
 
-@movies = MyMovieList.load_csv(path)
+# @movies = MyMovieList.load_csv(path)
 # @movies = MyMovieList.load_json(path)
-p @movies
+# p @movies
 # p @movies
 # @movies.rate("12 Angry Men", 7)
 # @movie = @movies.find_movie("12 Angry Men")
@@ -46,7 +46,7 @@ puts "\nWatched movies:"
 #p @movie.has_genres?("Crime", "Drama")
 
 # Print and algorithms
-#@movies.print { |movie| "#{movie.year}: #{movie.name}" }
+@movies.print { |movie| "#{movie.year}: #{movie.name}" }
 @movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
 puts @movies.algos
 p @movies.sorted_by { |movie| [movie.genre, movie.year] }.first(5)
