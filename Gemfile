@@ -8,3 +8,4 @@ gem "rspec-core"
 gem 'factory_girl'
 gem 'fuubar'
 gem 'fakeweb'
+gem 'pmap'
