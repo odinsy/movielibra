@@ -116,7 +116,7 @@ class MovieList
   end
 
   protected
-  # Parse from JSON to array
+  # Parse from JSON to array of hashes
   def self.parse_json(path)
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
     JSON.parse(open(path).read, symbolize_names: true)
