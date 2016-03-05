@@ -8,7 +8,6 @@ require './lib/rate_list.rb'
 class MovieList
 
   include Enumerable
-  extend Enumerable
 
   attr_accessor :movies, :algos, :filters
 
