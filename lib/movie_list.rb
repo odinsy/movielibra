@@ -105,11 +105,6 @@ class MovieList
     @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
   end
 
-  # Beauty output
-  def beauty
-    @movies.map { |m| m.humane }
-  end
-
   def each(&block)
     @movies.each(&block)
   end
