@@ -12,6 +12,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
+    fakeweb (1.3.0)
     fuubar (2.0.0)
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -68,6 +69,7 @@ PLATFORMS
 
 DEPENDENCIES
   factory_girl
+  fakeweb
   fuubar
   json
   mechanize
