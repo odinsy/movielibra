@@ -1,5 +1,4 @@
 require 'imdb_fetcher'
-require 'fakeweb'
 
 describe "IMDBFetcher" do
 
