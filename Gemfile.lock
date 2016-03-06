@@ -70,8 +70,6 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     ruby-progressbar (1.7.5)
-    themoviedb-api (1.1.0)
-      rest-client (~> 1.8, >= 1.8)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -93,4 +91,3 @@ DEPENDENCIES
   pmap
   progress_bar
   rspec-core
-  themoviedb-api
