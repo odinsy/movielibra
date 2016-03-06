@@ -76,4 +76,11 @@ describe "TmdbFetcher" do
     end
   end
 
+  describe ".get_movie_count" do
+    it "returns the movie count" do
+      fetcher.count_page = 13
+      expect(fetcher.send(:get_movie_count)).to eq(260)
+    end
+  end
+
 end
