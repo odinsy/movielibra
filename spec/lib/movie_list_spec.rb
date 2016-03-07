@@ -1,6 +1,7 @@
 require 'movie_list'
 
 describe "MovieList" do
+  
   let!(:movies) { build(:movie_list) }
 
   describe "#add_sort_algo" do
@@ -78,7 +79,7 @@ describe "MovieList" do
 
   describe "#count_by_director" do
     it "returns a count of movies by each director" do
-      expect(movies.count_by_director).to eq([["Kar-wai Wong", 1], ["Katsuhiro Ôtomo", 1], ["Otto Preminger", 1], ["Clyde BruckmanBuster Keaton", 1]])
+      expect(movies.count_by_director).to eq({"Kar-wai Wong"=>1, "Katsuhiro Ôtomo"=>1, "Otto Preminger"=>1, "Clyde BruckmanBuster Keaton"=>1})
     end
   end
 

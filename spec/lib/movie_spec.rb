@@ -4,23 +4,20 @@ describe "Movie" do
 
   let(:movie) { build(:movie) }
   let(:movie_list) { build(:movie_list) }
+  let(:attributes) { {link: "http://www.imdb.com/title/tt0017925/", name: "The General", year: "1926", country: "USA", date: "1929", genre: ["Action","Adventure","Comedy","Drama","War"], duration: "67", rating: "8.3", director: "Clyde BruckmanBuster Keaton", actors: ["Buster Keaton", "Marion Mack", "Glen Cavender"]} }
 
   describe ".create" do
-    it "creates a movie with class Movie::ClassicMovie" do
-      classic = {link: "http://www.imdb.com/title/tt0052561/", name: "Anatomy of a Murder", year: "1959", country: "USA", date: "1959-09", genre: ["Crime","Drama","Mystery","Thriller"], duration: "160", rating: "8.1", director: "Otto Preminger", actors: ["James Stewart", "Lee Remick", "Ben Gazzara"]}
-      expect(Movie.create(movie_list, classic)).to be_a(Movie::ClassicMovie)
-    end
     it "creates a movie with class Movie::AncientMovie" do
-      ancient = {link: "http://www.imdb.com/title/tt0017925/", name: "The General", year: "1926", country: "USA", date: "1929", genre: ["Action","Adventure","Comedy","Drama","War"], duration: "67", rating: "8.3", director: "Clyde BruckmanBuster Keaton", actors: ["Buster Keaton", "Marion Mack", "Glen Cavender"]}
-      expect(Movie.create(movie_list, ancient)).to be_a(Movie::AncientMovie)
+      expect(Movie.create(movie_list, attributes.merge(year: '1920'))).to be_a(Movie::AncientMovie)
+    end
+    it "creates a movie with class Movie::ClassicMovie" do
+      expect(Movie.create(movie_list, attributes.merge(year: '1959'))).to be_a(Movie::ClassicMovie)
     end
     it "creates a movie with class Movie::ModernMovie" do
-      modern = {link: "http://www.imdb.com/title/tt0094625/", name: "Акира", year: "1988", country: "Japan", date: "1988-07-16", genre: ["Animation","Action","Sci-Fi"], duration: "124", rating: "8.1", director: "Katsuhiro Ôtomo", actors: ["Nozomu Sasaki","Mami Koyama","Mitsuo Iwata"]}
-      expect(Movie.create(movie_list, modern)).to be_a(Movie::ModernMovie)
+      expect(Movie.create(movie_list, attributes.merge(year: '1998'))).to be_a(Movie::ModernMovie)
     end
     it "creates a movie with class Movie::NewMovie" do
-      newmovie = {link: "http://www.imdb.com/title/tt0118694/", name: "In the Mood for Love", year: "2000", country: "Hong Kong", date: "2001-03-09", genre: ["Drama","Romance"], duration: "98", rating: "8.1", director: "Kar-wai Wong", actors: ["Tony Chiu Wai Leung","Maggie Cheung","Ping Lam Siu"]}
-      expect(Movie.create(movie_list, newmovie)).to be_a(Movie::NewMovie)
+      expect(Movie.create(movie_list, attributes.merge(year: '2005'))).to be_a(Movie::NewMovie)
     end
   end
 
@@ -98,13 +95,16 @@ describe "Movie" do
 
   describe "#parse_date" do
     it "parse a date with format '%Y' when date.length eq 0..4" do
-      expect(movie.parse_date("1994").to_s).to eq("1994-01-01")
+      @movie = Movie.new(attributes.merge(date: '1926'))
+      expect(@movie.date.to_s).to eq("1926-01-01")
     end
     it "parse a date with format '%Y-%m' when date.length eq 5..7" do
-      expect(movie.parse_date("1994-10").to_s).to eq("1994-10-01")
+      @movie = Movie.new(attributes.merge(date: '1926-10'))
+      expect(@movie.date.to_s).to eq("1926-10-01")
     end
     it "parse a date with format '%Y-%m-%d' when date.length is more than 7" do
-      expect(movie.parse_date("1994-10-14").to_s).to eq("1994-10-14")
+      @movie = Movie.new(attributes.merge(date: '1926-10-10'))
+      expect(@movie.date.to_s).to eq("1926-10-10")
     end
   end
 end
