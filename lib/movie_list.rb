@@ -85,7 +85,7 @@ class MovieList
 
   # Display the count of movies by each director
   def count_by_director
-    @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse
+    @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse.to_h
   end
 
   # Display the movies by director
