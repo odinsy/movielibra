@@ -70,9 +70,13 @@ describe "Movie" do
   end
 
   describe ".filter" do
-    it "stores the filter" do
+    it "stores the filter for the Movie subclass" do
       Movie::ClassicMovie.filter { (1945..1967).cover?(year) }
-      expect(Movie.filters ).to include { (1945..1967).cover?(year) }
+      expect(Movie.filters).to include(Movie::ClassicMovie)
+    end
+    it "has Proc for the value of Movie subclass" do
+      Movie::ClassicMovie.filter { (1945..1967).cover?(year) }
+      expect(Movie.filters[Movie::ClassicMovie].class).to eq(Proc)
     end
   end
 
