@@ -11,18 +11,17 @@ class TmdbFetcher
 
   include Export
 
-  IMDB_URI  = "http://www.imdb.com/title/"
-  MOVIE_URI = "http://api.themoviedb.org/3/movie"
-  TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated"
+  IMDB_URI    = "http://www.imdb.com/title/"
+  TMDB_URI    = "http://api.themoviedb.org/3/movie"
+  MOVIE_COUNT = 250
 
-  attr_accessor :list, :ids, :count_page
+  attr_accessor :list, :ids
 
   @@api_key = nil
 
   def initialize
     @list = []
     @ids  = []
-    @count_page = 12
   end
 
   def self.key=(api_key)
@@ -33,65 +32,77 @@ class TmdbFetcher
     @@api_key
   end
 
+  def self.movie_count(count)
+    const_set("MOVIE_COUNT", count)
+  end
+
   def run!
-    bar = ProgressBar.new(get_movie_count)
-    top_movie_ids.each { |id| parse(id) ; bar.increment! }
+    movie_count = TmdbFetcher::MOVIE_COUNT
+    bar = ProgressBar.new(movie_count)
+    top_movie_ids.first(movie_count).each { |id| parse(id) ; bar.increment! }
   end
 
   private
 
-  def get_movie_count
-    @count_page * 20
+  def page_count
+    (TmdbFetcher::MOVIE_COUNT / 20.0).round
   end
+
+  def top_movie_ids
+    1.upto(page_count) do |num|
+      movies = get("top_rated", num)
+      movies[:results].select { |movie| @ids << movie[:id] }
+    end
+    @ids
+  end
+
+  def parse(id)
+    movie   = get("#{id}")
+    credits = get("#{id}/credits")
+    @list << {
+      link:     get_imdb_link(movie[:imdb_id]),
+      name:     movie[:title],
+      year:     Date.strptime(movie[:release_date], '%Y').year,
+      country:  movie[:production_countries].map { |key| key[:iso_3166_1] }.first,
+      date:     movie[:release_date],
+      genre:    movie[:genres].map { |key| key[:name] },
+      duration: movie[:runtime],
+      rating:   movie[:vote_average],
+      director: get_director(credits),
+      actors:   get_actors(credits, 5)
+    }
+  end
+
+  def get(path, page=nil)
+    page.nil? ? path = "#{TMDB_URI}/#{path}?api_key=#{@@api_key}" : path = "#{TMDB_URI}/#{path}?api_key=#{@@api_key}&page=#{page}"
+    begin
+      JSON.parse(open(path).read, symbolize_names: true)
+    rescue OpenURI::HTTPError => e
+      puts "Passed path is incorrect, status code: #{e.io.status[0]}"
+    rescue JSON::ParserError => e
+      puts e.message
+    end
+  end
+
+  # def get_with_page(path)
+  #   url =
+  #   JSON.parse(open(url).read, symbolize_names: true)
+  # end
 
   def get_imdb_link(imdb_id)
     TmdbFetcher::IMDB_URI + imdb_id
   end
 
-  def get_director(id)
-    page    = "#{MOVIE_URI}/#{id}/credits?api_key=#{@@api_key}"
-    json    = open(page).read
-    result  = JSON.parse(json, symbolize_names: true)
-    if director = result[:crew].find { |key| key[:job] == "Director" }
+  def get_director(json)
+    if director = json[:crew].find { |key| key[:job] == "Director" }
       director[:name]
     else
       nil
     end
   end
 
-  def get_actors(id, num)
-    page    = "#{MOVIE_URI}/#{id}/credits?api_key=#{@@api_key}"
-    json    = open(page).read
-    result  = JSON.parse(json, symbolize_names: true)
-    result[:cast].map { |key| key[:name] }.first(num)
-  end
-
-  def top_movie_ids
-    1.upto(@count_page) do |num|
-      page    = "#{TOP_RATED}?api_key=#{@@api_key}&page=#{num}"
-      json    = open(page).read
-      result  = JSON.parse(json, symbolize_names: true)
-      result[:results].select { |movie| @ids << movie[:id] }
-    end
-    @ids
-  end
-
-  def parse(id)
-    mov     = {}
-    page    = "#{MOVIE_URI}/#{id}?api_key=#{@@api_key}"
-    json    = open(page).read
-    result  = JSON.parse(json, symbolize_names: true)
-    mov[:link]      = get_imdb_link(result[:imdb_id])
-    mov[:name]      = result[:title]
-    mov[:year]      = Date.strptime(result[:release_date], '%Y').year
-    mov[:country]   = result[:production_countries].map { |key| key[:iso_3166_1] }.first
-    mov[:date]      = result[:release_date]
-    mov[:genre]     = result[:genres].map { |key| key[:name] }
-    mov[:duration]  = result[:runtime]
-    mov[:rating]    = result[:vote_average]
-    mov[:director]  = get_director(id)
-    mov[:actors]    = get_actors(id, 5)
-    @list << mov
+  def get_actors(json, count)
+    json[:cast].map { |key| key[:name] }.first(count)
   end
 
 end

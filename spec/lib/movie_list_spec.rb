@@ -6,7 +6,11 @@ describe "MovieList" do
   describe "#add_sort_algo" do
     it "stores algorithms" do
       movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
-      expect(movies.algos).to include { |movie| [movie.genre, movie.year] }
+      expect(movies.algos).to include(:genres_years)
+    end
+    it "has Proc for the value of stored algorithm" do
+      movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
+      expect(movies.algos[:genres_years]).to be_a(Proc)
     end
   end
 
@@ -30,7 +34,11 @@ describe "MovieList" do
   describe "#add_filter" do
     it "stores filters" do
       movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
-      expect(movies.filters).to include { |movie, *genres| movie.has_genres?(*genres) }
+      expect(movies.filters).to include(:genres)
+    end
+    it "has Proc for the value of stored filters" do
+      movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
+      expect(movies.filters[:genres]).to be_a(Proc)
     end
   end
 
@@ -94,7 +102,7 @@ describe "MovieList" do
 
   describe ".parse_json" do
     it "returns an array" do
-      expect(MovieList.parse_json("spec/factories/movies.json").class).to eq(Array)
+      expect(MovieList.parse_json("spec/factories/movies.json")).to be_a(Array)
     end
     it "parses JSON to array of hashes" do
       expect(MovieList.parse_json("spec/factories/movies.json").first).to eq({:link=>"http://www.imdb.com/title/tt0111161/", :name=>"The Shawshank Redemption", :year=>"1994", :country=>"USA", :date=>"1994-10-14", :genre=>["Crime", "Drama"], :duration=>"142", :rating=>"9.3", :director=>"Frank Darabont", :actors=>["Tim Robbins", "Morgan Freeman", "Bob Gunton"]})
@@ -115,13 +123,13 @@ describe "MovieList" do
 
   describe ".load_json" do
     it "creates an object of class MovieList" do
-      expect(MovieList.load_json("spec/factories/movies.json").class).to eq(MovieList)
+      expect(MovieList.load_json("spec/factories/movies.json")).to be_a(MovieList)
     end
   end
 
   describe ".load_csv" do
     it "creates an object of class MovieList" do
-      expect(MovieList.load_csv("spec/factories/movies.csv").class).to eq(MovieList)
+      expect(MovieList.load_csv("spec/factories/movies.csv")).to be_a(MovieList)
     end
   end
 
