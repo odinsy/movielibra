@@ -28,7 +28,7 @@ class IMDBFetcher
   private
 
   def shorten_link(link)
-    link.split("/")[0..4].join("/")
+    link.split("/?").first
   end
 
   def get_movie_links
@@ -44,20 +44,20 @@ class IMDBFetcher
   end
 
   def parse(link)
-    agent           = Mechanize.new
-    page            = agent.get(link)
-    mov             = {}
-    mov[:link]      = page.canonical_uri.to_s
-    mov[:name]      = page.search(".title_wrapper h1[itemprop='name']").text.gsub(/ \(\d+\)/,"").strip
-    mov[:year]      = page.search(".title_wrapper h1 span#titleYear a").text
-    mov[:country]   = page.links_with(href: %r{/country/}).map(&:text).first
-    mov[:date]      = page.search("//*[@class='titleBar']//meta[@itemprop='datePublished']/@content").map(&:value).first
-    mov[:genre]     = page.search(".see-more.inline.canwrap[itemprop='genre'] a").text.split("\s").map(&:strip)
-    mov[:duration]  = page.search(".title_wrapper .subtext time/@datetime").first.value.gsub(/[^\d]/, '')
-    mov[:rating]    = page.search(".imdbRating .ratingValue strong span").text
-    mov[:director]  = page.search(".credit_summary_item span[itemprop='director'] a").text
-    mov[:actors]    = page.search(".credit_summary_item span[itemprop='actors'] a").map { |actor| actor.text.strip }
-    @list << mov
+    agent = Mechanize.new
+    page  = agent.get(link)
+    @list << {
+      link:     page.canonical_uri.to_s,
+      name:     page.search(".title_wrapper h1[itemprop='name']").text.gsub(/ \(\d+\)/,"").strip,
+      year:     page.search(".title_wrapper h1 span#titleYear a").text,
+      country:  page.links_with(href: %r{/country/}).map(&:text).first,
+      date:     page.search("//*[@class='titleBar']//meta[@itemprop='datePublished']/@content").map(&:value).first,
+      genre:    page.search(".see-more.inline.canwrap[itemprop='genre'] a").text.split("\s").map(&:strip),
+      duration: page.search(".title_wrapper .subtext time/@datetime").first.value.gsub(/[^\d]/, ''),
+      rating:   page.search(".imdbRating .ratingValue strong span").text,
+      director: page.search(".credit_summary_item span[itemprop='director'] a").text,
+      actors:   page.search(".credit_summary_item span[itemprop='actors'] a").map { |actor| actor.text.strip }
+    }
   end
 
 end
