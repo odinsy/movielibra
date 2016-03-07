@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
-# Parse information about movies from IMDb TOP250
+# Parse information about movies from http://www.imdb.com/chart/top
 
 require 'json'
 require 'csv'
 require 'mechanize'
 require 'progress_bar'
 require 'pmap'
+require './lib/export.rb'
 
 class IMDBFetcher
+
+  include Export
 
   IMDB_URL = "http://www.imdb.com/chart/top"
 
@@ -15,19 +18,6 @@ class IMDBFetcher
 
   def initialize
     @list = []
-  end
-
-  def save_to_json(filename)
-    File.open(filename, "w+") { |f| f.puts @list.to_json }
-  end
-
-  def save_to_csv(filename)
-    CSV.open(filename, "w+", col_sep: "|") do |file|
-      file << @list.first.keys
-      @list.each do |m|
-        file << m.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
-      end
-    end
   end
 
   def run!
@@ -71,8 +61,3 @@ class IMDBFetcher
   end
 
 end
-
-# fetcher = IMDBFetcher.new
-# fetcher.run!
-# fetcher.save_to_json("movies.json")
-# fetcher.save_to_csv("movies.csv")
