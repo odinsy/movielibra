@@ -6,12 +6,12 @@ describe "TmdbFetcher" do
   let(:id) { 40662 }
 
   it "gets my API key" do
-    get "https://api.themoviedb.org/3/movie/550?api_key=#{TmdbFetcher::API_KEY}"
+    get "https://api.themoviedb.org/3/movie/550?api_key=#{TmdbFetcher.key}"
     expect_status 200
   end
 
   describe ".top_movie_ids" do
-    let(:top_movie_ids) { fetcher.top_movie_ids }
+    let(:top_movie_ids) { fetcher.send(:top_movie_ids) }
     it "returns an array" do
       expect(top_movie_ids.class).to eq(Array)
     end
@@ -28,18 +28,18 @@ describe "TmdbFetcher" do
 
   describe ".parse" do
     it "returns an array" do
-      expect(fetcher.parse(id).class).to eq(Array)
+      expect(fetcher.send(:parse, id).class).to eq(Array)
     end
     it "returns not empty array" do
-      expect(fetcher.parse(id)).not_to be_empty
+      expect(fetcher.send(:parse, id)).not_to be_empty
     end
     it "returns not nil" do
-      expect(fetcher.parse(id)).not_to be_nil
+      expect(fetcher.send(:parse, id)).not_to be_nil
     end
     it "returns not nil values" do
-      expect(fetcher.parse(id).include?(nil)).to be_falsey
+      expect(fetcher.send(:parse, id).include?(nil)).to be_falsey
     end
-    it "correctly parses the information of the movie" do
+    it "correctly parses information of the movie" do
       movie = [
         { link: "http://www.imdb.com/title/tt1569923",
           name: "Batman: Under the Red Hood",
@@ -53,7 +53,7 @@ describe "TmdbFetcher" do
           actors: ["Bruce Greenwood", "Jensen Ackles", "Neil Patrick Harris", "Jason Isaacs", "John DiMaggio"]
         }
       ]
-      expect(fetcher.parse(id)).to eq(movie)
+      expect(fetcher.send(:parse, id)).to eq(movie)
     end
   end
 
