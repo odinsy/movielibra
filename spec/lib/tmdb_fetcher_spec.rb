@@ -37,19 +37,59 @@ describe "TmdbFetcher" do
   end
 
   describe "API" do
-    it "doesn't get incorrect API key" do
-      TmdbFetcher.key = "blabla"
-      get "#{movie_link}?api_key=#{TmdbFetcher.key}"
-      expect_status 401
+
+    it "throw an exception when API key is incorrect" do
+      expect { TmdbFetcher.key = "blabla" }.to raise_error("Incorrect API key blabla. Response code: 401.")
     end
+
+    it "doesn't change a value of API key" do
+      expect(TmdbFetcher.key).to eq(nil)
+    end
+
     it "gets correct API key" do
       TmdbFetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
-      get "#{movie_link}?api_key=#{TmdbFetcher.key}"
-      expect_status 200
+      expect(TmdbFetcher.key).to eq("dd165b18174b238eb2af5a0c3552f2f3")
     end
+
   end
 
-  describe ".top_movie_ids" do
+  describe ".movie_count" do
+
+    it "throw an exception when movie_count is less than 1" do
+      expect { TmdbFetcher.movie_count -1 }.to raise_error("You can't set movie_count less than 1!")
+    end
+
+    it "sets movie_count" do
+      TmdbFetcher.movie_count 5
+      expect(TmdbFetcher::MOVIE_COUNT).to eq(5)
+    end
+
+  end
+
+  describe "#run!" do
+
+    let(:result) { fetcher.run! }
+
+    before :each do
+      TmdbFetcher.movie_count 5
+      make_top_rated
+    end
+
+    it "responds to method #run!", vcr: true do
+      expect(fetcher).to respond_to(:run!)
+    end
+
+    it "returns an array", vcr: true do
+      expect(result).to be_a(Array)
+    end
+
+    it "returns passed number of movies", vcr: true do
+      expect(result.size).to eq(5)
+    end
+
+  end
+
+  describe "#top_movie_ids" do
 
     let(:top_movie_ids) { fetcher.send(:top_movie_ids) }
 
@@ -76,7 +116,7 @@ describe "TmdbFetcher" do
 
   end
 
-  describe ".parse" do
+  describe "#parse" do
 
     before :each do
       make_movie
@@ -105,7 +145,7 @@ describe "TmdbFetcher" do
 
   end
 
-  describe ".get" do
+  describe "#get" do
 
     before :each do
       make_movie
@@ -126,21 +166,21 @@ describe "TmdbFetcher" do
 
   end
 
-  describe ".get_director" do
+  describe "#get_director" do
     it "returns the director of the movie", vcr: true do
       make_movie_credits
       expect(fetcher.send(:get_director, credits)).to eq("Brandon Vietti")
     end
   end
 
-  describe ".get_actors" do
+  describe "#get_actors" do
     it "returns an array of the movie actors", vcr: true do
       make_movie_credits
       expect(fetcher.send(:get_actors, credits, 5)).to contain_exactly("Bruce Greenwood", "Jensen Ackles", "John DiMaggio", "Neil Patrick Harris", "Jason Isaacs")
     end
   end
 
-  describe ".page_count" do
+  describe "#page_count" do
     it "returns page count", vcr: true do
       TmdbFetcher.movie_count 10
       make_top_rated
@@ -148,7 +188,7 @@ describe "TmdbFetcher" do
     end
   end
 
-  describe ".get_imdb_link" do
+  describe "#get_imdb_link" do
     it "makes IMDB link" do
       imdb_id = "tt1569923"
       expect(fetcher.send(:get_imdb_link, imdb_id)).to eq("http://www.imdb.com/title/tt1569923")

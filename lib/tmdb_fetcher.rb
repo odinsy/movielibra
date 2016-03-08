@@ -6,6 +6,8 @@ require 'csv'
 require 'open-uri'
 require 'progress_bar'
 require './lib/export.rb'
+require 'uri'
+require 'net/http'
 
 class TmdbFetcher
 
@@ -25,6 +27,8 @@ class TmdbFetcher
   end
 
   def self.key=(api_key)
+    response_code = test_api_key(api_key)
+    raise ArgumentError, "Incorrect API key #{api_key}. Response code: #{response_code}." unless response_code == "200"
     @@api_key = api_key
   end
 
@@ -33,7 +37,7 @@ class TmdbFetcher
   end
 
   def self.movie_count(count)
-    const_set("MOVIE_COUNT", count)
+    count.to_i > 0 ? const_set("MOVIE_COUNT", count.to_i) : (raise ArgumentError, "You can't set movie_count less than 1!")
   end
 
   def run!
@@ -44,8 +48,13 @@ class TmdbFetcher
 
   private
 
+  def self.test_api_key(key)
+    Net::HTTP.get_response(URI("#{TmdbFetcher::TMDB_URI}/top_rated?api_key=#{key}")).code
+  end
+
   def page_count
-    (TmdbFetcher::MOVIE_COUNT / 20.0).round
+    movie_count = TmdbFetcher::MOVIE_COUNT
+    movie_count >= 10 ? (movie_count / 20.0).round : 1
   end
 
   def top_movie_ids

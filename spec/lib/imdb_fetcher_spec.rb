@@ -27,35 +27,35 @@ describe "IMDBFetcher" do
     Net::HTTP.get(URI(IMDBFetcher::IMDB_URL))
   end
 
-  describe ".parse" do
+  describe "#parse" do
     it "parses information from the movie page", vcr: true do
       make_movie_page
       expect(fetcher.send(:parse, link)).to eq(result)
     end
   end
 
-  describe ".get_movie_count", vcr: true do
+  describe "#get_movie_count", vcr: true do
     it "gets movie count" do
       make_movies_page
       expect(fetcher.send(:get_movie_count)).to eq(250)
     end
   end
 
-  describe ".get_movie_links", vcr: true do
+  describe "#get_movie_links", vcr: true do
     it "gets an array of movie links" do
       make_movies_page
       expect(fetcher.send(:get_movie_links)).to be_a(Array)
     end
   end
 
-  describe ".shorten_link" do
+  describe "#shorten_link" do
     it "makes link shorer" do
       link = "http://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2398042102&pf_rd_r=0758ZBZPJ59ZZDVJ47ZS&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1"
       expect(fetcher.send(:shorten_link, link)).to eq("http://www.imdb.com/title/tt0111161")
     end
   end
 
-  # describe ".run!" do
+  # describe "#run!" do
   #   it "parses TOP250 imdb.com movies" do
   #     expect(fetcher.run!).to eq(true)
   #   end
