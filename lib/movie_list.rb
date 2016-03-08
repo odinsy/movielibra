@@ -11,8 +11,9 @@ class MovieList
 
   attr_accessor :movies, :algos, :filters
 
-  def initialize(array)
-    @movies   = array.map { |movie| Movie.new(self, movie) }
+  def initialize(data)
+    data      = [] unless data.is_a?(Array)
+    @movies   = data.map { |movie| Movie.new(self, movie) }
     @algos    = {}
     @filters  = {}
   end

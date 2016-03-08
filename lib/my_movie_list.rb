@@ -6,8 +6,9 @@ class MyMovieList < MovieList
 
   include RateList
 
-  def initialize(array)
-    @movies = array.map { |movie| Movie.create(self, movie) }
+  def initialize(data)
+    data    = [] unless data.is_a?(Array)
+    @movies = data.map { |movie| Movie.create(self, movie) }
   end
 
   def find_movie(name)

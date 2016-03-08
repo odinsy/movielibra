@@ -14,6 +14,7 @@ class Movie
   @@filters = {}
 
   def initialize(list=nil, attributes)
+    attributes  = {} unless attributes.is_a?(Hash)
     @list       = list
     @link       = attributes[:link]
     @name       = attributes[:name]
