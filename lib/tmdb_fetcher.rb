@@ -84,11 +84,6 @@ class TmdbFetcher
     end
   end
 
-  # def get_with_page(path)
-  #   url =
-  #   JSON.parse(open(url).read, symbolize_names: true)
-  # end
-
   def get_imdb_link(imdb_id)
     TmdbFetcher::IMDB_URI + imdb_id
   end
