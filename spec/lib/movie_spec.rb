@@ -69,6 +69,10 @@ describe "Movie" do
     it "returns true if a movie has genres" do
       expect(movie.has_genres?("Crime", "Drama")).to be_truthy
     end
+    it "returns true if a movie has genres" do
+      @movie = Movie.create(movie_list, attributes.merge(genres: ['Crime', 'Drama']))
+      expect(@movie.has_genres?("Crime")).to be_falsey
+    end
     it "returns false if a movie has not genres" do
       expect(movie.has_genres?("Comedy", "Action")).to be_falsey
     end

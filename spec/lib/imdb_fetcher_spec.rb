@@ -19,30 +19,32 @@ describe "IMDBFetcher" do
     ]
   }
 
-  context "offline parsing" do
-    describe ".parse" do
-      it "parses information from the movie page" do
-        path    = File.expand_path("../../factories/The Shawshank Redemption (1994) - IMDb.html", __FILE__)
-        stream  = File.read(path)
-        FakeWeb.register_uri(:get, link, body: stream, content_type: "text/html")
-        expect(fetcher.send(:parse, link)).to eq(result)
-      end
+  def make_movie_page
+    Net::HTTP.get(URI(link))
+  end
+
+  def make_movies_page
+    Net::HTTP.get(URI(IMDBFetcher::IMDB_URL))
+  end
+
+  describe ".parse" do
+    it "parses information from the movie page", vcr: true do
+      make_movie_page
+      expect(fetcher.send(:parse, link)).to eq(result)
     end
-    describe ".get_movie_count" do
-      it "gets movie count" do
-        path    = File.expand_path("../../factories/IMDb Top 250 - IMDb.html", __FILE__)
-        stream  = File.read(path)
-        FakeWeb.register_uri(:get, IMDBFetcher::IMDB_URL, body: stream, content_type: "text/html")
-        expect(fetcher.send(:get_movie_count)).to eq(250)
-      end
+  end
+
+  describe ".get_movie_count", vcr: true do
+    it "gets movie count" do
+      make_movies_page
+      expect(fetcher.send(:get_movie_count)).to eq(250)
     end
-    describe ".get_movie_links" do
-      it "gets movie links" do
-        path    = File.expand_path("../../factories/IMDb Top 250 - IMDb.html", __FILE__)
-        stream  = File.read(path)
-        FakeWeb.register_uri(:get, IMDBFetcher::IMDB_URL, body: stream, content_type: "text/html")
-        expect(fetcher.send(:get_movie_links)).to match_array(links)
-      end
+  end
+
+  describe ".get_movie_links", vcr: true do
+    it "gets an array of movie links" do
+      make_movies_page
+      expect(fetcher.send(:get_movie_links)).to be_a(Array)
     end
   end
 
@@ -56,24 +58,6 @@ describe "IMDBFetcher" do
   # describe ".run!" do
   #   it "parses TOP250 imdb.com movies" do
   #     expect(fetcher.run!).to eq(true)
-  #   end
-  # end
-
-  # context "online parsing" do
-  #   describe ".parse" do
-  #     it "parses information from the movie page (online)" do
-  #       expect(fetcher.send(:parse, link)).to eq(result)
-  #     end
-  #   end
-  #   describe ".get_movie_count" do
-  #     it "gets movie count" do
-  #       expect(fetcher.send(:get_movie_count)).to eq(250)
-  #     end
-  #   end
-  #   describe ".get_movie_links" do
-  #     it "gets movie links" do
-  #       expect(fetcher.send(:get_movie_links)).to match_array(links)
-  #     end
   #   end
   # end
 

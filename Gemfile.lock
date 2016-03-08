@@ -20,7 +20,6 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
-    fakeweb (1.3.0)
     fuubar (2.0.0)
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -81,6 +80,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    vcr (3.0.1)
     webmock (1.24.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -93,11 +93,11 @@ PLATFORMS
 DEPENDENCIES
   airborne
   factory_girl
-  fakeweb
   fuubar
   json
   mechanize
   pmap
   progress_bar
   rspec-core
+  vcr
   webmock
