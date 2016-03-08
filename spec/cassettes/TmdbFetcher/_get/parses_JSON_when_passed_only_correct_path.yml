@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.themoviedb.org
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:39 GMT
+      Server:
+      - openresty
+      Status:
+      - 401 Unauthorized
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '10'
+      X-Ratelimit-Reset:
+      - '1457457099'
+      Content-Length:
+      - '86'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
+        a valid key."}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:39 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/top_rated
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.themoviedb.org
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:39 GMT
+      Server:
+      - openresty
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '39'
+      X-Ratelimit-Reset:
+      - '1457457109'
+      Content-Length:
+      - '86'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
+        a valid key."}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:39 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662?api_key=dd165b18174b238eb2af5a0c3552f2f3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=28800
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:40 GMT
+      Etag:
+      - W/"cb199d8b0d04c047fdbf649107c70a87"
+      Server:
+      - openresty
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      X-Memc:
+      - HIT
+      X-Memc-Age:
+      - '7779'
+      X-Memc-Expires:
+      - '21021'
+      X-Memc-Key:
+      - 9e58c29c33fa8983a5303b9fd8fdcb90
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '38'
+      X-Ratelimit-Reset:
+      - '1457457109'
+      Content-Length:
+      - '702'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"adult":false,"backdrop_path":"/rHNz1AlYG0S9J3CGp9ObSFxUyMH.jpg","belongs_to_collection":null,"budget":0,"genres":[{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":28,"name":"Action"},{"id":878,"name":"Science
+        Fiction"},{"id":9648,"name":"Mystery"}],"homepage":"http://www.warnervideo.com/batmanredhood/","id":40662,"imdb_id":"tt1569923","original_language":"en","original_title":"Batman:
+        Under the Red Hood","overview":"Batman faces his ultimate challenge as the
+        mysterious Red Hood takes Gotham City by firestorm. One part vigilante, one
+        part criminal kingpin, Red Hood begins cleaning up Gotham with the efficiency
+        of Batman, but without following the same ethical code.","popularity":1.297833,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
+        Comics","id":429},{"name":"Warner Bros. Animation","id":2785}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"release_date":"2010-07-27","revenue":6629178,"runtime":75,"spoken_languages":[{"iso_639_1":"en","name":"English"}],"status":"Released","tagline":"Dare
+        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.5,"vote_count":222}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:39 GMT
+recorded_with: VCR 3.0.1

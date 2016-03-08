@@ -19,12 +19,12 @@ end
 # imdb_fetcher.save_to_json("movies.json")
 # imdb_fetcher.save_to_csv("movies.csv")
 
-TmdbFetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
-TmdbFetcher.movie_count 30
-tmdb_fetcher = TmdbFetcher.new
-tmdb_fetcher.run!
-tmdb_fetcher.save_to_json("movies.json")
-tmdb_fetcher.save_to_csv("movies.csv")
+# TmdbFetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
+# TmdbFetcher.movie_count 30
+# tmdb_fetcher = TmdbFetcher.new
+# tmdb_fetcher.run!
+# tmdb_fetcher.save_to_json("movies.json")
+# tmdb_fetcher.save_to_csv("movies.csv")
 
 #@movies = MovieList.load_csv(path)
 # @movies = MovieList.load_json(path)

@@ -1,0 +1,254 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.themoviedb.org
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:33 GMT
+      Server:
+      - openresty
+      Status:
+      - 401 Unauthorized
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '26'
+      X-Ratelimit-Reset:
+      - '1457457099'
+      Content-Length:
+      - '86'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
+        a valid key."}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:33 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662/credits
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.themoviedb.org
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:34 GMT
+      Server:
+      - openresty
+      Status:
+      - 401 Unauthorized
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '25'
+      X-Ratelimit-Reset:
+      - '1457457099'
+      Content-Length:
+      - '86'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
+        a valid key."}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:34 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662?api_key=dd165b18174b238eb2af5a0c3552f2f3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=28800
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:34 GMT
+      Etag:
+      - W/"cb199d8b0d04c047fdbf649107c70a87"
+      Server:
+      - openresty
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      X-Memc:
+      - HIT
+      X-Memc-Age:
+      - '7773'
+      X-Memc-Expires:
+      - '21027'
+      X-Memc-Key:
+      - 9e58c29c33fa8983a5303b9fd8fdcb90
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '24'
+      X-Ratelimit-Reset:
+      - '1457457099'
+      Content-Length:
+      - '702'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"adult":false,"backdrop_path":"/rHNz1AlYG0S9J3CGp9ObSFxUyMH.jpg","belongs_to_collection":null,"budget":0,"genres":[{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":28,"name":"Action"},{"id":878,"name":"Science
+        Fiction"},{"id":9648,"name":"Mystery"}],"homepage":"http://www.warnervideo.com/batmanredhood/","id":40662,"imdb_id":"tt1569923","original_language":"en","original_title":"Batman:
+        Under the Red Hood","overview":"Batman faces his ultimate challenge as the
+        mysterious Red Hood takes Gotham City by firestorm. One part vigilante, one
+        part criminal kingpin, Red Hood begins cleaning up Gotham with the efficiency
+        of Batman, but without following the same ethical code.","popularity":1.297833,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
+        Comics","id":429},{"name":"Warner Bros. Animation","id":2785}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"release_date":"2010-07-27","revenue":6629178,"runtime":75,"spoken_languages":[{"iso_639_1":"en","name":"English"}],"status":"Released","tagline":"Dare
+        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.5,"vote_count":222}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:34 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/40662/credits?api_key=dd165b18174b238eb2af5a0c3552f2f3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=28800
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 08 Mar 2016 17:11:34 GMT
+      Etag:
+      - W/"a8914af3bf0d6b2a62733a151230cfe2"
+      Server:
+      - openresty
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      X-Memc:
+      - HIT
+      X-Memc-Age:
+      - '19000'
+      X-Memc-Expires:
+      - '9800'
+      X-Memc-Key:
+      - abfd5974f493057124ac27140aeaf87e
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '23'
+      X-Ratelimit-Reset:
+      - '1457457099'
+      Content-Length:
+      - '1659'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":40662,"cast":[{"cast_id":3,"character":"Bruce Wayne/Batman","credit_id":"52fe459dc3a36847f80d0e99","id":21089,"name":"Bruce
+        Greenwood","order":0,"profile_path":"/his8sEwC8FLC4dAxVSu9GNicE6Z.jpg"},{"cast_id":4,"character":"Red
+        Hood","credit_id":"52fe459dc3a36847f80d0e9d","id":49624,"name":"Jensen Ackles","order":1,"profile_path":"/3PEwDCpJwA6ZKzD1hJdp334EGbp.jpg"},{"cast_id":5,"character":"Dick
+        Grayson/Nightwing","credit_id":"52fe459dc3a36847f80d0ea1","id":41686,"name":"Neil
+        Patrick Harris","order":2,"profile_path":"/v5sCdjk0zxwSdFT4kmlVwu6M3Hb.jpg"},{"cast_id":6,"character":"Ra''s
+        al Ghul","credit_id":"52fe459dc3a36847f80d0ea5","id":11355,"name":"Jason Isaacs","order":3,"profile_path":"/1GtGhAJz1JloqHARqc2xMsq5rG4.jpg"},{"cast_id":7,"character":"The
+        Joker","credit_id":"52fe459dc3a36847f80d0ea9","id":31531,"name":"John DiMaggio","order":4,"profile_path":"/4gEy7tWkh95mgfsiHmTuFQkeRkx.jpg"},{"cast_id":27,"character":"Black
+        Mask","credit_id":"533009dbc3a3685fb30062ca","id":51930,"name":"Wade Williams","order":5,"profile_path":"/vKv1f23vrRrD3UlDQDfIdECJfnu.jpg"},{"cast_id":10,"character":"Chi
+        Chi / Thug #1 / Baton","credit_id":"52fe459dc3a36847f80d0eb7","id":59784,"name":"Carlos
+        Alazraqui","order":6,"profile_path":"/o62NevO1Vt9n1MdYsWOsDyhUt3A.jpg"},{"cast_id":11,"character":"Leon
+        / Thug","credit_id":"52fe459dc3a36847f80d0ebb","id":35172,"name":"Robert Clotworthy","order":7,"profile_path":"/m4poS8cn91Gz2uxSRqve5xrgkGI.jpg"},{"cast_id":12,"character":"Bobo
+        / Commissioner Gordon / Shot / Guard","credit_id":"52fe459dc3a36847f80d0ebf","id":21163,"name":"Gary
+        Cole","order":8,"profile_path":"/yk3HecThETfRIaMF2NKLhJElsbQ.jpg"},{"cast_id":13,"character":"Ra''s
+        Assistant","credit_id":"52fe459dc3a36847f80d0ec3","id":58511,"name":"Brian
+        George","order":9,"profile_path":"/g0bVyXsHDhRhd5WuQwRQDv2TkG9.jpg"},{"cast_id":14,"character":"Ms.
+        Li","credit_id":"52fe459dc3a36847f80d0ec7","id":11024,"name":"Kelly Hu","order":10,"profile_path":"/ldIqkVNQoig6tFdF6b1ql1iylAD.jpg"},{"cast_id":26,"character":"Rick
+        / Bulk","credit_id":"52fe459dc3a36847f80d0ef3","id":31549,"name":"Phil LaMarr","order":11,"profile_path":"/2rYa0M1bOSAATGbF5oe5pmoNeDn.jpg"},{"cast_id":16,"character":"Young
+        Robin / Jason Todd","credit_id":"52fe459dc3a36847f80d0ecb","id":1128886,"name":"Alexander
+        Martella","order":12,"profile_path":null},{"cast_id":17,"character":"Robin
+        / Jason Todd","credit_id":"52fe459dc3a36847f80d0ecf","id":188024,"name":"Vincent
+        Martella","order":13,"profile_path":"/oj6wwVmB0NgGPk9jqKkYWNVC9vz.jpg"},{"cast_id":18,"character":"Alfred
+        Pennyworth","credit_id":"52fe459dc3a36847f80d0ed3","id":120560,"name":"Jim
+        Piddock","order":14,"profile_path":"/vdsY1X3LBvXzX84kl9sxCNaTxjw.jpg"},{"cast_id":19,"character":"Tyler
+        Bramford","credit_id":"52fe459dc3a36847f80d0ed7","id":24362,"name":"Kevin
+        Michael Richardson","order":15,"profile_path":"/9dMOW2CFRrlDkNzeXVGMJfASupM.jpg"},{"cast_id":20,"character":"Reporter
+        #1","credit_id":"52fe459dc3a36847f80d0edb","id":34945,"name":"Andrea Romano","order":16,"profile_path":"/1XTwon7oYI6nl9YWtrYC4AkjgID.jpg"},{"cast_id":21,"character":"Freddie
+        / Drug Dealer","credit_id":"52fe459dc3a36847f80d0edf","id":28248,"name":"Dwight
+        Schultz","order":17,"profile_path":"/lvhnIeUHMUvjfxRS2xWeF6xbsJc.jpg"},{"cast_id":22,"character":"Mercenary
+        #1 / Amazo / Guard","credit_id":"52fe459dc3a36847f80d0ee3","id":60279,"name":"Fred
+        Tatasciore","order":18,"profile_path":"/lNe4zn9fJ302GehQVaFk5BNcGGM.jpg"},{"cast_id":23,"character":"Reporter
+        #2 / Fearsome Hand Leader","credit_id":"52fe459dc3a36847f80d0ee7","id":1128887,"name":"Keri
+        Tombazian","order":19,"profile_path":null},{"cast_id":24,"character":"The
+        Riddler","credit_id":"52fe459dc3a36847f80d0eeb","id":34934,"name":"Bruce Timm","order":20,"profile_path":"/2MaucKEFexM0MMcpsHHbDtDVZbk.jpg"},{"cast_id":25,"character":"Reporter
+        #3","credit_id":"52fe459dc3a36847f80d0eef","id":128267,"name":"Michael Villani","order":21,"profile_path":"/jRP2NMYmFjk66sQMaorWXHTSuGR.jpg"}],"crew":[{"credit_id":"52fe459dc3a36847f80d0e8f","department":"Directing","id":124279,"job":"Director","name":"Brandon
+        Vietti","profile_path":null},{"credit_id":"52fe459dc3a36847f80d0e95","department":"Writing","id":124280,"job":"Writer","name":"Judd
+        Winick","profile_path":null},{"credit_id":"52fe459dc3a36847f80d0eb3","department":"Writing","id":124280,"job":"Screenplay","name":"Judd
+        Winick","profile_path":null},{"credit_id":"56a9578fc3a36872cb002322","department":"Writing","id":105643,"job":"Storyboard","name":"Jay
+        Oliva","profile_path":"/az4rTiBwQlsUUK8WGNZpOI69QLo.jpg"}]}'
+    http_version: 
+  recorded_at: Tue, 08 Mar 2016 17:11:34 GMT
+recorded_with: VCR 3.0.1
