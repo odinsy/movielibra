@@ -8,12 +8,12 @@ require './lib/rate_list.rb'
 class MovieList
 
   include Enumerable
-  include RateList
 
   attr_accessor :movies, :algos, :filters
 
-  def initialize(array)
-    @movies   = array.map { |movie| Movie.create(self, movie) }
+  def initialize(data)
+    data      = [] unless data.is_a?(Array)
+    @movies   = data.map { |movie| Movie.new(self, movie) }
     @algos    = {}
     @filters  = {}
   end
@@ -86,7 +86,7 @@ class MovieList
 
   # Display the count of movies by each director
   def count_by_director
-    @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse
+    @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse.to_h
   end
 
   # Display the movies by director
@@ -106,23 +106,20 @@ class MovieList
     @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
   end
 
-  # Beauty output
-  def beauty
-    @movies.map { |m| m.humane }
+  def each(&block)
+    @movies.each(&block)
   end
 
   protected
-  # Parse from JSON to array
+  # Parse from JSON to array of hashes
   def self.parse_json(path)
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
-    JSON.parse(open(path).read).map do |mov|
-      mov.values.map { |v| v.kind_of?(Array) ? v.join(',') : v }
-    end
+    JSON.parse(open(path).read, symbolize_names: true)
   end
-  # Parse from CSV to array
+  # Parse from CSV to array of hashes
   def self.parse_csv(path)
     raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
-    CSV.foreach(path, col_sep: "|").map
+    CSV.foreach(path, col_sep: "|", headers: true, header_converters: :symbol).map
   end
 
 end

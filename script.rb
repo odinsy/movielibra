@@ -14,16 +14,32 @@ unless File.exist?(path)
   exit
 end
 
+# imdb_fetcher = IMDBFetcher.new
+# imdb_fetcher.run!
+# imdb_fetcher.save_to_json("movies.json")
+# imdb_fetcher.save_to_csv("movies.csv")
+
+# TmdbFetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
+# TmdbFetcher.movie_count 30
+# tmdb_fetcher = TmdbFetcher.new
+# tmdb_fetcher.run!
+# tmdb_fetcher.save_to_json("movies.json")
+# tmdb_fetcher.save_to_csv("movies.csv")
+
 #@movies = MovieList.load_csv(path)
-#@movies = MovieList.load_json(path)
+# @movies = MovieList.load_json(path)
 
-#@movies = MyMovieList.load_csv(path)
-@movies = MyMovieList.load_json(path)
-p @movies
-
-#@movie = @movies.find_movie("12 Angry Men")
-
+# @movies = MyMovieList.load_csv(path)
+# @movies = MyMovieList.load_json(path)
+# p @movies
+# p @movies
+# @movies.rate("12 Angry Men", 7)
+# @movie = @movies.find_movie("12 Angry Men")
+# p @movies.watched
+# Movie::AncientMovie.filter { (1900..1944).cover?(year) }
+# p Movie.filters
 =begin
+
 @movies.longest(10)
 p @movies.select_by_genre("Comedy")
 p @movies.directors
@@ -42,7 +58,7 @@ puts "\nWatched movies:"
 #p @movie.has_genres?("Crime", "Drama")
 
 # Print and algorithms
-#@movies.print { |movie| "#{movie.year}: #{movie.name}" }
+@movies.print { |movie| "#{movie.year}: #{movie.name}" }
 @movies.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
 puts @movies.algos
 p @movies.sorted_by { |movie| [movie.genre, movie.year] }.first(5)
