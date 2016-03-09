@@ -1,5 +1,4 @@
 require 'factory_girl'
-require 'airborne'
 require 'webmock/rspec'
 require 'vcr'
 
