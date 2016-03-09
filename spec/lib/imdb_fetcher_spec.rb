@@ -19,31 +19,20 @@ describe "IMDBFetcher" do
     ]
   }
 
-  def make_movie_page
-    Net::HTTP.get(URI(link))
-  end
-
-  def make_movies_page
-    Net::HTTP.get(URI(IMDBFetcher::IMDB_URL))
-  end
-
   describe "#parse" do
     it "parses information from the movie page", vcr: true do
-      make_movie_page
       expect(fetcher.send(:parse, link)).to eq(result)
     end
   end
 
   describe "#get_movie_count", vcr: true do
     it "gets movie count" do
-      make_movies_page
       expect(fetcher.send(:get_movie_count)).to eq(250)
     end
   end
 
   describe "#get_movie_links", vcr: true do
     it "gets an array of movie links" do
-      make_movies_page
       expect(fetcher.send(:get_movie_links)).to be_a(Array)
     end
   end
@@ -55,10 +44,22 @@ describe "IMDBFetcher" do
     end
   end
 
-  # describe "#run!" do
-  #   it "parses TOP250 imdb.com movies" do
-  #     expect(fetcher.run!).to eq(true)
-  #   end
-  # end
+  describe "#run!" do
+
+    let(:result) { fetcher.run! }
+
+    it "responds to method #run!", vcr: true do
+      expect(fetcher).to respond_to(:run!)
+    end
+
+    it "returns an array", vcr: true do
+      expect(result).to be_a(Array)
+    end
+
+    it "returns passed number of movies", vcr: true do
+      expect(result.size).to eq(250)
+    end
+
+  end
 
 end

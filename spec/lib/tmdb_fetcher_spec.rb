@@ -17,24 +17,12 @@ describe "TmdbFetcher" do
         date: "2010-07-27",
         genre: ["Adventure", "Animation", "Action", "Science Fiction", "Mystery"],
         duration: 75,
-        rating: 7.5,
+        rating: 7.6,
         director: "Brandon Vietti",
         actors: ["Bruce Greenwood", "Jensen Ackles", "Neil Patrick Harris", "Jason Isaacs", "John DiMaggio"]
       }
     ]
   }
-
-  def make_movie
-    Net::HTTP.get(URI(movie_link))
-  end
-
-  def make_movie_credits
-    Net::HTTP.get(URI(credits_link))
-  end
-
-  def make_top_rated
-    Net::HTTP.get(URI(top_rated_link))
-  end
 
   describe "API" do
 
@@ -53,27 +41,17 @@ describe "TmdbFetcher" do
 
   end
 
-  describe ".movie_count" do
-
-    it "throw an exception when movie_count is less than 1" do
-      expect { TmdbFetcher.movie_count -1 }.to raise_error("You can't set movie_count less than 1!")
-    end
-
-    it "sets movie_count" do
-      TmdbFetcher.movie_count 5
-      expect(TmdbFetcher::MOVIE_COUNT).to eq(5)
-    end
-
-  end
-
   describe "#run!" do
 
-    let(:result) { fetcher.run! }
+    let(:result) { fetcher.run!(5) }
 
-    before :each do
-      TmdbFetcher.movie_count 5
-      make_top_rated
+    it "throw an exception when movie_count is less than 1" do
+      expect { fetcher.run!(-1) }.to raise_error("You can't set movie_count less than 1!")
     end
+
+    # it "throw an exception when movie_count is not an integer" do
+    #   expect { fetcher.run!("bla") }.to raise_error("Wrong argument!")
+    # end
 
     it "responds to method #run!", vcr: true do
       expect(fetcher).to respond_to(:run!)
@@ -91,12 +69,7 @@ describe "TmdbFetcher" do
 
   describe "#top_movie_ids" do
 
-    let(:top_movie_ids) { fetcher.send(:top_movie_ids) }
-
-    before :each do
-      TmdbFetcher.movie_count 20
-      make_top_rated
-    end
+    let(:top_movie_ids) { fetcher.send(:top_movie_ids, 20) }
 
     it "returns an array", vcr: true do
       expect(top_movie_ids).to be_a(Array)
@@ -117,11 +90,6 @@ describe "TmdbFetcher" do
   end
 
   describe "#parse" do
-
-    before :each do
-      make_movie
-      make_movie_credits
-    end
 
     it "returns an array", vcr: true do
       expect(fetcher.send(:parse, correct_id)).to be_a(Array)
@@ -147,11 +115,6 @@ describe "TmdbFetcher" do
 
   describe "#get" do
 
-    before :each do
-      make_movie
-      make_top_rated
-    end
-
     it "parses JSON when passed only correct path", vcr: true do
       expect(fetcher.send(:get, correct_id)).to be_a(Hash)
     end
@@ -168,23 +131,13 @@ describe "TmdbFetcher" do
 
   describe "#get_director" do
     it "returns the director of the movie", vcr: true do
-      make_movie_credits
       expect(fetcher.send(:get_director, credits)).to eq("Brandon Vietti")
     end
   end
 
   describe "#get_actors" do
     it "returns an array of the movie actors", vcr: true do
-      make_movie_credits
       expect(fetcher.send(:get_actors, credits, 5)).to contain_exactly("Bruce Greenwood", "Jensen Ackles", "John DiMaggio", "Neil Patrick Harris", "Jason Isaacs")
-    end
-  end
-
-  describe "#page_count" do
-    it "returns page count", vcr: true do
-      TmdbFetcher.movie_count 10
-      make_top_rated
-      expect(fetcher.send(:page_count)).to eq(1)
     end
   end
 

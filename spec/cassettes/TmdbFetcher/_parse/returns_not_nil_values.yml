@@ -2,98 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.themoviedb.org/3/movie/40662
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - api.themoviedb.org
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json;charset=utf-8
-      Date:
-      - Tue, 08 Mar 2016 17:11:36 GMT
-      Server:
-      - openresty
-      Status:
-      - 401 Unauthorized
-      X-Ratelimit-Limit:
-      - '40'
-      X-Ratelimit-Remaining:
-      - '18'
-      X-Ratelimit-Reset:
-      - '1457457099'
-      Content-Length:
-      - '86'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
-        a valid key."}'
-    http_version: 
-  recorded_at: Tue, 08 Mar 2016 17:11:36 GMT
-- request:
-    method: get
-    uri: http://api.themoviedb.org/3/movie/40662/credits
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - api.themoviedb.org
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json;charset=utf-8
-      Date:
-      - Tue, 08 Mar 2016 17:11:36 GMT
-      Server:
-      - openresty
-      Status:
-      - 401 Unauthorized
-      X-Ratelimit-Limit:
-      - '40'
-      X-Ratelimit-Remaining:
-      - '17'
-      X-Ratelimit-Reset:
-      - '1457457099'
-      Content-Length:
-      - '86'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
-        a valid key."}'
-    http_version: 
-  recorded_at: Tue, 08 Mar 2016 17:11:36 GMT
-- request:
-    method: get
     uri: http://api.themoviedb.org/3/movie/40662?api_key=dd165b18174b238eb2af5a0c3552f2f3
     body:
       encoding: US-ASCII
@@ -117,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 08 Mar 2016 17:11:37 GMT
+      - Wed, 09 Mar 2016 18:40:23 GMT
       Etag:
-      - W/"cb199d8b0d04c047fdbf649107c70a87"
+      - W/"519be48ead51a9c59a111722e95969c5"
       Server:
       - openresty
       Status:
@@ -129,19 +37,19 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '7776'
+      - '12782'
       X-Memc-Expires:
-      - '21024'
+      - '16018'
       X-Memc-Key:
       - 9e58c29c33fa8983a5303b9fd8fdcb90
       X-Ratelimit-Limit:
       - '40'
       X-Ratelimit-Remaining:
-      - '16'
+      - '18'
       X-Ratelimit-Reset:
-      - '1457457099'
+      - '1457548825'
       Content-Length:
-      - '702'
+      - '701'
       Connection:
       - keep-alive
     body:
@@ -151,12 +59,12 @@ http_interactions:
         Under the Red Hood","overview":"Batman faces his ultimate challenge as the
         mysterious Red Hood takes Gotham City by firestorm. One part vigilante, one
         part criminal kingpin, Red Hood begins cleaning up Gotham with the efficiency
-        of Batman, but without following the same ethical code.","popularity":1.297833,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
+        of Batman, but without following the same ethical code.","popularity":1.07709,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
         Comics","id":429},{"name":"Warner Bros. Animation","id":2785}],"production_countries":[{"iso_3166_1":"US","name":"United
         States of America"}],"release_date":"2010-07-27","revenue":6629178,"runtime":75,"spoken_languages":[{"iso_639_1":"en","name":"English"}],"status":"Released","tagline":"Dare
-        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.5,"vote_count":222}'
+        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.6,"vote_count":224}'
     http_version: 
-  recorded_at: Tue, 08 Mar 2016 17:11:37 GMT
+  recorded_at: Wed, 09 Mar 2016 18:40:23 GMT
 - request:
     method: get
     uri: http://api.themoviedb.org/3/movie/40662/credits?api_key=dd165b18174b238eb2af5a0c3552f2f3
@@ -182,7 +90,7 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 08 Mar 2016 17:11:37 GMT
+      - Wed, 09 Mar 2016 18:40:23 GMT
       Etag:
       - W/"a8914af3bf0d6b2a62733a151230cfe2"
       Server:
@@ -194,17 +102,17 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '19003'
+      - '23941'
       X-Memc-Expires:
-      - '9797'
+      - '4859'
       X-Memc-Key:
       - abfd5974f493057124ac27140aeaf87e
       X-Ratelimit-Limit:
       - '40'
       X-Ratelimit-Remaining:
-      - '15'
+      - '17'
       X-Ratelimit-Reset:
-      - '1457457099'
+      - '1457548825'
       Content-Length:
       - '1659'
       Connection:
@@ -250,5 +158,5 @@ http_interactions:
         Winick","profile_path":null},{"credit_id":"56a9578fc3a36872cb002322","department":"Writing","id":105643,"job":"Storyboard","name":"Jay
         Oliva","profile_path":"/az4rTiBwQlsUUK8WGNZpOI69QLo.jpg"}]}'
     http_version: 
-  recorded_at: Tue, 08 Mar 2016 17:11:37 GMT
+  recorded_at: Wed, 09 Mar 2016 18:40:23 GMT
 recorded_with: VCR 3.0.1

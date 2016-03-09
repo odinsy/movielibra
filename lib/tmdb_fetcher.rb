@@ -15,7 +15,7 @@ class TmdbFetcher
 
   IMDB_URI    = "http://www.imdb.com/title/"
   TMDB_URI    = "http://api.themoviedb.org/3/movie"
-  MOVIE_COUNT = 250
+  DEFAULT_COUNT = 250
 
   attr_accessor :list, :ids
 
@@ -36,28 +36,21 @@ class TmdbFetcher
     @@api_key
   end
 
-  def self.movie_count(count)
-    count.to_i > 0 ? const_set("MOVIE_COUNT", count.to_i) : (raise ArgumentError, "You can't set movie_count less than 1!")
-  end
-
-  def run!
-    movie_count = TmdbFetcher::MOVIE_COUNT
-    bar = ProgressBar.new(movie_count)
-    top_movie_ids.first(movie_count).each { |id| parse(id) ; bar.increment! }
+  def run!(movie_count=DEFAULT_COUNT)
+    movie_count = movie_count.to_i
+    raise ArgumentError, "You can't set movie_count less than 1!" unless movie_count >= 1
+    bar         = ProgressBar.new(movie_count)
+    page_count  = (movie_count / 20.0).ceil
+    top_movie_ids(page_count).first(movie_count).each { |id| parse(id) ; bar.increment! }
   end
 
   private
 
   def self.test_api_key(key)
-    Net::HTTP.get_response(URI("#{TmdbFetcher::TMDB_URI}/top_rated?api_key=#{key}")).code
+    Net::HTTP.get_response(URI("#{TmdbFetcher::TMDB_URI}/550?api_key=#{key}")).code
   end
 
-  def page_count
-    movie_count = TmdbFetcher::MOVIE_COUNT
-    movie_count >= 10 ? (movie_count / 20.0).round : 1
-  end
-
-  def top_movie_ids
+  def top_movie_ids(page_count)
     1.upto(page_count) do |num|
       movies = get("top_rated", num)
       movies[:results].select { |movie| @ids << movie[:id] }
@@ -83,7 +76,7 @@ class TmdbFetcher
   end
 
   def get(path, page=nil)
-    page.nil? ? path = "#{TMDB_URI}/#{path}?api_key=#{@@api_key}" : path = "#{TMDB_URI}/#{path}?api_key=#{@@api_key}&page=#{page}"
+    path = page.nil? ? "#{TMDB_URI}/#{path}?api_key=#{@@api_key}" : "#{TMDB_URI}/#{path}?api_key=#{@@api_key}&page=#{page}"
     begin
       JSON.parse(open(path).read, symbolize_names: true)
     rescue OpenURI::HTTPError => e
