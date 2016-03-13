@@ -1,3 +1,12 @@
+PATH
+  remote: .
+  specs:
+    movie_libra (0.1.0)
+      json
+      mechanize
+      pmap
+      progress_bar
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,9 +16,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
-    crack (0.4.3)
-      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
@@ -18,7 +24,6 @@ GEM
     fuubar (2.0.0)
       rspec (~> 3.0)
       ruby-progressbar (~> 1.4)
-    hashdiff (0.3.0)
     highline (1.7.8)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -46,6 +51,7 @@ GEM
     progress_bar (1.0.5)
       highline (~> 1.6)
       options (~> 2.3.0)
+    rake (10.4.2)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -60,7 +66,6 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     ruby-progressbar (1.7.5)
-    safe_yaml (1.0.4)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -68,22 +73,19 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     vcr (3.0.1)
-    webmock (1.24.2)
-      addressable (>= 2.3.6)
-      crack (>= 0.3.2)
-      hashdiff
     webrobots (0.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (~> 1.11)
   factory_girl
   fuubar
-  json
-  mechanize
-  pmap
-  progress_bar
-  rspec-core
+  movie_libra!
+  rake (~> 10.0)
+  rspec-core (~> 3.0)
   vcr
-  webmock
+
+BUNDLED WITH
+   1.11.2
