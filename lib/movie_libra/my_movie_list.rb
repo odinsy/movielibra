@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/rate_list.rb'
+require 'movie_libra/rate_list.rb'
 
 module MovieLibra
 

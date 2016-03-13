@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'date'
-require './lib/rate.rb'
 require 'ostruct'
+require 'movie_libra/rate.rb'
 
 module MovieLibra
 

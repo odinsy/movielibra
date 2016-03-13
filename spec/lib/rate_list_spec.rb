@@ -1,5 +1,5 @@
-require 'movie_list'
-require 'my_movie_list'
+require 'movie_libra/movie_list'
+require 'movie_libra/my_movie_list'
 
 describe "RateList" do
   let!(:movies) { build(:my_movie_list) }

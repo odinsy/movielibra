@@ -6,7 +6,7 @@ require 'csv'
 require 'mechanize'
 require 'progress_bar'
 require 'pmap'
-require './lib/export.rb'
+require 'movie_libra/export.rb'
 
 class IMDBFetcher
 

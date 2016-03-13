@@ -2,8 +2,8 @@
 
 require 'json'
 require 'csv'
-require './lib/movie.rb'
-require './lib/rate_list.rb'
+require 'movie_libra/movie.rb'
+require 'movie_libra/rate_list.rb'
 
 module MovieLibra
 

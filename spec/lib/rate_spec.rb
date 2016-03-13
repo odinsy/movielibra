@@ -1,4 +1,4 @@
-require 'movie'
+require 'movie_libra/movie'
 
 describe "Rate" do
   let!(:movie) { build(:movie) }

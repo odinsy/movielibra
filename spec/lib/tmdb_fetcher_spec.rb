@@ -1,4 +1,4 @@
-require 'tmdb_fetcher'
+require 'movie_libra/tmdb_fetcher'
 
 describe "TmdbFetcher" do
 

@@ -5,9 +5,9 @@ require 'json'
 require 'csv'
 require 'open-uri'
 require 'progress_bar'
-require './lib/export.rb'
 require 'uri'
 require 'net/http'
+require 'movie_libra/export.rb'
 
 class TmdbFetcher
 
