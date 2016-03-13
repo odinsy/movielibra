@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     movie_libra (0.1.0)
+      json
       mechanize
       pmap
       progress_bar

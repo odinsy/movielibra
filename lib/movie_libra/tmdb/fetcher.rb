@@ -50,7 +50,7 @@ module MovieLibra
       private
 
       def self.test_api_key(key)
-        Net::HTTP.get_response(URI("#{Fetcher::TMDB_URI}/550?api_key=#{key}")).code
+        Net::HTTP.get_response(URI("#{TMDB_URI}/550?api_key=#{key}")).code
       end
 
       def top_movie_ids(page_count)
@@ -90,7 +90,7 @@ module MovieLibra
       end
 
       def get_imdb_link(imdb_id)
-        Fetcher::IMDB_URI + imdb_id
+        IMDB_URI + imdb_id
       end
 
       def get_director(json)
