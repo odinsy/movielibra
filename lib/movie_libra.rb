@@ -9,5 +9,4 @@ require 'movie_libra/rate'
 require 'movie_libra/export'
 
 module MovieLibra
-  # Your code goes here...
 end
