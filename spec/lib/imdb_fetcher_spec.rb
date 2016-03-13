@@ -1,6 +1,6 @@
-require 'movie_libra/imdb_fetcher'
+require 'movie_libra/imdb/fetcher'
 
-describe "IMDBFetcher" do
+describe "ImdbFetcher" do
 
   let(:fetcher) { build(:imdb_fetcher) }
   let(:link) { "http://www.imdb.com/title/tt0111161" }

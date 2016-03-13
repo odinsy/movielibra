@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     movie_libra (0.1.0)
-      json
       mechanize
       pmap
       progress_bar
@@ -20,7 +19,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
-    domain_name (0.5.20160128)
+    domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -88,7 +87,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.11)
+  bundler (~> 1.11.2)
   factory_girl
   fuubar
   movie_libra!

@@ -1,4 +1,4 @@
-require 'movie_libra/tmdb_fetcher'
+require 'movie_libra/tmdb/fetcher'
 
 describe "TmdbFetcher" do
 
@@ -27,16 +27,16 @@ describe "TmdbFetcher" do
   describe "API" do
 
     it "throw an exception when API key is incorrect" do
-      expect { TmdbFetcher.key = "blabla" }.to raise_error("Incorrect API key blabla. Response code: 401.")
+      expect { MovieLibra::Tmdb::Fetcher.key = "blabla" }.to raise_error("Incorrect API key blabla. Response code: 401.")
     end
 
     it "doesn't change a value of API key" do
-      expect(TmdbFetcher.key).to eq(nil)
+      expect(MovieLibra::Tmdb::Fetcher.key).to eq(nil)
     end
 
     it "gets correct API key" do
-      TmdbFetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
-      expect(TmdbFetcher.key).to eq("dd165b18174b238eb2af5a0c3552f2f3")
+      MovieLibra::Tmdb::Fetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
+      expect(MovieLibra::Tmdb::Fetcher.key).to eq("dd165b18174b238eb2af5a0c3552f2f3")
     end
 
   end
