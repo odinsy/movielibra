@@ -6,6 +6,7 @@ PATH
       mechanize
       pmap
       progress_bar
+      slop
 
 GEM
   remote: https://rubygems.org/
@@ -71,6 +72,7 @@ GEM
     rspec-support (3.3.0)
     ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
+    slop (4.2.1)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
