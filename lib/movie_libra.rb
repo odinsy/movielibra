@@ -7,8 +7,8 @@ require 'movie_libra/imdb/fetcher'
 require 'movie_libra/rate_list'
 require 'movie_libra/rate'
 require 'movie_libra/export'
+require 'movie_libra/cli'
 require 'movie_libra/cli/fetch'
-require 'movie_libra/cli/save'
 
 module MovieLibra
 end

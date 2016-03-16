@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'movie_libra/cli'
-MovieLibra::Fetch.start
+MovieLibra::CLI.start
