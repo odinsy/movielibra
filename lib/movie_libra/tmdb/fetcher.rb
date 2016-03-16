@@ -30,13 +30,17 @@ module MovieLibra
       end
 
       def self.key=(api_key)
-        response_code = test_api_key(api_key)
-        raise ArgumentError, "Incorrect API key #{api_key}. Response code: #{response_code}." unless response_code == "200"
+        test_api_key(api_key)
         @@api_key = api_key
       end
 
       def self.key
         @@api_key
+      end
+
+      def self.test_api_key(key)
+        response_code = Net::HTTP.get_response(URI("#{TMDB_URI}/550?api_key=#{key}")).code
+        raise ArgumentError, "Incorrect API key #{key}. Response code: #{response_code}." unless response_code == "200"
       end
 
       def run!(movie_count=DEFAULT_COUNT)
@@ -48,10 +52,6 @@ module MovieLibra
       end
 
       private
-
-      def self.test_api_key(key)
-        Net::HTTP.get_response(URI("#{TMDB_URI}/550?api_key=#{key}")).code
-      end
 
       def top_movie_ids(page_count)
         1.upto(page_count) do |num|
