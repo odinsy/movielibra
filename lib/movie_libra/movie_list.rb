@@ -11,10 +11,11 @@ module MovieLibra
 
     include Enumerable
 
-    attr_accessor :movies, :algos, :filters
+    attr_accessor :list, :movies, :algos, :filters
 
     def initialize(data)
       data      = [] unless data.is_a?(Array)
+      @list     = self
       @movies   = data.map { |movie| Movie.new(self, movie) }
       @algos    = {}
       @filters  = {}
