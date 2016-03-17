@@ -14,31 +14,27 @@ module MovieLibra
 
     desc "imdb", "Fetch the imdb movies. Format can be --json or --csv."
     def imdb
-      @fetcher = MovieLibra::Imdb::Fetcher.new
-      if options[:csv]
-        @fetcher.run!
-        @fetcher.save_to_csv("#{DATA_PATH}/movies.csv")
-      elsif options[:json]
-        @fetcher.run!
-        @fetcher.save_to_json("#{DATA_PATH}/movies.json")
-      else
-        puts "Format is not correct or is not passed."
-      end
+      fetch(MovieLibra::Imdb::Fetcher.new, options)
     end
 
     desc "tmdb", "Fetch the tmdb movies. Format can be --json or --csv."
     def tmdb
-      if options[:csv]
-        @fetcher = MovieLibra::Tmdb::Fetcher.new
-        @fetcher.run!
-        @fetcher.save_to_csv("#{DATA_PATH}/movies.csv")
-      elsif options[:json]
-        @fetcher = MovieLibra::Tmdb::Fetcher.new
-        @fetcher.run!
-        @fetcher.save_to_json("#{DATA_PATH}/movies.json")
-      else
-        puts "Format is not correct or is not passed."
+      fetch(MovieLibra::Tmdb::Fetcher.new, options)
+    end
+
+    no_commands do
+      def fetch(fetcher, options)
+        if options[:csv]
+          fetcher.run!
+          fetcher.save_to_csv("#{DATA_PATH}/movies.csv")
+        elsif options[:json]
+          fetcher.run!
+          fetcher.save_to_json("#{DATA_PATH}/movies.json")
+        else
+          puts "Format is not correct or is not passed."
+        end
       end
     end
+
   end
 end
