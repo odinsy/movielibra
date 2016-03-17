@@ -20,30 +20,21 @@ module MovieLibra
       TMDB_URI    = "http://api.themoviedb.org/3/movie"
       DEFAULT_COUNT = 250
 
-      attr_accessor :list, :ids
+      attr_accessor :list, :ids, :key
 
-      @@api_key = nil
-
-      def initialize
+      def initialize(api_key)
+        @key  = api_key
         @list = []
         @ids  = []
       end
 
-      def self.key=(api_key)
-        test_api_key(api_key)
-        @@api_key = api_key
-      end
-
-      def self.key
-        @@api_key
-      end
-
-      def self.test_api_key(key)
+      def test_api_key(key=@key)
         response_code = Net::HTTP.get_response(URI("#{TMDB_URI}/550?api_key=#{key}")).code
         raise ArgumentError, "Incorrect API key #{key}. Response code: #{response_code}." unless response_code == "200"
       end
 
       def run!(movie_count=DEFAULT_COUNT)
+        test_api_key
         movie_count = movie_count.to_i
         raise ArgumentError, "You can't set movie_count less than 1!" unless movie_count >= 1
         bar         = ProgressBar.new(movie_count)
@@ -79,7 +70,7 @@ module MovieLibra
       end
 
       def get(path, page=nil)
-        path = page.nil? ? "#{TMDB_URI}/#{path}?api_key=#{@@api_key}" : "#{TMDB_URI}/#{path}?api_key=#{@@api_key}&page=#{page}"
+        path = page.nil? ? "#{TMDB_URI}/#{path}?api_key=#{@key}" : "#{TMDB_URI}/#{path}?api_key=#{@key}&page=#{page}"
         begin
           JSON.parse(open(path).read, symbolize_names: true)
         rescue OpenURI::HTTPError => e
