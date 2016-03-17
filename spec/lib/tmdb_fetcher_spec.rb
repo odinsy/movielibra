@@ -1,4 +1,4 @@
-require 'movie_libra/tmdb/fetcher'
+require 'movie_libra/fetcher/tmdb'
 
 describe "TmdbFetcher" do
 
@@ -25,24 +25,18 @@ describe "TmdbFetcher" do
   }
 
   describe "API" do
-
     it "throw an exception when API key is incorrect" do
-      expect { MovieLibra::Tmdb::Fetcher.key = "blabla" }.to raise_error("Incorrect API key blabla. Response code: 401.")
-    end
-
-    it "doesn't change a value of API key" do
-      expect(MovieLibra::Tmdb::Fetcher.key).to eq(nil)
+      fetcher.key = "blabla"
+      expect { fetcher.test_api_key }.to raise_error("Incorrect API key blabla. Response code: 401.")
     end
 
     it "gets correct API key" do
-      MovieLibra::Tmdb::Fetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
-      expect(MovieLibra::Tmdb::Fetcher.key).to eq("dd165b18174b238eb2af5a0c3552f2f3")
+      fetcher.key = "dd165b18174b238eb2af5a0c3552f2f3"
+      expect { fetcher.test_api_key }.to_not raise_error
     end
-
   end
 
   describe "#run!" do
-
     let(:result) { fetcher.run!(5) }
 
     it "throw an exception when movie_count is less than 1" do
@@ -64,11 +58,9 @@ describe "TmdbFetcher" do
     it "returns passed number of movies", vcr: true do
       expect(result.size).to eq(5)
     end
-
   end
 
   describe "#top_movie_ids" do
-
     let(:top_movie_ids) { fetcher.send(:top_movie_ids, 20) }
 
     it "returns an array", vcr: true do
@@ -86,11 +78,9 @@ describe "TmdbFetcher" do
     it "returns not nil values", vcr: true do
       expect(top_movie_ids.include?(nil)).to be_falsey
     end
-
   end
 
   describe "#parse" do
-
     it "returns an array", vcr: true do
       expect(fetcher.send(:parse, correct_id)).to be_a(Array)
     end
@@ -110,11 +100,9 @@ describe "TmdbFetcher" do
     it "correctly parses information of the movie", vcr: true do
       expect(fetcher.send(:parse, correct_id)).to eq(movie_hash)
     end
-
   end
 
   describe "#get" do
-
     it "parses JSON when passed only correct path", vcr: true do
       expect(fetcher.send(:get, correct_id)).to be_a(Hash)
     end
@@ -122,11 +110,6 @@ describe "TmdbFetcher" do
     it "parses JSON when passed path and page numer", vcr: true do
       expect(fetcher.send(:get, "top_rated", 1)).to be_a(Hash)
     end
-
-    # it "throw an exception when path is incorrect", vcr: true do
-    #   expect { fetcher.send(:get, "blabla") }.to raise_error("The passed path is incorrect, status code: 404")
-    # end
-
   end
 
   describe "#get_director" do

@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 09 Mar 2016 18:40:25 GMT
+      - Thu, 17 Mar 2016 18:53:07 GMT
       Etag:
       - W/"a8914af3bf0d6b2a62733a151230cfe2"
       Server:
@@ -37,17 +37,17 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '23943'
+      - '17748'
       X-Memc-Expires:
-      - '4857'
+      - '11052'
       X-Memc-Key:
       - abfd5974f493057124ac27140aeaf87e
       X-Ratelimit-Limit:
       - '40'
       X-Ratelimit-Remaining:
-      - '39'
+      - '22'
       X-Ratelimit-Reset:
-      - '1457548835'
+      - '1458240791'
       Content-Length:
       - '1659'
       Connection:
@@ -93,5 +93,5 @@ http_interactions:
         Winick","profile_path":null},{"credit_id":"56a9578fc3a36872cb002322","department":"Writing","id":105643,"job":"Storyboard","name":"Jay
         Oliva","profile_path":"/az4rTiBwQlsUUK8WGNZpOI69QLo.jpg"}]}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 18:40:25 GMT
+  recorded_at: Thu, 17 Mar 2016 18:53:07 GMT
 recorded_with: VCR 3.0.1
