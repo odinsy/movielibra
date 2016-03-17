@@ -1,4 +1,4 @@
-require 'movie_libra/imdb/fetcher'
+require 'movie_libra/fetcher/imdb'
 
 describe "ImdbFetcher" do
 
