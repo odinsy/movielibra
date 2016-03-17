@@ -10,7 +10,6 @@ require 'movie_libra/export.rb'
 
 module MovieLibra
   module Imdb
-
     class Fetcher
 
       include Export
@@ -22,30 +21,30 @@ module MovieLibra
       def initialize
         @list = []
       end
-
+      # Run parser of top IMDB movies links
       def run!
         bar = ProgressBar.new(get_movie_count)
         get_movie_links.peach(4) { |link| parse(link) ; bar.increment! }
       end
 
       private
-
+      # just make link shorter
       def shorten_link(link)
         link.split("/?").first
       end
-
+      # get Top IMDB movies links from http://www.imdb.com/chart/top
       def get_movie_links
         agent = Mechanize.new
         page  = agent.get(IMDB_URL)
         page.links_with(css: "td.titleColumn a").map { |link| shorten_link(page.uri.merge(link.href).to_s) }
       end
-
+      # get count of Top IMDB movies from http://www.imdb.com/chart/top
       def get_movie_count
         agent = Mechanize.new
         page  = agent.get(IMDB_URL)
         count = page.links_with(css: "td.titleColumn a").count
       end
-
+      # Parse information about movie to Hash
       def parse(link)
         agent = Mechanize.new
         page  = agent.get(link)
@@ -64,6 +63,5 @@ module MovieLibra
       end
 
     end
-
   end
 end

@@ -11,7 +11,6 @@ require 'movie_libra/export.rb'
 
 module MovieLibra
   module Tmdb
-
     class Fetcher
 
       include Export
@@ -27,12 +26,12 @@ module MovieLibra
         @list = []
         @ids  = []
       end
-
+      # Just tests your TMDB API key
       def test_api_key(key=@key)
         response_code = Net::HTTP.get_response(URI("#{TMDB_URI}/550?api_key=#{key}")).code
         raise ArgumentError, "Incorrect API key #{key}. Response code: #{response_code}." unless response_code == "200"
       end
-
+      # Runs parser of top TMDB movies from API http://api.themoviedb.org/3
       def run!(movie_count=DEFAULT_COUNT)
         test_api_key
         movie_count = movie_count.to_i
@@ -43,7 +42,7 @@ module MovieLibra
       end
 
       private
-
+      # Gets top movie IDs
       def top_movie_ids(page_count)
         1.upto(page_count) do |num|
           movies = get("top_rated", num)
@@ -51,7 +50,7 @@ module MovieLibra
         end
         @ids
       end
-
+      # Parse information about movies
       def parse(id)
         movie   = get("#{id}")
         credits = get("#{id}/credits")
@@ -68,7 +67,7 @@ module MovieLibra
           actors:   get_actors(credits, 5)
         }
       end
-
+      # Parses the passed page with your API key
       def get(path, page=nil)
         path = page.nil? ? "#{TMDB_URI}/#{path}?api_key=#{@key}" : "#{TMDB_URI}/#{path}?api_key=#{@key}&page=#{page}"
         begin
@@ -79,11 +78,11 @@ module MovieLibra
           puts e.message
         end
       end
-
+      # Gets full link by imdb_id
       def get_imdb_link(imdb_id)
         IMDB_URI + imdb_id
       end
-
+      # Gets director of the movie to JSON
       def get_director(json)
         if director = json[:crew].find { |key| key[:job] == "Director" }
           director[:name]
@@ -91,12 +90,11 @@ module MovieLibra
           nil
         end
       end
-
+      # Gets count actors of the movie to JSON
       def get_actors(json, count)
         json[:cast].map { |key| key[:name] }.first(count)
       end
 
     end
-
   end
 end
