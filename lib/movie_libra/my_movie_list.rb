@@ -3,9 +3,7 @@
 require 'movie_libra/rate_list.rb'
 
 module MovieLibra
-
   class MyMovieList < MovieList
-
     include RateList
 
     def initialize(data)
@@ -14,9 +12,7 @@ module MovieLibra
     end
 
     def find_movie(name)
-      @movies.detect { |movie| movie.name.downcase == name.downcase }
+      @movies.detect { |movie| movie.name.casecmp(name.downcase).zero? }
     end
-
   end
-
 end
