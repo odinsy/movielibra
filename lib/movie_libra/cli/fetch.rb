@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require "thor"
 require 'movie_libra/cli'
-require 'movie_libra/imdb/fetcher'
-require 'movie_libra/tmdb/fetcher'
+require 'movie_libra/fetcher/imdb'
+require 'movie_libra/fetcher/tmdb'
 require 'movie_libra/export'
 
 module MovieLibra
@@ -17,9 +17,9 @@ module MovieLibra
       fetch(MovieLibra::Imdb::Fetcher.new, options)
     end
 
-    desc "tmdb", "Fetch the tmdb movies. Format can be --json or --csv."
-    def tmdb
-      fetch(MovieLibra::Tmdb::Fetcher.new, options)
+    desc "tmdb", "Fetch the tmdb movies. Pass your API key with --key. Format can be --json or --csv."
+    def tmdb(key)
+      fetch(MovieLibra::Tmdb::Fetcher.new(key), options)
     end
 
     no_commands do
