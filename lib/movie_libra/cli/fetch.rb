@@ -11,15 +11,17 @@ module MovieLibra
 
     method_option :csv, type: :string
     method_option :json, type: :string
-
     desc "imdb", "Fetch the imdb movies. Format can be --json or --csv."
     def imdb
       fetch(MovieLibra::Imdb::Fetcher.new, options)
     end
 
+    method_option :csv, type: :string
+    method_option :json, type: :string
+    method_option :key, type: :string, required: true
     desc "tmdb", "Fetch the tmdb movies. Pass your API key with --key. Format can be --json or --csv."
-    def tmdb(key)
-      fetch(MovieLibra::Tmdb::Fetcher.new(key), options)
+    def tmdb
+      fetch(MovieLibra::Tmdb::Fetcher.new(options[:key]), options)
     end
 
     no_commands do
