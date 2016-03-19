@@ -34,18 +34,18 @@ describe "MovieList" do
 
   describe "#add_filter" do
     it "stores filters" do
-      movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
+      movies.add_filter(:genres) { |movie, *genres| movie.genres?(*genres) }
       expect(movies.filters).to include(:genres)
     end
     it "has Proc for the value of stored filters" do
-      movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
+      movies.add_filter(:genres) { |movie, *genres| movie.genres?(*genres) }
       expect(movies.filters[:genres]).to be_a(Proc)
     end
   end
 
   describe "#filter" do
     it "filters movies by the existing filter" do
-      movies.add_filter(:genres) { |movie, *genres| movie.has_genres?(*genres) }
+      movies.add_filter(:genres) { |movie, *genres| movie.genres?(*genres) }
       expect(movies.filter(genres: ["Drama","Romance"]).map(&:name)).to eq(["In the Mood for Love"])
     end
     it "throw an exception when was passed an unknown filter" do

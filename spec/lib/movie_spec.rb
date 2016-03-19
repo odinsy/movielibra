@@ -65,25 +65,25 @@ describe "Movie" do
     end
   end
 
-  describe "#has_genres?" do
+  describe "#genres?" do
     it "returns true if a movie has genres" do
-      expect(movie.has_genres?("Crime", "Drama")).to be_truthy
+      expect(movie.genres?("Crime", "Drama")).to be_truthy
     end
     it "returns true if a movie has genres" do
       @movie = MovieLibra::Movie.create(movie_list, attributes.merge(genres: ['Crime', 'Drama']))
-      expect(@movie.has_genres?("Crime")).to be_falsey
+      expect(@movie.genres?("Crime")).to be_falsey
     end
     it "returns false if a movie has not genres" do
-      expect(movie.has_genres?("Comedy", "Action")).to be_falsey
+      expect(movie.genres?("Comedy", "Action")).to be_falsey
     end
   end
 
-  describe "#has_genre?" do
+  describe "#genre?" do
     it "returns true if a movie has genre" do
-      expect(movie.has_genre?("Crime")).to be_truthy
+      expect(movie.genre?("Crime")).to be_truthy
     end
     it "returns false if a movie has not genre" do
-      expect(movie.has_genre?("Comedy")).to be_falsey
+      expect(movie.genre?("Comedy")).to be_falsey
     end
   end
 

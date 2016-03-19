@@ -5,9 +5,7 @@ require 'ostruct'
 require 'movie_libra/rate.rb'
 
 module MovieLibra
-
   class Movie
-
     WEIGHT = 0
 
     include Rate
@@ -15,7 +13,7 @@ module MovieLibra
 
     @@filters = {}
 
-    def initialize(list=nil, attributes)
+    def initialize(list = nil, attributes)
       attributes  = {} unless attributes.is_a?(Hash)
       @list       = list
       @link       = attributes[:link]
@@ -33,9 +31,9 @@ module MovieLibra
     end
 
     def method_missing(method_sym, *arguments, &block)
-      method = method_sym.to_s.chomp("?").capitalize
-      if method_sym.to_s.match(/\w+\?$/)
-        has_genre?(method)
+      method = method_sym.to_s.chomp('?').capitalize
+      if method_sym.to_s =~ /\w+\?$/
+        genre?(method)
       else
         super
       end
@@ -43,8 +41,8 @@ module MovieLibra
 
     def self.create(list, args)
       @movie  = OpenStruct.new(year: args[:year].to_i)
-      cls     = @@filters.detect { |cls, filter| @movie.instance_eval(&filter) }.first
-      cls.new(list, args)
+      klass   = @@filters.detect { |_klass, filter| @movie.instance_eval(&filter) }.first
+      klass.new(list, args)
     end
 
     def self.filter(&block)
@@ -53,12 +51,12 @@ module MovieLibra
 
     def self.print_format(format_str)
       define_method(:description) do
-        format_str % self.to_h
+        format_str % to_h
       end
     end
 
     def self.weight(arg)
-      const_set("WEIGHT", arg)
+      const_set('WEIGHT', arg)
     end
 
     def self.filters
@@ -92,12 +90,12 @@ module MovieLibra
     # Parse the date
     def parse_date(date)
       fmt = case date.length
-      when 0..4
-        '%Y'
-      when 5..7
-        '%Y-%m'
-      else
-        '%Y-%m-%d'
+            when 0..4
+              '%Y'
+            when 5..7
+              '%Y-%m'
+            else
+              '%Y-%m-%d'
       end
       Date.strptime(date, fmt)
     end
@@ -107,12 +105,12 @@ module MovieLibra
       !@view_date.nil?
     end
 
-    def has_genre?(genre)
+    def genre?(genre)
       @genre.include?(genre)
     end
 
     # Check that movies has genre
-    def has_genres?(*genres)
+    def genres?(*genres)
       (@genre - genres).empty?
     end
 
@@ -138,7 +136,5 @@ module MovieLibra
         view_date:  @view_date
       }
     end
-
   end
-
 end
