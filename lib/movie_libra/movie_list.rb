@@ -6,11 +6,22 @@ require 'movie_libra/movie.rb'
 require 'movie_libra/rate_list.rb'
 
 module MovieLibra
+  # MovieList class
+  #
+  # @example
+  #   list = MovieLibra::MovieList.new('data/movies.json')
+  #   list = MovieLibra::MovieList.new('data/movies.csv')
+  #
   class MovieList
     include Enumerable
 
     attr_accessor :list, :movies, :algos, :filters
-
+    # Creates a new MovieLibra::MovieList object
+    # @param [Array] data                    Array of the movie hashes
+    # @attr [MovieLibra::MovieList] list     Returns self
+    # @attr [MovieLibra::MovieList] movies   Returns movie list
+    # @attr [Hash] algos                     List of algorithms
+    # @attr [Hash] filters                   List of filters
     def initialize(data)
       data      = [] unless data.is_a?(Array)
       @list     = self
@@ -19,27 +30,46 @@ module MovieLibra
       @filters  = {}
     end
 
-    # Load from JSON
+    # Loads movies data from JSON file.
+    # Creates a new MovieLibra::MovieList object.
+    # @example
+    #   MovieLibra::MovieList.load_csv("data/movies.json")
     def self.load_json(path)
       new(parse_json(path))
     end
 
-    # Load from CSV
+    # Loads movies data from CSV file.
+    # Creates a new MovieLibra::MovieList object.
+    # @example
+    #   MovieLibra::MovieList.load_csv("data/movies.csv")
     def self.load_csv(path)
       new(parse_csv(path))
     end
 
-    # Print movies
+    # Prints movies by given block
+    # @return [String]
+    # @example
+    #   list.print { |movie| "#{movie.year}: #{movie.name}" }
     def print
       @movies.map { |i| puts yield(i) } if block_given?
+      nil
     end
 
-    # Add sorting algorithm
+    # Adds sorting algorithm
+    # @param algo [Symbol]  the algorithm name
+    # @param block [&block]  the algorithm block
+    # @example
+    #   list.add_sort_algo(:genres_years) { |movie| [movie.genre, movie.year] }
     def add_sort_algo(algo, &block)
       @algos.store(algo, block)
     end
 
-    # Sorting by algorithm or block
+    # Sorts by algorithm or block
+    # @return [Array] the sorted movie list
+    # @param algo [Symbol]
+    # @param block [&block]
+    # @example
+    #   list.sorted_by(:years)
     def sorted_by(algo = nil, &block)
       if @algos.include?(algo)
         algo = @algos[algo]
@@ -51,58 +81,92 @@ module MovieLibra
       end
     end
 
-    # Add new filter for movie list
+    # Adds filter for the movie list
+    # @param filter [Symbol]  the filter name
+    # @param block [&block]  the filter block
+    # @example
+    #   list.add_filter(:genres) { |movie, *genres| movie.genres?(*genres) }
     def add_filter(filter, &block)
       @filters.store(filter, block)
     end
 
-    # Call filter on movie list
-    def filter(attrs)
-      attrs.inject(@movies) do |result, (title, value)|
+    # Applies filter for the movie list
+    # @return [Array] the filtered movie list
+    # @param [Hash] attributes
+    # @example
+    #   list.filter(genres: ['Comedy', 'Drama'])
+    def filter(attributes)
+      attributes.inject(@movies) do |result, (title, value)|
         filter = @filters[title]
         raise ArgumentError, "Unknown filter #{title}" unless filter
         result.select { |movie| filter.call(movie, *value) }
       end
     end
 
-    # Display the longest movies
+    # Displays the longest movies
+    # @return [Array] the list of N longest movies
+    # @param [Integer] num
+    # @example
+    #   list.longest(10)
     def longest(num)
       @movies.sort_by(&:duration).last(num)
     end
 
-    # Display movies selected by genre
+    # Displays a list of the specified genre movies sorted by release date
+    # @param genre [String] movie genre
+    # @return [Array] movies list
+    # @example
+    #   list.sort_by_genre('Comedy')
     def select_by_genre(genre)
       @movies.select { |k| k.genre.include? genre }.sort_by(&:date)
     end
 
-    # Display all directors sorted by second name
+    # Displays all directors sorted by second name
+    # @return [Array] directors
+    # @example
+    #   list.directors
     def directors
       @movies.map(&:director).sort_by { |words| words.split(' ').last }.uniq
     end
 
-    # Display the count of movies without skipped country
+    # Displays the count of movies without skipped country
+    # @return [Fixnum] the count of movies without skipped country
+    # @example
+    #   list.skip_country("USA")
     def skip_country(country)
       @movies.count { |k| k.country != country }
     end
 
-    # Display the count of movies by each director
+    # Displays the count of movies by each director
+    # @return [Hash] the count of movies by each director
+    # @example
+    #   list.count_by_director
     def count_by_director
       @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |_k, v| v }.reverse.to_h
     end
 
-    # Display the movies by director
+    # Displays the movies by director
+    # @return [Array] the movies by director
+    # @example
+    #   list.by_director("Frank Darabont")
     def by_director(director)
       @movies.select { |m| m.director == director }.map(&:name)
     end
 
-    # Display the count of movies by each actor
+    # Displays the count of movies by each actor
+    # @return [Hash] the count of movies by each actor
+    # @example
+    #   list.count_by_actor
     def count_by_actor
-      @movies.map(&:actors).flatten.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort_by { |_k, v| v }.reverse
+      @movies.map(&:actors).flatten.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort_by { |_k, v| v }.reverse.to_h
     end
 
-    # Display the statistics of movies shot each month
+    # Displays the statistics of the movies shot each month
+    # @return [Hash] the statistics of the movies shot each month
+    # @example
+    #   list.month_stats
     def month_stats
-      @movies.map { |k| k.date.mon }.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort
+      @movies.map { |k| k.date.mon }.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort.to_h
     end
 
     def each(&block)
