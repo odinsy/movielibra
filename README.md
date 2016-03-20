@@ -26,9 +26,7 @@ Or install it yourself as:
 
     $ gem install movie_libra
 
-## Usage
-
-### TODO:
+## TODO:
 
 - [ ] Write documentation for the class MovieLibra::Movie
 - [x] Write documentation for the class MovieLibra::MovieList
@@ -40,6 +38,8 @@ Or install it yourself as:
 - [ ] Write documentation for the class MovieLibra::Tmdb::Fetcher
 - [ ] Refactor with rubocops
 - [ ] Add more examples to README
+
+## Usage
 
 First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
 
