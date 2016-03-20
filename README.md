@@ -51,23 +51,24 @@ IMDB
 
 ```ruby
 2.2.4 :005 > fetcher = MovieLibra::Imdb::Fetcher.new
- => MovieLibra::Imdb::Fetcher (0 movies)
+=> MovieLibra::Imdb::Fetcher (0 movies)
 2.2.4 :006 > fetcher.run!
 [#############################################################################################################################################################] [250/250] [100.00%] [00:52] [00:00] [  4.72/s]
 => MovieLibra::Imdb::Fetcher (250 movies)
 2.2.4 :007 > fetcher.save_to_json
- => "./data/movies.json"
+=> "./data/movies.json"
  ```
 
  TMDB
 
 ```ruby
- 2.2.4 :002 > fetcher = MovieLibra::Tmdb::Fetcher.new("dd165b18174b238eb2af5a0c3552f2f3")
- => MovieLibra::Tmdb::Fetcher (0 movies)
+2.2.4 :002 > fetcher = MovieLibra::Tmdb::Fetcher.new("dd165b18174b238eb2af5a0c3552f2f3")
+=> MovieLibra::Tmdb::Fetcher (0 movies)
 2.2.4 :003 > fetcher.run!(5)
-[###################################################################################################################################################################] [5/5] [100.00%] [00:16] [00:00] [0.30/s] => MovieLibra::Tmdb::Fetcher (5 movies)
+[###################################################################################################################################################################] [5/5] [100.00%] [00:16] [00:00] [0.30/s]
+=> MovieLibra::Tmdb::Fetcher (5 movies)
 2.2.4 :004 > fetcher.save_to_csv
- => "./data/movies.csv"
+=> "./data/movies.csv"
  ```
 
 ## Development
@@ -78,7 +79,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/movie_libra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/odinsy/movie_libra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
