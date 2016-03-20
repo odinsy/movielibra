@@ -6,9 +6,7 @@ require 'movie_libra/movie.rb'
 require 'movie_libra/rate_list.rb'
 
 module MovieLibra
-
   class MovieList
-
     include Enumerable
 
     attr_accessor :list, :movies, :algos, :filters
@@ -42,7 +40,7 @@ module MovieLibra
     end
 
     # Sorting by algorithm or block
-    def sorted_by(algo=nil, &block)
+    def sorted_by(algo = nil, &block)
       if @algos.include?(algo)
         algo = @algos[algo]
         @movies.sort_by(&algo)
@@ -79,17 +77,17 @@ module MovieLibra
 
     # Display all directors sorted by second name
     def directors
-      @movies.map(&:director).sort_by { |words| words.split(" ").last }.uniq
+      @movies.map(&:director).sort_by { |words| words.split(' ').last }.uniq
     end
 
     # Display the count of movies without skipped country
     def skip_country(country)
-      @movies.reject { |k| k.country == country }.count
+      @movies.count { |k| k.country != country }
     end
 
     # Display the count of movies by each director
     def count_by_director
-      @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |k,v| v }.reverse.to_h
+      @movies.group_by(&:director).map { |k, v| [k, v.count] }.sort_by { |_k, v| v }.reverse.to_h
     end
 
     # Display the movies by director
@@ -99,14 +97,12 @@ module MovieLibra
 
     # Display the count of movies by each actor
     def count_by_actor
-      h = Hash.new(0)
-      @movies.map(&:actors).flatten.inject(h) { |acc, n| acc[n] += 1; acc }.sort_by { |k,v| v }.reverse
+      @movies.map(&:actors).flatten.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort_by { |_k, v| v }.reverse
     end
 
     # Display the statistics of movies shot each month
     def month_stats
-      f = Hash.new(0)
-      @movies.map { |k| k.date.mon }.inject(f) { |acc, n| acc[n] += 1 ; acc }.sort
+      @movies.map { |k| k.date.mon }.each_with_object(Hash.new(0)) { |acc, n| n[acc] += 1 }.sort
     end
 
     def each(&block)
@@ -114,17 +110,17 @@ module MovieLibra
     end
 
     protected
+
     # Parse from JSON to array of hashes
     def self.parse_json(path)
       raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
       JSON.parse(open(path).read, symbolize_names: true)
     end
+
     # Parse from CSV to array of hashes
     def self.parse_csv(path)
       raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
-      CSV.foreach(path, col_sep: "|", headers: true, header_converters: :symbol).map
+      CSV.foreach(path, col_sep: '|', headers: true, header_converters: :symbol).map
     end
-
   end
-
 end
