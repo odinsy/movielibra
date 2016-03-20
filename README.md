@@ -28,6 +28,19 @@ Or install it yourself as:
 
 ## Usage
 
+### TODO:
+
+- [ ] Write documentation for the class MovieLibra::Movie
+- [x] Write documentation for the class MovieLibra::MovieList
+- [ ] Write documentation for the class MovieLibra::MyMovieList
+- [ ] Write documentation for the module MovieLibra::Rate
+- [ ] Write documentation for the module MovieLibra::RateList
+- [ ] Write documentation for the module MovieLibra::Export
+- [ ] Write documentation for the class MovieLibra::Imdb::Fetcher
+- [ ] Write documentation for the class MovieLibra::Tmdb::Fetcher
+- [ ] Refactor with rubocops
+- [ ] Add more examples to README
+
 First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
 
 ### CLI
