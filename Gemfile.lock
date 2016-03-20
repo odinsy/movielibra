@@ -1,3 +1,13 @@
+PATH
+  remote: .
+  specs:
+    movie_libra (0.1.0)
+      json
+      mechanize
+      pmap
+      progress_bar
+      thor
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -8,10 +18,11 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    ast (2.2.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
-    domain_name (0.5.20160128)
+    domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -42,10 +53,15 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     ntlm-http (0.1.1)
     options (2.3.2)
+    parser (2.3.0.6)
+      ast (~> 2.2)
     pmap (1.1.1)
+    powerpack (0.1.1)
     progress_bar (1.0.5)
       highline (~> 1.6)
       options (~> 2.3.0)
+    rainbow (2.1.0)
+    rake (10.4.2)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -59,14 +75,22 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    rubocop (0.38.0)
+      parser (>= 2.3.0.6, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
+    thor (0.19.1)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    unicode-display_width (1.0.2)
     vcr (3.0.1)
     webmock (1.24.2)
       addressable (>= 2.3.6)
@@ -78,12 +102,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (~> 1.11.2)
   factory_girl
   fuubar
-  json
-  mechanize
-  pmap
-  progress_bar
-  rspec-core
+  movie_libra!
+  rake (~> 10.0)
+  rspec-core (~> 3.0)
+  rubocop
   vcr
   webmock
+
+BUNDLED WITH
+   1.11.2

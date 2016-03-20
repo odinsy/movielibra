@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :my_movie_list do
+  factory :my_movie_list, class: MovieLibra::MyMovieList do
     movies = [
       {link: "http://www.imdb.com/title/tt0111161/", name: "The Shawshank Redemption", year: "1994", country: "USA", date: "1994-10-14", genre: ["Crime","Drama"], duration: "142", rating: "9.3", director: "Frank Darabont", actors: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"]},
       {link: "http://www.imdb.com/title/tt0017925/", name: "The General", year: "1926", country: "USA", date: "1929", genre: ["Action","Adventure","Comedy","Drama","War"], duration: "67", rating: "8.3", director: "Clyde BruckmanBuster Keaton", actors: ["Buster Keaton", "Marion Mack", "Glen Cavender"]},

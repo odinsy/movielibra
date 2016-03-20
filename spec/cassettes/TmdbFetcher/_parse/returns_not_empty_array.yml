@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 09 Mar 2016 18:40:21 GMT
+      - Thu, 17 Mar 2016 18:53:03 GMT
       Etag:
-      - W/"519be48ead51a9c59a111722e95969c5"
+      - W/"e70bf6f51c74114ad6d163b27c605185"
       Server:
       - openresty
       Status:
@@ -37,19 +37,19 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '12780'
+      - '11685'
       X-Memc-Expires:
-      - '16020'
+      - '17115'
       X-Memc-Key:
-      - 9e58c29c33fa8983a5303b9fd8fdcb90
+      - 08892af275477200fda3fd6e3d8beb60
       X-Ratelimit-Limit:
       - '40'
       X-Ratelimit-Remaining:
-      - '22'
+      - '32'
       X-Ratelimit-Reset:
-      - '1457548825'
+      - '1458240791'
       Content-Length:
-      - '701'
+      - '702'
       Connection:
       - keep-alive
     body:
@@ -59,12 +59,12 @@ http_interactions:
         Under the Red Hood","overview":"Batman faces his ultimate challenge as the
         mysterious Red Hood takes Gotham City by firestorm. One part vigilante, one
         part criminal kingpin, Red Hood begins cleaning up Gotham with the efficiency
-        of Batman, but without following the same ethical code.","popularity":1.07709,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
+        of Batman, but without following the same ethical code.","popularity":2.232095,"poster_path":"/78kjgspmLLOm2Glgpzqo9cS4GpI.jpg","production_companies":[{"name":"DC
         Comics","id":429},{"name":"Warner Bros. Animation","id":2785}],"production_countries":[{"iso_3166_1":"US","name":"United
         States of America"}],"release_date":"2010-07-27","revenue":6629178,"runtime":75,"spoken_languages":[{"iso_639_1":"en","name":"English"}],"status":"Released","tagline":"Dare
-        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.6,"vote_count":224}'
+        to Look Beneath the Hood.","title":"Batman: Under the Red Hood","video":false,"vote_average":7.6,"vote_count":225}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 18:40:22 GMT
+  recorded_at: Thu, 17 Mar 2016 18:53:04 GMT
 - request:
     method: get
     uri: http://api.themoviedb.org/3/movie/40662/credits?api_key=dd165b18174b238eb2af5a0c3552f2f3
@@ -90,7 +90,7 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 09 Mar 2016 18:40:22 GMT
+      - Thu, 17 Mar 2016 18:53:04 GMT
       Etag:
       - W/"a8914af3bf0d6b2a62733a151230cfe2"
       Server:
@@ -102,17 +102,17 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '23940'
+      - '17745'
       X-Memc-Expires:
-      - '4860'
+      - '11055'
       X-Memc-Key:
       - abfd5974f493057124ac27140aeaf87e
       X-Ratelimit-Limit:
       - '40'
       X-Ratelimit-Remaining:
-      - '21'
+      - '31'
       X-Ratelimit-Reset:
-      - '1457548825'
+      - '1458240791'
       Content-Length:
       - '1659'
       Connection:
@@ -158,5 +158,5 @@ http_interactions:
         Winick","profile_path":null},{"credit_id":"56a9578fc3a36872cb002322","department":"Writing","id":105643,"job":"Storyboard","name":"Jay
         Oliva","profile_path":"/az4rTiBwQlsUUK8WGNZpOI69QLo.jpg"}]}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 18:40:22 GMT
+  recorded_at: Thu, 17 Mar 2016 18:53:04 GMT
 recorded_with: VCR 3.0.1

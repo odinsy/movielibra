@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :movie_list do
+  factory :movie_list, class: MovieLibra::MovieList do
     movies = [
       {link: "http://www.imdb.com/title/tt0017925/", name: "The General", year: "1926", country: "USA", date: "1929", genre: ["Action","Adventure","Comedy","Drama","War"], duration: "67", rating: "8.3", director: "Clyde BruckmanBuster Keaton", actors: ["Buster Keaton", "Marion Mack", "Glen Cavender"]},
       {link: "http://www.imdb.com/title/tt0052561/", name: "Anatomy of a Murder", year: "1959", country: "USA", date: "1959-09", genre: ["Crime","Drama","Mystery","Thriller"], duration: "160", rating: "8.1", director: "Otto Preminger", actors: ["James Stewart", "Lee Remick", "Ben Gazzara"]},

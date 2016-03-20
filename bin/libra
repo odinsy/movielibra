@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'movie_libra/cli'
+MovieLibra::CLI.start

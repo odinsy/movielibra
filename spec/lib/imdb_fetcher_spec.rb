@@ -1,6 +1,6 @@
-require 'imdb_fetcher'
+require 'movie_libra/fetcher/imdb'
 
-describe "IMDBFetcher" do
+describe "ImdbFetcher" do
 
   let(:fetcher) { build(:imdb_fetcher) }
   let(:link) { "http://www.imdb.com/title/tt0111161" }
@@ -52,12 +52,12 @@ describe "IMDBFetcher" do
       expect(fetcher).to respond_to(:run!)
     end
 
-    it "returns an array", vcr: true do
-      expect(result).to be_a(Array)
+    it "stores movies to list and returns an array", vcr: true do
+      expect(result.list).to be_a(Array)
     end
 
-    it "returns passed number of movies", vcr: true do
-      expect(result.size).to eq(250)
+    it "returns passed number of movie list", vcr: true do
+      expect(result.list.size).to eq(250)
     end
 
   end
