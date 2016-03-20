@@ -28,8 +28,10 @@ Or install it yourself as:
 
 ## Usage
 
-### TODO:
+---
 
+### TODO:
+---
 - [ ] Write documentation for the class MovieLibra::Movie
 - [x] Write documentation for the class MovieLibra::MovieList
 - [ ] Write documentation for the class MovieLibra::MyMovieList
@@ -40,11 +42,12 @@ Or install it yourself as:
 - [ ] Write documentation for the class MovieLibra::Tmdb::Fetcher
 - [ ] Refactor with rubocops
 - [ ] Add more examples to README
+---
 
 First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
 
 ### CLI
-
+---
 Format can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```. Parsed data stores to ```tmp/``` directory.  
 One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
 
@@ -59,7 +62,7 @@ TMDB
 Or you can just use an existing movies data from ```data/``` directory.
 
 ### Console
-
+---
 IMDB
 
 ```ruby
