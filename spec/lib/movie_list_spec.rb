@@ -28,7 +28,7 @@ describe "MovieList" do
       expect(movies.sorted_by(:years).map(&:year)).to eq([1926, 1959, 1988, 2000])
     end
     it "throw an exception when was passed an unknown algorithm" do
-      expect { movies.sorted_by(:alg) }.to raise_error("Unknown algorithm alg")
+      expect { movies.sorted_by(:algo) }.to raise_error("Unknown algorithm algo")
     end
   end
 
