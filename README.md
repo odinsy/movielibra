@@ -23,9 +23,9 @@ Or install it yourself as:
 
 ### CLI
 
-First of all you need to parse movies data from IMDB or TMDB. Also you can just use an existing movies data from ```data/``` directory.
-Formats can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```.
-One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.
+First of all you need to parse movies data from IMDB or TMDB. Also you can just use an existing movies data from ```data/``` directory.  
+Format can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```.  
+One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
 Parsed data stores to ```tmp/``` directory.
 
 IMDB
