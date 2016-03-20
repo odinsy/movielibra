@@ -2,6 +2,13 @@
 
 # MovieLibra
 
+MovieLibra is a Ruby movie library for the working with the movie list from IMDB and TMDB.
+
+Provides a simple and intuitive interface for:
+* parse and create movie lists from IMDB or TMDB,
+* save movies list to file and load them,
+* rate movies,
+* get information about movies (see examples)
 
 ## Installation
 
@@ -24,9 +31,8 @@ Or install it yourself as:
 ### CLI
 
 First of all you need to parse movies data from IMDB or TMDB. Also you can just use an existing movies data from ```data/``` directory.  
-Format can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```.  
+Format can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```. Parsed data stores to ```tmp/``` directory.  
 One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
-Parsed data stores to ```tmp/``` directory.
 
 IMDB
 
