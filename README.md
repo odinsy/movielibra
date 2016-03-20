@@ -23,7 +23,7 @@ Or install it yourself as:
 
 First of all you need to parse movies data from IMDB or TMDB. Also you can just use an existing movies data from ```data``` directory.
 
-# CLI
+### CLI
 
 IMDB
 
