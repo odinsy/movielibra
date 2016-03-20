@@ -21,7 +21,7 @@ module MovieLibra
 
       attr_accessor :list, :ids, :key
 
-      def initialize(api_key)
+      def initialize(api_key=nil)
         @key  = api_key
         @list = []
         @ids  = []
@@ -39,6 +39,11 @@ module MovieLibra
         bar         = ProgressBar.new(movie_count)
         page_count  = (movie_count / 20.0).ceil
         top_movie_ids(page_count).first(movie_count).each { |id| parse(id) ; bar.increment! }
+        self
+      end
+
+      def inspect
+        "#{self.class} (#{@list.count} movies)"
       end
 
       private

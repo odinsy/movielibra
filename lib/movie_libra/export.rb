@@ -4,6 +4,7 @@ module Export
   # Export array with movie hashes to JSON
   def save_to_json(filename = './data/movies.json')
     File.open(filename, 'w+') { |f| f.puts list.to_json }
+    filename
   end
 
   # Export array with movie hashes to CSV
@@ -14,5 +15,6 @@ module Export
         file << m.values.map { |v| v.is_a?(Array) ? v.join(',') : v }
       end
     end
+    filename
   end
 end

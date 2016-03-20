@@ -25,6 +25,11 @@ module MovieLibra
       def run!
         bar = ProgressBar.new(get_movie_count)
         get_movie_links.peach(4) { |link| parse(link) ; bar.increment! }
+        self
+      end
+
+      def inspect
+        "#{self.class} (#{@list.count} movies)"
       end
 
       private

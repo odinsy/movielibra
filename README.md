@@ -2,11 +2,11 @@
 
 # MovieLibra
 
-MovieLibra is a Ruby movie library for the working with the movie list from IMDB and TMDB.
+MovieLibra is a Ruby movie library for the working with the top rated movies from IMDB and TMDB.
 
 Provides a simple and intuitive interface for:
 * parse and create movie lists from IMDB or TMDB,
-* save movies list to file and load them,
+* save movie list to and load from file,
 * rate movies,
 * get information about movies (see examples)
 
@@ -28,9 +28,10 @@ Or install it yourself as:
 
 ## Usage
 
+First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
+
 ### CLI
 
-First of all you need to parse movies data from IMDB or TMDB. Also you can just use an existing movies data from ```data/``` directory.  
 Format can be JSON or CSV. Just pass argument like ```--csv``` or ```-json```. Parsed data stores to ```tmp/``` directory.  
 One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
 
@@ -41,6 +42,33 @@ IMDB
 TMDB
 
     $ bundle exec bin/libra fetch tmdb --json --key YOUR-API-KEY
+
+Or you can just use an existing movies data from ```data/``` directory.
+
+### Console
+
+IMDB
+
+```ruby
+2.2.4 :005 > fetcher = MovieLibra::Imdb::Fetcher.new
+ => MovieLibra::Imdb::Fetcher (0 movies)
+2.2.4 :006 > fetcher.run!
+[#############################################################################################################################################################] [250/250] [100.00%] [00:52] [00:00] [  4.72/s]
+=> MovieLibra::Imdb::Fetcher (250 movies)
+2.2.4 :007 > fetcher.save_to_json
+ => "./data/movies.json"
+ ```
+
+ TMDB
+
+```ruby
+ 2.2.4 :002 > fetcher = MovieLibra::Tmdb::Fetcher.new("dd165b18174b238eb2af5a0c3552f2f3")
+ => MovieLibra::Tmdb::Fetcher (0 movies)
+2.2.4 :003 > fetcher.run!(5)
+[###################################################################################################################################################################] [5/5] [100.00%] [00:16] [00:00] [0.30/s] => MovieLibra::Tmdb::Fetcher (5 movies)
+2.2.4 :004 > fetcher.save_to_csv
+ => "./data/movies.csv"
+ ```
 
 ## Development
 
