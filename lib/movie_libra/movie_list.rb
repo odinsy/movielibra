@@ -3,7 +3,6 @@
 require 'json'
 require 'csv'
 require 'movie_libra/movie.rb'
-require 'movie_libra/rate_list.rb'
 
 module MovieLibra
   # MovieList class

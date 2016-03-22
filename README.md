@@ -32,7 +32,7 @@ Or install it yourself as:
 - [x] Write documentation for the class MovieLibra::MovieList
 - [ ] Write documentation for the class MovieLibra::MyMovieList
 - [ ] Write documentation for the module MovieLibra::Rate
-- [ ] Write documentation for the module MovieLibra::RateList
+- [x] Write documentation for the module MovieLibra::RateList
 - [x] Write documentation for the module MovieLibra::Export
 - [ ] Write documentation for the class MovieLibra::Imdb::Fetcher
 - [ ] Write documentation for the class MovieLibra::Tmdb::Fetcher
