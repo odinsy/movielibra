@@ -8,8 +8,8 @@ module MovieLibra
   # MovieList class
   #
   # @example
-  #   list = MovieLibra::MovieList.new('data/movies.json')
-  #   list = MovieLibra::MovieList.new('data/movies.csv')
+  #   list = MovieLibra::MovieList.load_json('data/movies.json')
+  #   list = MovieLibra::MovieList.load_json('data/movies.csv')
   #
   class MovieList
     include Enumerable
