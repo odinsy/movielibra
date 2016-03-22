@@ -3,8 +3,8 @@
 module MovieLibra
   class MovieList
     # Module which provides a functionality for:
-    # * rate watched movie list
-    # * get list of recommend(not-watched) movies
+    # * rate watched movie
+    # * get list of recommended (not-watched) movies
     # * get list of watched movies
     module RateList
       # Rate and make viewed movie

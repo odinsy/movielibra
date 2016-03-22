@@ -2,7 +2,7 @@
 
 # MovieLibra
 
-MovieLibra is a Ruby movie library for the working with the top rated movies from IMDB and TMDB.
+MovieLibra is a Ruby movie library for the working with the top-rated movies from IMDB and TMDB.
 
 Provides a simple and intuitive interface for:
 * parse and create movie lists from IMDB or TMDB,
