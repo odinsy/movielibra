@@ -5,7 +5,7 @@ module MovieLibra
     # Module which provides a functionality for:
     # * rate watched movie
     # * get list of recommended (not-watched) movies
-    # * get list of watched movies
+    # * get list of watched highest-rated movies
     module RateList
       # Rate and make viewed movie
       # @param [String] name  Movie name that you want to rate
