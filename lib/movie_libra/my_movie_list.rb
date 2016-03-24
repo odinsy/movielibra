@@ -11,18 +11,10 @@ module MovieLibra
     include RateList
 
     # Creates a new MyMovieLibra::MovieList object
-    # @param [Array] data   Array of the movie hashes
-    def initialize(data)
-      data    = [] unless data.is_a?(Array)
-      @movies = data.map { |movie| Movie.create(self, movie) }
-    end
-
-    # Finds movie by name
-    # @return [MovieLibra::Movie] movie information
-    # @example
-    #   list.find_movie("The Shawshank Redemption")
-    def find_movie(name)
-      @movies.detect { |movie| movie.name.casecmp(name.downcase).zero? }
+    # @param [String] path    Path to your CSV or JSON file
+    def initialize(path)
+      super
+      @movies = load_data(path).map { |movie| Movie.create(self, movie) }
     end
   end
 end
