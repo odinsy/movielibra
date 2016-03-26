@@ -9,8 +9,8 @@ require 'pmap'
 require 'movie_libra/export.rb'
 
 module MovieLibra
-  module Imdb
-    class Fetcher
+  module Fetcher
+    class Imdb
 
       include Export
 

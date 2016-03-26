@@ -10,8 +10,8 @@ require 'net/http'
 require 'movie_libra/export.rb'
 
 module MovieLibra
-  module Tmdb
-    class Fetcher
+  module Fetcher
+    class Tmdb
 
       include Export
 
