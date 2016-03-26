@@ -24,7 +24,7 @@ module MovieLibra
       # Run parser of top IMDB movies links
       def run!
         bar = ProgressBar.create(total: get_movie_count)
-        get_movie_links.peach(4) { |link| parse(link) && bar.increment }
+        get_movie_links.peach(3) { |link| parse(link) && bar.increment }
         self
       end
 
