@@ -47,7 +47,7 @@ First of all you need to parse movies data from IMDB or TMDB or you can just use
 
 ---
 
-Format can be JSON or CSV. Just pass parameter to argument ```-f```` like ```-f csv``` or ```-f json```. Parsed data stores to ```tmp/``` directory.  
+Format can be JSON or CSV. Just pass parameter to argument ```-f``` like ```-f csv``` or ```-f json```. Parsed data stores to ```tmp/``` directory.  
 One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
 
 IMDB

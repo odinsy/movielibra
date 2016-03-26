@@ -7,7 +7,7 @@ require 'movie_libra/export'
 
 module MovieLibra
   class Fetch < Thor
-    DATA_PATH = File.expand_path("../../../../tmp/", __FILE__)
+    # DATA_PATH = File.expand_path("../../../../tmp/", __FILE__)
 
     method_option :format, type: :string, aliases: "-f", required: true
     desc "imdb", "Fetch the imdb movies. Format can be --json or --csv."
@@ -26,10 +26,10 @@ module MovieLibra
       def fetch(fetcher, options)
         if options[:format] == "csv"
           fetcher.run!
-          fetcher.save_to_csv("#{DATA_PATH}/movies.csv")
+          fetcher.save_to_csv
         elsif options[:format] == "json"
           fetcher.run!
-          fetcher.save_to_json("#{DATA_PATH}/movies.json")
+          fetcher.save_to_json
         else
           puts "Format is not correct or is not passed."
         end
