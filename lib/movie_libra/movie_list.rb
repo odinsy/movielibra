@@ -8,41 +8,34 @@ module MovieLibra
   # MovieList class
   #
   # @example
-  #   list = MovieLibra::MovieList.load_json('data/movies.json')
-  #   list = MovieLibra::MovieList.load_json('data/movies.csv')
+  #   list = MovieLibra::MovieList.new('data/movies.json')
+  #   list = MovieLibra::MovieList.new('data/movies.csv')
   #
   class MovieList
     include Enumerable
+    # Supported file formats
+    FORMATS = ['.json', '.csv'].freeze
 
     attr_accessor :list, :movies, :algos, :filters
     # Creates a new MovieLibra::MovieList object
-    # @param [Array] data                    Array of the movie hashes
+    # @param [String] path                   Path to your CSV or JSON file
     # @attr [MovieLibra::MovieList] list     Returns self
-    # @attr [MovieLibra::MovieList] movies   Returns movie list
+    # @attr [Array] movies                   Returns array of movies
     # @attr [Hash] algos                     List of algorithms
     # @attr [Hash] filters                   List of filters
-    def initialize(data)
-      data      = [] unless data.is_a?(Array)
+    def initialize(path)
+      @movies   = load_data(path).map { |movie| Movie.new(self, movie) }
       @list     = self
-      @movies   = data.map { |movie| Movie.new(self, movie) }
       @algos    = {}
       @filters  = {}
     end
 
-    # Loads movies data from JSON file.
-    # Creates a new MovieLibra::MovieList object.
+    # Finds movie by name
+    # @return [MovieLibra::Movie] movie information
     # @example
-    #   MovieLibra::MovieList.load_csv("data/movies.json")
-    def self.load_json(path)
-      new(parse_json(path))
-    end
-
-    # Loads movies data from CSV file.
-    # Creates a new MovieLibra::MovieList object.
-    # @example
-    #   MovieLibra::MovieList.load_csv("data/movies.csv")
-    def self.load_csv(path)
-      new(parse_csv(path))
+    #   list.find_movie("The Shawshank Redemption")
+    def find_movie(name)
+      @movies.detect { |movie| movie.name.casecmp(name.downcase).zero? }
     end
 
     # Prints movies by given block
@@ -174,16 +167,29 @@ module MovieLibra
 
     protected
 
-    # Parse from JSON to array of hashes
-    def self.parse_json(path)
-      raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
+    # Loads movies data from JSON or CSV file.
+    def load_data(path)
+      raise ArgumentError, "File #{path} not found or has not incorrect format." unless File.exist?(path) && FORMATS.include?(File.extname(path))
+      case File.extname(path)
+      when '.json'
+        parse_json(path)
+      when '.csv'
+        parse_csv(path)
+      end
+    end
+
+    # Parse from JSON
+    # @return [Array] the array of movie hashes
+    def parse_json(path)
       JSON.parse(open(path).read, symbolize_names: true)
     end
 
-    # Parse from CSV to array of hashes
-    def self.parse_csv(path)
-      raise ArgumentError, "File not found: #{path}" unless File.exist?(path)
-      CSV.foreach(path, col_sep: '|', headers: true, header_converters: :symbol).map
+    # Parse from CSV
+    # @return [Array] the array of movie hashes
+    def parse_csv(path)
+      CSV.foreach(path, col_sep: '|', headers: true, header_converters: :symbol, encoding: "UTF-8").map do |row|
+        row.to_h.update(row) { |x, y| row[x] = y.include?(",") ? y.split(",") : y }
+      end
     end
   end
 end

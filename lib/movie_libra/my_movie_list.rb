@@ -5,8 +5,7 @@ require 'movie_libra/rate_list.rb'
 module MovieLibra
   # MyMovieList class
   # @example
-  #   list = MyMovieLibra::MovieList.load_json('data/movies.json')
-  #   list = MyMovieLibra::MovieList.load_csv('data/movies.csv')
+  #   list = MyMovieLibra::MyMovieList.new('data/movies.json')
   class MyMovieList < MovieList
     include RateList
 
