@@ -41,7 +41,7 @@ Or install it yourself as:
 
 ## Usage
 
-First of all you need to parse movies data from IMDB or TMDB or you can just use an existing movies data from ```data/``` directory.
+First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
 
 ### CLI
 
@@ -52,11 +52,13 @@ One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/acc
 
 IMDB
 
-    $ bundle exec bin/libra fetch imdb -f csv
+    $ bundle exec bin/libra fetch imdb --csv
 
 TMDB
 
-    $ bundle exec bin/libra fetch tmdb -f json --key YOUR-API-KEY
+    $ bundle exec bin/libra fetch tmdb --json --key YOUR-API-KEY
+
+Or you can just use an existing movies data from ```data/``` directory.
 
 ### Console
 
@@ -65,25 +67,25 @@ TMDB
 IMDB
 
 ```ruby
-2.2.4 :001 > fetcher = MovieLibra::Fetcher::Imdb.new
- => MovieLibra::Fetcher::Imdb (0 movies)
-2.2.4 :002 > fetcher.run!
-Progress: |==================================================================================================================================================================================================|
- => MovieLibra::Fetcher::Imdb (250 movies)
-2.2.4 :003 > fetcher.save_to_json
- => "./data/movies.json"
+2.2.4 :005 > fetcher = MovieLibra::Imdb::Fetcher.new
+=> MovieLibra::Imdb::Fetcher (0 movies)
+2.2.4 :006 > fetcher.run!
+[#############################################################################################################################################################] [250/250] [100.00%] [00:52] [00:00] [  4.72/s]
+=> MovieLibra::Imdb::Fetcher (250 movies)
+2.2.4 :007 > fetcher.save_to_json
+=> "./data/movies.json"
  ```
 
  TMDB
 
 ```ruby
-2.2.4 :009 > fetcher = MovieLibra::Fetcher::Tmdb.new("dd165b18174b238eb2af5a0c3552f2f3")
- => MovieLibra::Fetcher::Tmdb (0 movies)
-2.2.4 :010 > fetcher.run!(20)
-Progress: |==================================================================================================================================================================================================|
- => MovieLibra::Fetcher::Tmdb (20 movies)
-2.2.4 :011 > fetcher.save_to_csv
- => "./data/movies.csv"
+2.2.4 :002 > fetcher = MovieLibra::Tmdb::Fetcher.new("dd165b18174b238eb2af5a0c3552f2f3")
+=> MovieLibra::Tmdb::Fetcher (0 movies)
+2.2.4 :003 > fetcher.run!(5)
+[###################################################################################################################################################################] [5/5] [100.00%] [00:16] [00:00] [0.30/s]
+=> MovieLibra::Tmdb::Fetcher (5 movies)
+2.2.4 :004 > fetcher.save_to_csv
+=> "./data/movies.csv"
  ```
 
 ## Development
