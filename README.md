@@ -41,7 +41,7 @@ Or install it yourself as:
 
 ## Usage
 
-First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it or you can just use an existing movies data from ```data/``` directory.
+First of all you need to parse movies data from IMDB or TMDB or you can just use an existing movies data from ```data/``` directory.
 
 ### CLI
 
@@ -57,8 +57,6 @@ IMDB
 TMDB
 
     $ bundle exec bin/libra fetch tmdb -f json --key YOUR-API-KEY
-
-
 
 ### Console
 
