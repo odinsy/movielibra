@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/odinsy/imdb-data-parser.svg?branch=master)](https://travis-ci.org/odinsy/imdb-data-parser)
+[![Build Status](https://travis-ci.org/odinsy/movie_libra.svg?branch=master)](https://travis-ci.org/odinsy/movie_libra)
 
 # MovieLibra
 
