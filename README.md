@@ -34,14 +34,14 @@ Or install it yourself as:
 - [x] Write documentation for the module MovieLibra::Rate
 - [x] Write documentation for the module MovieLibra::RateList
 - [x] Write documentation for the module MovieLibra::Export
-- [ ] Write documentation for the class MovieLibra::Imdb::Fetcher
-- [ ] Write documentation for the class MovieLibra::Tmdb::Fetcher
-- [ ] Refactor with rubocops
-- [ ] Add more examples to README
+- [ ] Write documentation for the class MovieLibra::Fetcher::Imdb
+- [ ] Write documentation for the class MovieLibra::Fetcher::Tmdb
+- [ ] Refactoring with rubocops
+- [ ] Add more examples to README.md
 
 ## Usage
 
-First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it:
+First of all you need to parse movies data from IMDB or TMDB. There are 3 ways to do it or you can just use an existing movies data from ```data/``` directory.
 
 ### CLI
 
@@ -58,7 +58,7 @@ TMDB
 
     $ bundle exec bin/libra fetch tmdb -f json --key YOUR-API-KEY
 
-Or you can just use an existing movies data from ```data/``` directory.
+
 
 ### Console
 
