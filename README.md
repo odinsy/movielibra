@@ -52,11 +52,11 @@ One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/acc
 
 IMDB
 
-    $ bundle exec bin/libra fetch imdb --csv
+    $ bundle exec bin/libra fetch imdb -f csv
 
 TMDB
 
-    $ bundle exec bin/libra fetch tmdb --json --key YOUR-API-KEY
+    $ bundle exec bin/libra fetch tmdb -f json --key YOUR-API-KEY
 
 Or you can just use an existing movies data from ```data/``` directory.
 
