@@ -25,13 +25,13 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib", "lib/imdb", "lib/tmdb"]
+  spec.require_paths = ["lib"]
 
   spec.required_ruby_version = ">= 2.1.4"
 
   spec.add_dependency "json"
   spec.add_dependency "mechanize"
-  spec.add_dependency "progress_bar"
+  spec.add_dependency "ruby-progressbar"
   spec.add_dependency 'pmap'
   spec.add_dependency 'thor'
 

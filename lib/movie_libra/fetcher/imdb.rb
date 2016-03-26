@@ -4,7 +4,7 @@
 require 'json'
 require 'csv'
 require 'mechanize'
-require 'progress_bar'
+require 'ruby-progressbar'
 require 'pmap'
 require 'movie_libra/export.rb'
 
@@ -23,8 +23,8 @@ module MovieLibra
       end
       # Run parser of top IMDB movies links
       def run!
-        bar = ProgressBar.new(get_movie_count)
-        get_movie_links.peach(4) { |link| parse(link) ; bar.increment! }
+        bar = ProgressBar.create(total: get_movie_count)
+        get_movie_links.peach(4) { |link| parse(link) && bar.increment }
         self
       end
 
