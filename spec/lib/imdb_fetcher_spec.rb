@@ -25,15 +25,15 @@ describe "ImdbFetcher" do
     end
   end
 
-  describe "#get_movie_count", vcr: true do
+  describe "#movie_count", vcr: true do
     it "gets movie count" do
-      expect(fetcher.send(:get_movie_count)).to eq(250)
+      expect(fetcher.send(:movie_count)).to eq(250)
     end
   end
 
-  describe "#get_movie_links", vcr: true do
+  describe "#movie_links", vcr: true do
     it "gets an array of movie links" do
-      expect(fetcher.send(:get_movie_links)).to be_a(Array)
+      expect(fetcher.send(:movie_links)).to be_a(Array)
     end
   end
 
