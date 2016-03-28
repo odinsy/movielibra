@@ -4,7 +4,7 @@ require 'movie_libra/cli/fetch'
 
 module MovieLibra
   class CLI < Thor
-    desc 'fetch TYPE FORMAT', 'Fetch a new movies. Type can be imdb, tmdb. Formats: --json, --csv.'
+    desc 'fetch TYPE FORMAT', 'Fetch a new movies. Type can be imdb, tmdb. Formats: json or csv.'
     subcommand 'fetch', MovieLibra::Fetch
   end
 end

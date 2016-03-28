@@ -168,6 +168,7 @@ module MovieLibra
     protected
 
     # Loads movies data from JSON or CSV file.
+    # @return [Array] the array of movie hashes
     def load_data(path)
       raise ArgumentError, "File #{path} not found or has not incorrect format." unless File.exist?(path) && FORMATS.include?(File.extname(path))
       case File.extname(path)
@@ -187,8 +188,8 @@ module MovieLibra
     # Parse from CSV
     # @return [Array] the array of movie hashes
     def parse_csv(path)
-      CSV.foreach(path, col_sep: '|', headers: true, header_converters: :symbol, encoding: "UTF-8").map do |row|
-        row.to_h.update(row) { |x, y| row[x] = y.include?(",") ? y.split(",") : y }
+      CSV.foreach(path, col_sep: '|', headers: true, header_converters: :symbol, encoding: 'UTF-8').map do |row|
+        row.to_h.update(row) { |x, y| row[x] = y.include?(',') ? y.split(',') : y }
       end
     end
   end
