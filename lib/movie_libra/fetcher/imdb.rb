@@ -20,43 +20,55 @@ module MovieLibra
 
       attr_accessor :list
 
+      # Creates a new MovieLibra::Fetcher::Imdb object
+      # @attr [Array] list                   Array of movie hashes
       def initialize
         @list = []
       end
 
-      # Run parser of top IMDB movies links
+      # Parse movies information from IMDB to @list
+      # @return [MovieLibra::Fetcher::Imdb] @list.count movies
+      # @example
+      #   fetcher = MovieLibra::Fetcher::Imdb.new
+      #   fetcher.run!
       def run!
         bar = ProgressBar.create(total: movie_count)
         movie_links.peach(3) { |link| parse(link) && bar.increment }
         self
       end
 
+      # Redefine method inspect
+      # @return [MovieLibra::Fetcher::Imdb] @list.count movies
       def inspect
         "#{self.class} (#{@list.count} movies)"
       end
 
       private
 
-      # just make link shorter
+      # Make movie link shorter
+      # @return [String] Short IMDB movie link
       def shorten_link(link)
         link.split('/?').first
       end
 
-      # get Top IMDB movies links from http://www.imdb.com/chart/top
+      # Get movies links from http://www.imdb.com/chart/top
+      # @return [Array] Array of movie links
       def movie_links
         agent = Mechanize.new
         page  = agent.get(IMDB_URL)
         page.links_with(css: 'td.titleColumn a').map { |link| shorten_link(page.uri.merge(link.href).to_s) }
       end
 
-      # get count of Top IMDB movies from http://www.imdb.com/chart/top
+      # Get count of movies from http://www.imdb.com/chart/top
+      # @return [Fixnum] Count of movies
       def movie_count
         agent = Mechanize.new
         page  = agent.get(IMDB_URL)
         page.links_with(css: 'td.titleColumn a').count
       end
 
-      # Parse information about movie to Hash
+      # Parse movie information to Hash and add him to [Array] @list
+      # @return [Array] Array of movie hashes
       def parse(link)
         agent = Mechanize.new
         page  = agent.get(link)

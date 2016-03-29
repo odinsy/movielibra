@@ -34,7 +34,7 @@ Or install it yourself as:
 - [x] Write documentation for the module MovieLibra::Rate
 - [x] Write documentation for the module MovieLibra::RateList
 - [x] Write documentation for the module MovieLibra::Export
-- [ ] Write documentation for the class MovieLibra::Fetcher::Imdb
+- [x] Write documentation for the class MovieLibra::Fetcher::Imdb
 - [ ] Write documentation for the class MovieLibra::Fetcher::Tmdb
 - [ ] Refactoring with rubocops
 - [ ] Add more examples to README.md
