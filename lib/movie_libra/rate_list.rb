@@ -11,9 +11,7 @@ module MovieLibra
       # @param [String] name  Movie name that you want to rate
       # @param [Fixnum] num   Your movie rating
       def rate(name, num)
-        unless (0..10).cover?(num)
-          raise ArgumentError, 'You can rate movie only from 0 to 10!'
-        end
+        raise ArgumentError, 'You can rate movie only from 0 to 10!' unless (0..10).cover?(num)
         movie           = find_movie(name)
         movie.my_rating = num.to_i
         movie.view_date = Date.today
