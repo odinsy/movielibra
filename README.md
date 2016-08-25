@@ -14,9 +14,7 @@ Provides a simple and intuitive interface for:
 
 Clone application from repository:
 
-```
     $ git clone https://github.com/odinsy/movie_libra.git
-```
 
 And then execute:
 
