@@ -44,7 +44,7 @@ Or install it yourself as:
 
 ---
 ```
-➜  movie_libra git:(develop) bundle exec bin/libra                                         
+$ bundle exec bin/libra                                         
 Commands:
   libra fetch TYPE FORMAT  # Fetch a new movies. Type can be imdb, tmdb. Formats: json or csv.
   libra help [COMMAND]     # Describe available commands or one specific command
