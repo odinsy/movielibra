@@ -12,10 +12,10 @@ Provides a simple and intuitive interface for:
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone application from repository:
 
-```ruby
-gem 'movie_libra'
+```
+    $ git clone https://github.com/odinsy/movie_libra.git
 ```
 
 And then execute:
@@ -24,6 +24,7 @@ And then execute:
 
 Or install it yourself as:
 
+    $ gem build movie_libra.gemspec
     $ gem install movie_libra
 
 ## TODO:
