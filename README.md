@@ -25,20 +25,15 @@ Or install it yourself as:
     $ gem build movie_libra.gemspec
     $ gem install movie_libra
 
-## TODO:
-
-- [ ] Write documentation for the class MovieLibra::Movie
-- [x] Write documentation for the class MovieLibra::MovieList
-- [x] Write documentation for the class MovieLibra::MyMovieList
-- [x] Write documentation for the module MovieLibra::Rate
-- [x] Write documentation for the module MovieLibra::RateList
-- [x] Write documentation for the module MovieLibra::Export
-- [x] Write documentation for the class MovieLibra::Fetcher::Imdb
-- [ ] Write documentation for the class MovieLibra::Fetcher::Tmdb
-- [ ] Refactoring with rubocops
-- [ ] Add more examples to README.md
-
 ## Usage
+
+### Information
+
+---
+For starting work you need to parse movies data from IMDB or TMDB or you can just use an existing movies data from ```data/``` directory.  
+Format can be JSON or CSV. Just pass parameter to an argument ```-f``` like ```-f csv``` or ```-f json```.  
+Parsed data stores to ```tmp/``` directory.  
+For working with TMDB you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
 
 ### CLI
 
