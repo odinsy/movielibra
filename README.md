@@ -40,14 +40,28 @@ Or install it yourself as:
 
 ## Usage
 
-First of all you need to parse movies data from IMDB or TMDB or you can just use an existing movies data from ```data/``` directory.
-
 ### CLI
 
 ---
+```
+➜  movie_libra git:(develop) bundle exec bin/libra                                         
+Commands:
+  libra fetch TYPE FORMAT  # Fetch a new movies. Type can be imdb, tmdb. Formats: json or csv.
+  libra help [COMMAND]     # Describe available commands or one specific command
+```
 
-Format can be JSON or CSV. Just pass parameter to argument ```-f``` like ```-f csv``` or ```-f json```. Parsed data stores to ```tmp/``` directory.  
+First of all you need to parse movies data from IMDB or TMDB or you can just use an existing movies data from ```data/``` directory.
+Format can be JSON or CSV. Just pass parameter to argument ```-f``` like ```-f csv``` or ```-f json```.
+Parsed data stores to ```tmp/``` directory.  
 One caveat for TMDB - you first need to [sign up](https://www.themoviedb.org/account/signup) to The Movie Database and then request a new api key.  
+
+```
+$ bundle exec bin/libra help fetch
+Commands:
+  libra fetch help [COMMAND]                      # Describe subcommands or one specific subcommand
+  libra fetch imdb -f, --format=FORMAT            # Fetch the imdb movies. Format can be --json or --csv.
+  libra fetch tmdb --key=KEY -f, --format=FORMAT  # Fetch the tmdb movies. Pass your API key with --key. Format can be --json or --csv.
+```
 
 IMDB
 
