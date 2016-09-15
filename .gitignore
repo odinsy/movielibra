@@ -6,6 +6,7 @@
 /doc/
 /pkg/
 /spec/reports/
+/spec/cassettes/
 /tmp/
 /bin/console
 /bin/setup
