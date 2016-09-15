@@ -23,25 +23,24 @@ Gem::Specification.new do |spec|
   end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir        = "bin"
+  spec.executables   = ['libra']
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = ">= 2.1.4"
 
-  spec.add_dependency "json"
-  spec.add_dependency "mechanize"
-  spec.add_dependency "ruby-progressbar"
-  spec.add_dependency 'pmap'
-  spec.add_dependency 'thor'
+  spec.add_dependency "json", '~> 1.8', '>= 1.8.1'
+  spec.add_dependency "mechanize", '~> 2.7', '>= 2.7.4'
+  spec.add_dependency "ruby-progressbar", '~> 1.7', '>= 1.7.5'
+  spec.add_dependency 'pmap', '~> 1.1', '>= 1.1.1'
+  spec.add_dependency 'thor', '~> 0.19', '>= 0.19.1'
 
   spec.add_development_dependency "bundler", "~> 1.11.2"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec-core", "~> 3.0"
-  spec.add_development_dependency 'factory_girl'
-  spec.add_development_dependency 'fuubar'
-  spec.add_development_dependency 'vcr'
-  spec.add_development_dependency 'webmock'
-  spec.add_development_dependency 'rubocop'
-
+  spec.add_development_dependency 'factory_girl', '~> 4.7', '>= 4.7.0'
+  spec.add_development_dependency 'fuubar', '~> 2.2', '>= 2.2.0'
+  spec.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.3'
+  spec.add_development_dependency 'webmock', '~> 2.1', '2.1.0'
+  spec.add_development_dependency 'rubocop', '~> 0.42', '>= 0.42.0'
 end
