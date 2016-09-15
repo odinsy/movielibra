@@ -10,3 +10,4 @@
 /tmp/
 /bin/console
 /bin/setup
+*.gem
